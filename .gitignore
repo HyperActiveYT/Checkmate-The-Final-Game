@@ -1,0 +1,35 @@
+# Files from build
+**/*.o
+**/*.s
+Fairy-Stockfish-master/src/.depend
+Checkmate The Final Game/Library/*
+# Checkmate The Final Game/Library/Artifacts/*
+# Checkmate The Final Game/Library/Artifacts/*/*
+# Checkmate The Final Game/Library/APIUpdater/ConfigurationCache/*
+
+# Built binary
+Fairy-Stockfish-master/src/stockfish*
+Fairy-Stockfish-master/src/-lstdc++.res
+
+# Neural network for the NNUE evaluation
+**/*.nnue
+
+
+# Build/test artifacts
+*.exe
+Fairy-Stockfish-master/tests/syzygy
+
+# ffishjs
+tests/js/node_modules
+ffish.js
+*.wasm
+
+# pyffish
+venv
+*.so
+pyffish.egg-info
+
+# IDEs
+.vscode
+.idea
+.DS_Store
