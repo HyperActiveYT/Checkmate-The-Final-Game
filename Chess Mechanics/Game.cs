@@ -1,12 +1,14 @@
 namespace CtFG{
 public class Game:Tournament{
 
+    private 
+
     public Game(){
-        Board board = new Board();
+        createBoardBase()
     }
 
     public Game(Pieces[][] p){
-        Board board = new Board(p);
+        createBoard(p);
     }
 
     public void move(){

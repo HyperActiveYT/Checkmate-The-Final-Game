@@ -25,7 +25,10 @@ public class PiecesBetza:Board{
 
 public class Pawn:PiecesBetza{
     public Pawn(string color, int[][] ptscore){
-        base.("Pawn","(fW~fmW) (fifmnD) (!1fmW2) ([1]fW=QNRB)", "P", color, ptscore)
+        base.("Pawn","fmWfceFifmnD", "P", color, ptscore)
+    }
+    public Pawn(string color){
+        Pawn(color, new int[][]{{1,0,0,0},{0,0,0,0},{0,0,0,0}});
     }
 }
 
@@ -33,11 +36,17 @@ public class Knight:PiecesBetza{
     public Knight(string color, int[][] ptscore){
         base.("Knight","N", "N", color, ptscore);
     }
+    public Knight(string color){
+        Knight(color, new int[][]{{3,0,0,0},{0,0,0,0},{0,0,0,0}});
+    }
 }
 
 public class Bishop:PiecesBetza{
     public Bishop(string color, int[][] ptscore){
         base.("Bishop","B", "B", color, ptscore);
+    }
+    public Bishop(string color){
+        Bishop(color, new int[][]{{3,0,0,0},{0,0,0,0},{0,0,0,0}});
     }
 }
 
@@ -45,17 +54,26 @@ public class Rook:PiecesBetza{
     public Rook(string color, int[][] ptscore){
         base.("Rook","R", "R", color, ptscore);
     }
+    public Rook(string color){
+        Rook(color, new int[][]{{5,0,0,0},{0,0,0,0},{0,0,0,0}});
+    }
 }
 
 public class Queen:PiecesBetza{
     public Queen(string color, int[][] ptscore){
         base.("Queen","Q", "Q", color, ptscore);
     }
+    public Queen(string color){
+        Queen(color, new int[][]{{9,0,0,0},{0,0,0,0},{0,0,0,0}});
+    }
 }
 
 public class King:PiecesBetza{
     public King(string color, int[][] ptscore){
         base.("King","K", "K", color, ptscore);
+    }
+    public King(string color){
+        King(color, new int[][]{{0,0,0,0},{0,0,0,0},{0,0,0,0}});
     }
 }
 }

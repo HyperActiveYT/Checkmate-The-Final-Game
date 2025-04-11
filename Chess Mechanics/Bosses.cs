@@ -18,8 +18,10 @@ public class Bosses:Game{
         this.name = name;
         if (type == 0){
             RegularBoss.Add(this);
+            unseenRegularBoss.Add(this);
         } else if (type == 1){
             FinalBoss.Add(this);
+            unseenFinalBoss.Add(this);
         }
     }
     public static void createBosses(){
@@ -59,7 +61,7 @@ public class Bosses:Game{
     }
 
     public static void effect(){
-
+        
     }
 
 }

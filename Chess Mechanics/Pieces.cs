@@ -6,6 +6,8 @@ public class Pieces{
     private double[] ptscore; //0: +pts; 1: xpts; 2: +mult; 3: xmult
     private int color; //1=white, 2=black
 
+    private boolean canCastle = false;
+
     public Pieces(int[][] moves, string name, int abv, int color, double[] ptscore){
         if (moves.Length % 2 == 1 && moves[0].Length % 2 == 1){ //oddxodd up to 15x15 to account for all possible moves from anywhere
             this.moves = moves;//0 = cannot move to/attack, 1 = can both move to/attack, 2 = can attack but not move to, 3 = can move to but not attack
