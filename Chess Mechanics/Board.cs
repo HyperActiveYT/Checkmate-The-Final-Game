@@ -92,11 +92,22 @@ public class Board:Game{
 
     public static void move(int[] from, int[] to){
         Pieces piece = board[from[0]][from[1]];
+        board[from[0]][from[1]] = null;
+        board[to[0]][to[1]] = piece;
+        futureboard = board;
+        if (piece.)
         
     }
 
     public static void displaymove(int[] from, int[] to){
         Pieces piece = board[from[0]][from[1]];
+        futureboard[from[0]][from[1]] = null;
+        futureboard[to[0]][to[1]] = piece;
+        detectChecktype();
+    }
+
+    public static void undodisplaymove(){
+        futureboard = board;
     }
 
     public static void detectChecktype(){

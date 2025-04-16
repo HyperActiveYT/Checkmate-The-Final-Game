@@ -1,4 +1,4 @@
-namespace CtFG{
+/*namespace CtFG{
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ public class Checks{
 
 }
 
-public class ChessvolutionCards{
+/*public class ChessvolutionCards{
     private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>();
     private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>();
     string name;

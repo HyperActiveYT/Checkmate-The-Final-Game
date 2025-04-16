@@ -1,8 +1,70 @@
-/*namespace CtFG{
-
+namespace CtFG{
 using System;
 using System.Collections;
 using System.Collections.Generic;
+public class Consumables{
+    private static int consumableslots = 2;
+    private List<> heldConsumables = new List<>();
+
+}
+public class TheCardsofChess{
+
+    private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>();
+
+    private string name;
+
+    public TheCardsofChess(string name){ //Equivalent of Spectral Cards
+        this.name = name;
+        AllCoCCards.Add(this);
+    }
+
+    public static void createCoCCards()[
+        TheCardsofChess Sac = new TheCardsofChess("Sacrifice!");
+        TheCardsofChess Skip = new TheCardsofChess("Skipper");
+        TheCardsofChess Tal = new TheCardsofChess("Talent");
+        TheCardsofChess Gold = new TheCardsofChess("Gold");
+        TheCardsofChess Apoc = new TheCardsofChess("Apcoalypse");
+        TheCardsofChess Royal = new TheCardsofChess("Royalty");
+        TheCardsofChess Greed = new TheCardsofChess("Greed");
+        TheCardsofChess Double = new TheCardsofChess("Double Trouble");
+        TheCardsofChess Cassia = new TheCardsofChess("Cassia the God of Chess");
+        TheCardsofChess Ascen = new TheCardsofChess("Ascension");
+    ]
+
+}
+
+public class ChaturangaCards{ //Equivalent of Tarot Cards
+
+    private string name;
+    private static List<ChaturangaCards> AllChaturangaCards = new List<ChaturangaCards>();
+
+    public ChaturangaCards(string name){//
+        this.name = name;
+        AllChaturangaCards.Add(this);
+    }
+
+
+}
+public class ChessvolutionCards{
+    private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>();
+    private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>();
+    string name;
+    Checks check;
+
+    public ChessvolutionCards(string name, Checks check){
+        this.name = name;
+        this.check = check;
+        allCVCards.Add(this);
+    }
+
+    public Checks getCheck() => check;
+
+    public static void consumeCVCard(ChessvolutionCards card){
+        card.check.levelchange(1);
+    }
+
+}
+
 public class Tickets{
     
     private static List<Tickets> T1all = new List<Tickets>();
@@ -68,4 +130,5 @@ public class Tickets{
 
 
 }
+
 }

@@ -4,23 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PiecesBetza:Board{
-    private string name;
-    private string moves;
-    private string abv;
-    private string color;//1=white, 2=black
-    private double[] ptscore = new double[4]; 
+    private string name; public string getName() => name;
+    private string moves; public string getMoves() => moves;
+    private string abv; public string getAbv() => abv;
+    private string color;/*1=white, 2=black*/ public string getColor() => color;
+    private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
+    private string piecetype; public string getPieceType() => piecetype;
 
-    private string piecetype;
+    private Heads head; public string getHead() => head;
+    private Editions edition; public string getEdition() => edition;
+    private Aura aura; public string getAura() => aura;
 
-    private Heads head;
-    private Editions edition;
-    private Aura aura;
+    //0: +pts; 1: xpts; 2: +mult; 3: xmult
 
-
-    //first; 0: base(+bonus); 1: edition; 2: enhancement
-    //second; 0: +pts; 1: xpts; 2: +mult; 3: xmult
-
-    private List<PiecesBetza> pieces = new List<PiecesBetza>();
+    private static List<PiecesBetza> pieces = new List<PiecesBetza>();
 
     public PiecesBetza(string name, string moves, string abv, string color, string piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
         this.name = name;
@@ -33,6 +30,8 @@ public class PiecesBetza:Board{
         this.edition = edition;
         this.aura = aura;
     }
+
+
 }
 
 public class Pawn:PiecesBetza{
