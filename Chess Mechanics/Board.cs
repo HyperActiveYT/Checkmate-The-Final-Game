@@ -1,7 +1,7 @@
 namespace CtFG{
 public class Board:Game{
     private static Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
-    private static Pieces[][] prevboard = new Pieces[8][8];
+    private static Pieces[][] futureboard = new Pieces[8][8];
     private static int colorturn = 1; //1: white; -1: black
     private static int WCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
     private static int BCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
@@ -90,7 +90,12 @@ public class Board:Game{
         return new int[]{rank,file};
     }
 
-    public static void move(int[] from; int[] to){
+    public static void move(int[] from, int[] to){
+        Pieces piece = board[from[0]][from[1]];
+        
+    }
+
+    public static void displaymove(int[] from, int[] to){
         Pieces piece = board[from[0]][from[1]];
     }
 
@@ -144,7 +149,7 @@ public class Board:Game{
 
     public static void resetGame(){
         Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
-        Pieces[][] prevboard = new Pieces[8][8];
+        Pieces[][] futureboard = new Pieces[8][8];
         colorturn = 1; //1: white; -1: black
         WCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
         BCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both

@@ -62,7 +62,7 @@ public class ChessvolutionCards{
 
     public Checks getCheck() => check;
 
-        public static void consumeCVCard(ChessvolutionCards card){
+    public static void consumeCVCard(ChessvolutionCards card){
         card.check.levelchange(1);
     }
 

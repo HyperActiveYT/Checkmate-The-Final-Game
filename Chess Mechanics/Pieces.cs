@@ -32,7 +32,7 @@ public class Pieces{
     public String ToString() => name;
 
     public int[] findCenter(){
-        return new int[]{moves.Length/2,moves[0].Length.2};
+        return new int[]{moves.Length/2,moves[0].Length/2};
     }
 
     public int[][] getMoves() => moves;
