@@ -5,15 +5,29 @@ using System.Collections.Generic;
 public class Editions{
 
     private string name;
+    private int addcost;
 
     private static List<Editions> AllEditions = new List<Editions>();
-    public Editions(string name){
+    public Editions(string name, int addcost){
         this.name = name;
         AllEditions.Add(this);
+        this.addcost = addcost;
+    }
+
+    public static void createEditions(){
+        Editions Ancient = new Editions("Ancient",3);
+        Editions Gold = new Editions("Gold",3);
+        Editions Glass = new Editions("Glass",3);
+        Editions Metal = new Editions("Metal",3);
+        Editions Plastic = new Editions("Plastic",3);
+        Editions Magnetic = new Editions("Magnetic",3);
+        Editions Glitched = new Editions("Glitched",3);
     }
 
     public static void effects(){
-        
+        if (name.equals("Ancient")){
+            
+        }
     }
 
 }

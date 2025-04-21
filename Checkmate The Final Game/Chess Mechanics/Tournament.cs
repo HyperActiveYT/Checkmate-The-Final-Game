@@ -11,7 +11,7 @@ public class Tournament{
         basept = baseptreq[Tourneynum];
     }
 
-    
+    private static int gamenum = 1;
 
 }
 }

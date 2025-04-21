@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,13 +7,13 @@ public class Consumables{
     private List<> heldConsumables = new List<>();
 
 }
-public class TheCardsofChess{
+public class TheCardsofChess{//Equivalent of Spectral Cards
 
     private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>();
 
     private string name;
 
-    public TheCardsofChess(string name){ //Equivalent of Spectral Cards
+    public TheCardsofChess(string name){
         this.name = name;
         AllCoCCards.Add(this);
     }
@@ -31,6 +31,10 @@ public class TheCardsofChess{
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
+    public void effect(){
+
+    }
+
 }
 
 public class ChaturangaCards{ //Equivalent of Tarot Cards
@@ -41,6 +45,13 @@ public class ChaturangaCards{ //Equivalent of Tarot Cards
     public ChaturangaCards(string name){//
         this.name = name;
         AllChaturangaCards.Add(this);
+    }
+
+    public static void createChaturangaCards(){
+        ChaturangaCards Copy = new ChaturangaCards("The Copier");
+        ChaturangaCards Prod = new ChaturangaCards("The Prodigy");
+        ChaturangaCards WaCBp = new ChaturangaCards("The Wheat and Chessboard Problem");
+        ChaturangaCards Sissa = new ChaturangaCards("Sissa the Inventor");
     }
 
 

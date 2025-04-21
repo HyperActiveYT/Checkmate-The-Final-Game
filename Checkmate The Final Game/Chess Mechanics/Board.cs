@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Board:Game{
     private static Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
     private static Pieces[][] futureboard = new Pieces[8][8];
@@ -13,39 +13,39 @@ public class Board:Game{
     private static string FEN = BaseFEN;
 
     public static void createBoardBase(){
-        Rook bR1 = new Rook(2, null);
-        Knight bN1 = new Knight(2, null);
-        Bishop bB1 = new Bishop(2, null);
-        Queen bQ = new Queen(2, null);
-        King bK = new King(2, null);
-        Bishop bB2 = new Bishop(2, null);
-        Knight bN2 = new Knight(2, null);
-        Rook bR2 = new Rook(2, null);
-        Pawn bp1 = new Pawn(2, null);
-        Pawn bp2 = new Pawn(2, null);
-        Pawn bp3 = new Pawn(2, null);
-        Pawn bp4 = new Pawn(2, null);
-        Pawn bp5 = new Pawn(2, null);
-        Pawn bp6 = new Pawn(2, null);
-        Pawn bp7 = new Pawn(2, null);
-        Pawn bp8 = new Pawn(2, null);
+        Rook bR1 = new Rook(-1);
+        Knight bN1 = new Knight(-1;
+        Bishop bB1 = new Bishop(-1);
+        Queen bQ = new Queen(-1);
+        King bK = new King(-1);
+        Bishop bB2 = new Bishop(-1);
+        Knight bN2 = new Knight(-1);
+        Rook bR2 = new Rook(-1);
+        Pawn bp1 = new Pawn(-1);
+        Pawn bp2 = new Pawn(-1);
+        Pawn bp3 = new Pawn(-1);
+        Pawn bp4 = new Pawn(-1);
+        Pawn bp5 = new Pawn(-1);
+        Pawn bp6 = new Pawn(-1);
+        Pawn bp7 = new Pawn(-1);
+        Pawn bp8 = new Pawn(-1);
 
-        Pawn wp1 = new Pawn(1, null);
-        Pawn wp2 = new Pawn(1, null);
-        Pawn wp3 = new Pawn(1, null);
-        Pawn wp4 = new Pawn(1, null);
-        Pawn wp5 = new Pawn(1, null);
-        Pawn wp6 = new Pawn(1, null);
-        Pawn wp7 = new Pawn(1, null);
-        Pawn wp8 = new Pawn(1, null);
-        Rook wR1 = new Rook(2, null);
-        Knight wN1 = new Knight(1, null);
-        Bishop wB1 = new Bishop(1, null);
-        Queen wQ = new Queen(1, null);
-        King wK = new King(1, null);
-        Bishop wB2 = new Bishop(1, null);
-        Knight wN2 = new Knight(1, null);
-        Rook wR2 = new Rook(1, null);
+        Pawn wp1 = new Pawn(1);
+        Pawn wp2 = new Pawn(1);
+        Pawn wp3 = new Pawn(1);
+        Pawn wp4 = new Pawn(1);
+        Pawn wp5 = new Pawn(1);
+        Pawn wp6 = new Pawn(1);
+        Pawn wp7 = new Pawn(1);
+        Pawn wp8 = new Pawn(1);
+        Rook wR1 = new Rook(1);
+        Knight wN1 = new Knight(1);
+        Bishop wB1 = new Bishop(1);
+        Queen wQ = new Queen(1);
+        King wK = new King(1);
+        Bishop wB2 = new Bishop(1);
+        Knight wN2 = new Knight(1);
+        Rook wR2 = new Rook(1);
 
         board = new Pieces[][]{{bR1,bN1,bB1,bQ,bK,bB2,bN2,bR2}
                             ,{bp1,bp2,bp3,bp4,bp5,bp6,bp7,bp8}
@@ -139,7 +139,7 @@ public class Board:Game{
                 FEN+="/";
             }
         }
-        if (colorturnturn == 1){
+        if (colorturn == 1){
             FEN += " w";
         } else if (colorturn == -1){
             FEN += " b";

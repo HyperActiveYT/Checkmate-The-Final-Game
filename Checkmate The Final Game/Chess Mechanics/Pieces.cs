@@ -1,4 +1,4 @@
-public class Pieces{
+/*public class Pieces{
     private int[][] moves;
     private int[] center;
     private string name;

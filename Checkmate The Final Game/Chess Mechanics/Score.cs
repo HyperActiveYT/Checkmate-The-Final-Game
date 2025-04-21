@@ -1,6 +1,6 @@
 namespace CtFG{
 
-public class Checks{
+public class Checks:Score{
     
     private static List<Checks> allChecks = new List<Checks>();
     private static List<Checks> viewableChecks = new List<Checks>();
@@ -82,10 +82,16 @@ Polychrome bonus.
 Consumables: When the  Observatory Voucher has been purchased, planet cards give X1.5 Mult, activating from left to right.
 Plasma Deck balance: Lastly, if using the  Plasma Deck, Chips and Mult are balanced.
     */
-public static int[] basescore = new int[2];
+private static int[] score = new int[2];
+private static int finalscore = 0;
 public static void CalculateScore(){
-
+    
 }
 
+public static void modifyScore(int[] modify){
+    score[0] += modify[0];
+    score[0] *= modify[1];
+    score[1] += modify[2];
+    score[1] *= modify[3];
 }
 }

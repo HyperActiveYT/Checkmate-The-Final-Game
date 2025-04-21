@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;

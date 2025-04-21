@@ -7,7 +7,7 @@ public class PiecesBetza:Board{
     private string name; public string getName() => name;
     private string moves; public string getMoves() => moves;
     private string abv; public string getAbv() => abv;
-    private string color;/*1=white, 2=black*/ public string getColor() => color;
+    private string color;/*1=white, -1=black*/ public string getColor() => color;
     private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
     private string piecetype; public string getPieceType() => piecetype;
 
@@ -17,7 +17,8 @@ public class PiecesBetza:Board{
 
     //0: +pts; 1: xpts; 2: +mult; 3: xmult
 
-    private static List<PiecesBetza> pieces = new List<PiecesBetza>();
+    private static List<PiecesBetza> YourPieces = new List<PiecesBetza>();
+    private static List<PiecesBetza> AllPieces = new List<PiecesBetza();
 
     public PiecesBetza(string name, string moves, string abv, string color, string piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
         this.name = name;
@@ -31,6 +32,48 @@ public class PiecesBetza:Board{
         this.aura = aura;
     }
 
+    public static void createAllPieces(){
+        Pawn p = new Pawn(1);
+        Knight n = new Knight(1);
+        Bishop b = new Bishop(1);
+        Rook r = new Rook(1);
+        Queen q = new Queen(1);
+        King k = new King(1);
+        Crusader c = new Crusader(1);
+        Viking v = new Viking(1);
+        RoyalGuard g = new RoyalGuard(1);
+        Cannon o = new Cannon(1);
+        Musketeer m = new Musketeer(1);
+        Unicorn u = new Unicorn(1);
+        Archbishop a = new Archbishop(1);
+        Cardinal d = new Cardinal(1);
+        MountedKing o = new MountedKing(1);
+        Pegasus s = new Pegasus(1);
+        WarWagon w = new WarWagon(1);
+        Templar t = new Templar(1);
+        Beserker e = new Beserker(1);
+        Dragon f = new Dragon(1);
+        YourPieces.Add(p);
+        YourPieces.Add(n);
+        YourPieces.Add(b);
+        YourPieces.Add(r);
+        YourPieces.Add(q);
+        YourPieces.Add(k);
+        YourPieces.Add(c);
+        YourPieces.Add(v);
+        YourPieces.Add(g);
+        YourPieces.Add(o);
+        YourPieces.Add(m);
+        YourPieces.Add(u);
+        YourPieces.Add(a);
+        YourPieces.Add(d);
+        YourPieces.Add(o);
+        YourPieces.Add(s);
+        YourPieces.Add(w);
+        YourPieces.Add(t);
+        YourPieces.Add(e);
+        YourPieces.Add(f);
+    }
 
 }
 
@@ -163,7 +206,7 @@ public class MountedKing:PiecesBetza{
 }
 public class Pegasus:PiecesBetza{
     public Pegasus(string color, double[] ptscore){
-        base.("Pegasus Rider","N2","P",color,"knight",ptscore,null,null,null);
+        base.("Pegasus Rider","N2","S",color,"knight",ptscore,null,null,null);
     }
     public Pegasus(string color){
         Pegasus(color,new double[]{5,0,0,0});
@@ -195,7 +238,7 @@ public class Beserker:PiecesBetza{
 }
 public class Dragon:PiecesBetza{
     public Dragon(string color, double[] ptscore){
-        base.("Dragon","BR3","D",color,"bishop",ptscore,null,null,null);
+        base.("Dragon","BR3","F",color,"bishop",ptscore,null,null,null);
     }
     public Dragon(color){
         Dragon(color,new double[]{4,0,0,0})
