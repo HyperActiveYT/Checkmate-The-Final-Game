@@ -5,6 +5,25 @@ using namespace emscripten;
 using namespace Stockfish;
 
 public class ComputerSettings:Game{
+
+    int eloRating = 0;
+
+        public static void getELO() => eloRating;
+
+        public static void setELO(int eloRating){
+        // Set the ELO rating for the engine
+        this.eloRating = eloRating; // Example ELO rating
+        Stockfish.SetOption("UCI_Elo", eloRating);
+        // Set the engine to limit its strength to the specified ELO rating
+        Stockfish.SetOption("UCI_LimitStrength", true);
+    }
+
+    public static void modifyELO(double x){
+        eloRating *= x;
+        Stockfish.SetOption("UCI_Elo", eloRating);
+        // Set the engine to limit its strength to the specified ELO rating
+        Stockfish.SetOption("UCI_LimitStrength", true);
+    }
     
     public static void initialize_stockfish{
         Stockfish.InitializeStockfish();

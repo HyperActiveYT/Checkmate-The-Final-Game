@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Tournament{
 
     private static final long[] baseptreq = new long[]{50, 100, 250, 750, 3000, 7500, 15000

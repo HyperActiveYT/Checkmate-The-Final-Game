@@ -3,24 +3,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 public class Consumables{
-    private static int consumableslots = 2;
-    private List<> heldConsumables = new List<>();
-
+    private string name; public string getName() => name;
+    public Consumables(string name){
+        this.name = name;
+    }
 }
-public class TheCardsofChess{//Equivalent of Spectral Cards
+public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
 
-    private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>();
-
-    private string name;
+    private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>(); public static List<TheCardsofChess> getAllCoCCards() => AllCoCCards;
 
     public TheCardsofChess(string name){
-        this.name = name;
+        base.Consumables(name);
         AllCoCCards.Add(this);
     }
 
     public static void createCoCCards()[
         TheCardsofChess Sac = new TheCardsofChess("Sacrifice!");
-        TheCardsofChess Skip = new TheCardsofChess("Skipper");
+        TheCardsofChess Deja = new TheCardsofChess("Deja Vu");
         TheCardsofChess Tal = new TheCardsofChess("Talent");
         TheCardsofChess Gold = new TheCardsofChess("Gold");
         TheCardsofChess Apoc = new TheCardsofChess("Apcoalypse");
@@ -31,19 +30,30 @@ public class TheCardsofChess{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void effect(){
-
+    public void effect(PiecesBetza p){
+        if (name.equals("Sacrifice!")){
+            p.setHeads(Heads.getAllHeads().get(0));
+        } else if name.equals("Talent"){
+            p.setHeads(Heads.getAllHeads().get(1));
+        } else if name.equals("Deja Vu"){
+            p.setHeads(Heads.getAllHeads().get(2));
+        } else if name.equals("Gold"){
+            p.setHeads(Heads.getAllHeads().get(3));
+        } else if name.equals("Apcoalypse"){
+            PiecesBetza p1 = copypiece(p);
+            PiecesBetza.
+            PiecesBetza p2 = copypiece(p);
+        }
     }
 
 }
 
-public class ChaturangaCards{ //Equivalent of Tarot Cards
+public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
 
-    private string name;
-    private static List<ChaturangaCards> AllChaturangaCards = new List<ChaturangaCards>();
+    private static List<ChaturangaCards> AllChaturangaCards = new List<ChaturangaCards>(); public static List<ChaturangaCards> getAllChaturangaCards() => AllChaturangaCards;
 
     public ChaturangaCards(string name){//
-        this.name = name;
+        base.Consumables(name);
         AllChaturangaCards.Add(this);
     }
 
@@ -56,14 +66,13 @@ public class ChaturangaCards{ //Equivalent of Tarot Cards
 
 
 }
-public class ChessvolutionCards{
+public class ChessvolutionCards:Consumables{
     private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>();
     private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>();
-    string name;
     Checks check;
 
     public ChessvolutionCards(string name, Checks check){
-        this.name = name;
+        base.Consumables(name);
         this.check = check;
         allCVCards.Add(this);
     }
@@ -72,6 +81,7 @@ public class ChessvolutionCards{
 
     public static void consumeCVCard(ChessvolutionCards card){
         card.check.levelchange(1);
+        UserStats.setLastUsed(card);
     }
 
 }

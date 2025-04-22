@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +10,9 @@ public class PiecesBetza:Board{
     private string color;/*1=white, -1=black*/ public string getColor() => color;
     private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
     private string piecetype; public string getPieceType() => piecetype;
+    
+    private int buycost=0; public int getBuyCost() => buycost;
+    private int rebuycost=0; public int getRebuyCost() => rebuycost;
 
     private Heads head; public string getHead() => head;
     private Editions edition; public string getEdition() => edition;
@@ -17,8 +20,22 @@ public class PiecesBetza:Board{
 
     //0: +pts; 1: xpts; 2: +mult; 3: xmult
 
-    private static List<PiecesBetza> YourPieces = new List<PiecesBetza>();
-    private static List<PiecesBetza> AllPieces = new List<PiecesBetza();
+    private static List<PiecesBetza> YourPieces = new List<PiecesBetza>(); public static List<PiecesBetza> getYourPieces() => YourPieces;
+    public static void addYourPiece(PiecesBetza p){
+        YourPieces.Add(p);
+    }
+    public static void removeYourPiece(PiecesBetza p){
+        YourPieces.Remove(p);
+    }
+    private static List<PiecesBetza> YourCapturedPieces = new List<PiecesBetza>(); public static List<PiecesBetza> getYourCapturedPieces() => YourCapturedPieces;
+    public static void addYourCapturedPiece(PiecesBetza p){
+        YourCapturedPieces.Add(p);
+    }
+    public static void removeYourCapturedPiece(PiecesBetza p){
+        YourCapturedPieces.Remove(p);
+    }
+    private static List<PiecesBetza> AllPieces = new List<PiecesBetza(); public static List<PiecesBetza> getAllPieces() => AllPieces;
+
 
     public PiecesBetza(string name, string moves, string abv, string color, string piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
         this.name = name;
@@ -30,6 +47,23 @@ public class PiecesBetza:Board{
         this.head = head;
         this.edition = edition;
         this.aura = aura;
+        buycost = ptscore[0];
+        rebuycost = buycost/2;
+    }
+
+    public static PiecesBetza copyPiece(PiecesBetza p){
+        PiecesBetza newpiece = new PiecesBetza(p.getName(), p.getMoves(), p.getAbv(), p.getColor(), p.getPieceType(), p.getPtscore(), p.getHead(), p.getEdition(), p.getAura());
+        return newpiece;
+    }
+
+    public void setHead(Heads head){
+        this.head = head;
+    }
+    public void setEdition(Editions edition){
+        this.edition = edition;
+    }
+    public void setAura(Aura aura){
+        this.aura = aura;
     }
 
     public static void createAllPieces(){
@@ -39,7 +73,7 @@ public class PiecesBetza:Board{
         Rook r = new Rook(1);
         Queen q = new Queen(1);
         King k = new King(1);
-        Crusader c = new Crusader(1);
+        /*Crusader c = new Crusader(1);
         Viking v = new Viking(1);
         RoyalGuard g = new RoyalGuard(1);
         Cannon o = new Cannon(1);
@@ -52,27 +86,27 @@ public class PiecesBetza:Board{
         WarWagon w = new WarWagon(1);
         Templar t = new Templar(1);
         Beserker e = new Beserker(1);
-        Dragon f = new Dragon(1);
-        YourPieces.Add(p);
-        YourPieces.Add(n);
-        YourPieces.Add(b);
-        YourPieces.Add(r);
-        YourPieces.Add(q);
-        YourPieces.Add(k);
-        YourPieces.Add(c);
-        YourPieces.Add(v);
-        YourPieces.Add(g);
-        YourPieces.Add(o);
-        YourPieces.Add(m);
-        YourPieces.Add(u);
-        YourPieces.Add(a);
-        YourPieces.Add(d);
-        YourPieces.Add(o);
-        YourPieces.Add(s);
-        YourPieces.Add(w);
-        YourPieces.Add(t);
-        YourPieces.Add(e);
-        YourPieces.Add(f);
+        Dragon f = new Dragon(1);*/
+        AllPieces.Add(p);
+        AllPieces.Add(n);
+        AllPieces.Add(b);
+        AllPieces.Add(r);
+        AllPieces.Add(q);
+        AllPieces.Add(k);
+        /*AllPieces.Add(c);
+        AllPieces.Add(v);
+        AllPieces.Add(g);
+        AllPieces.Add(o);
+        AllPieces.Add(m);
+        AllPieces.Add(u);
+        AllPieces.Add(a);
+        AllPieces.Add(d);
+        AllPieces.Add(o);
+        AllPieces.Add(s);
+        AllPieces.Add(w);
+        AllPieces.Add(t);
+        AllPieces.Add(e);
+        AllPieces.Add(f);*/
     }
 
 }

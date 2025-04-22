@@ -1,5 +1,6 @@
 namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
+//using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,6 +14,10 @@ public class Bosses:Game{
     private static List<Bosses> unseenFinalBoss = new List<Bosses>();
 
     private string name;
+    //private static Timer time;
+    private static int moveselapsed;
+    private static int bosseffectActive = false;
+    private static int wasELO;
 
     public Bosses(string name, int type){
         this.name = name;
@@ -29,7 +34,7 @@ public class Bosses:Game{
         createFinBosses();
     }
     public static void createRegBosses(){
-        Bosses Clock = new Bosses("The Clock",0);
+        //Bosses Clock = new Bosses("The Clock",0);
         Bosses Wise = new Bosses("The Wise",0);
         Bosses Punisher = new Bosses("The Punisher",0);
         Bosses Creator = new Bosses("The Creator",0);
@@ -60,9 +65,48 @@ public class Bosses:Game{
         Bosses Bossemony = new Bosses("Boss-emony",1);
     }
 
-    public static void effect(){
-        
+    public static void decMovesElapse(){
+        moveselapsed--;
     }
+
+    public void Bosseffect(string timeframe){
+        if (timeframe.Equals("Boss Select")){
+            /*if (name.Equals("The Clock")){
+                time = 
+            } else */if (name.Equals("The Wise")){
+                ComputerSettings.modifyELO(1.5);
+            } else if (name.Equals("The Crusader")){
+                
+            } else if (name.Equals("The Inquisition")){
+            }
+        }
+        if (timeframce.equals("On Move")){
+            if (name.Equals("The Punisher")){
+                if (bosseffectActive){
+                    if (moveselapsed == 0){
+                        ComputerSettings.setELO(wasELO);
+                        bosseffectActive = false;
+                    }
+                } else {
+                    wasELO = ComputerSettings.getELO();
+                    ComputerSettings.setELO(3200);
+                    bosseffectActive = true;
+                }
+            } else if (name.Equals("The Creator")){
+                Random rand = new Random();
+                int num = rand.Next(6);
+                PiecesBetza p = PiecesBetza.getAllPieces()[num];
+                for (int i=0; i<8, i++){
+                    
+                }
+            } else if (name.Equals("The Volcano")){
+            } else if (name.Equals("The Atomizer")){
+            } else if (name.Equals("The Crusader")){
+            } else if (name.Equals("The Inquisition")){
+            }
+        }
+    }
+
 
 }
 }

@@ -1,16 +1,13 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
 public class Shop{
     
-
-    private static slot = 2; //number of slots available in shop
     private static double PieceWeight=0; //0
     private static double MasterCardWeight = 20; //1
     private static double ChessEVWeight = 4; //2
     private static double ChatarangaCardWeight = 4; //3
-    private static double 
     private static List<> InShop = new List<>();
 
 

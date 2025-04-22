@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 
 public class Checks:Score{
     
@@ -31,6 +31,7 @@ public class Checks:Score{
         Checks EnPassant = new Checks("En Passant Check", new int[]{120,12}, new int[]{35,3});
         Checks OneDisambig = new Checks("Singly Disambiguated Check", new int[]{140,14}, new int[]{40,4});
         Checks TwoDisambig = new Checks("Doubly Disambiguated Check", new int[]{160,16}, new int[]{50,3});
+        
         viewableChecks.Add(Direct);
         viewableChecks.Add(Skewer);
         viewableChecks.Add(Fork);
@@ -93,5 +94,6 @@ public static void modifyScore(int[] modify){
     score[0] *= modify[1];
     score[1] += modify[2];
     score[1] *= modify[3];
+}
 }
 }

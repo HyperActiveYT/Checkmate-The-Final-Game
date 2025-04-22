@@ -17,11 +17,14 @@ public class MasterCard{
     private int basecost;
     private int cost;
     private int sellval;
-    private int rarity; //0: Common, 1: Uncommon, 2: Rare, 3: Epic, 4: Legendary
+    private int rarity; //0: Common, 1: Uncommon, 2: Rare, 3: Legendary
+
+    private Aura aura;
     
-    public MasterCard(string name, int rarity){
+    public MasterCard(string name, int rarity, Aura aura){
         this.name = name;
         this.rarity = rarity;
+        this.aura = aura;
         allCards.Add(this);
         if (rarity == 0){
             Common.Add(this);
@@ -33,9 +36,6 @@ public class MasterCard{
             Rare.Add(this);
             basecost = 8;
         } else if (rarity == 3){
-            Epic.Add(this);
-            basecost = 10;
-        } else if (rarity == 4){
             Legendary.Add(this);
             basecost = 20;
         }

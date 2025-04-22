@@ -1,4 +1,4 @@
-namespace CtFG{
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Main{
     public static void Main(string[] args){
         // Create a new game

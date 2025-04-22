@@ -1,4 +1,4 @@
-namespace Checkmate_The_Final_Game.Chess_Mechanics{
+/*namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Board:Game{
     private static Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
     private static Pieces[][] futureboard = new Pieces[8][8];
@@ -14,7 +14,7 @@ public class Board:Game{
 
     public static void createBoardBase(){
         Rook bR1 = new Rook(-1);
-        Knight bN1 = new Knight(-1;
+        Knight bN1 = new Knight(-1);
         Bishop bB1 = new Bishop(-1);
         Queen bQ = new Queen(-1);
         King bK = new King(-1);
