@@ -48,6 +48,9 @@ public class UserStats{
     public static int setmaxinterest(int maxinterest){
         this.maxinterest = maxinterest;
     }
+    public static void calcInterest(){
+        
+    }
 }
 public class Checks:UserStats{
     

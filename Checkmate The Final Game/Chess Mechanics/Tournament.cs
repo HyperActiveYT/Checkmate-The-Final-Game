@@ -9,13 +9,26 @@ public class Tournament{
     , 40000, 125000, 375000, 1500000, 150000000, 1000000000};
 
     private static int Tourneynum = 1;
-    private static long basept = 50;
+    private static long basept = baseptreq[Tourneynum];;
 
     public static void setptbase(){
         basept = baseptreq[Tourneynum];
     }
 
     private static int gamenum = 1;
+
+    public static void opponentdefeated(){
+        gamenum++;
+
+    }
+    public static void opponentskipped(){
+        gamenum++;
+    }
+    public static void Bossdefeated(){
+        gamenum=1;
+        Tourneynum++;
+        setptbase();
+    }
 
 }
 public class Bosses:Tournament{
@@ -32,17 +45,20 @@ public class Bosses:Tournament{
     private static int moveselapsed;
     private static int bosseffectActive = false;
     private static int wasELO;
+    private static int defeatPrize; //amount of money given when defeated; 25 for final boss
 
     public Bosses(string name, int type){
         this.name = name;
         if (type == 0){
             RegularBoss.Add(this);
             unseenRegularBoss.Add(this);
+            defeatPrize = 15;
         } else if (type == 1){
             FinalBoss.Add(this);
             unseenFinalBoss.Add(this);
+            defeatPrize = 25;
         }
-    }
+    })
     public static void createBosses(){
         createRegBosses();
         createFinBosses();

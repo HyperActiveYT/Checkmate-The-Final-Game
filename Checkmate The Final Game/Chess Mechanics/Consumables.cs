@@ -4,8 +4,17 @@ using System.Collections;
 using System.Collections.Generic;
 public class Consumables{
     private string name; public string getName() => name;
+    private int buycost=3;
+    private int sellval=buycost/2;
     public Consumables(string name){
         this.name = name;
+    }
+    public Consumables(string name, int sellval){
+        this.name = name;
+        this.buycost = sellval;
+    }
+    public static void setSellVal(){
+        sellval = buycost/2;
     }
 }
 public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
@@ -13,7 +22,8 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
     private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>(); public static List<TheCardsofChess> getAllCoCCards() => AllCoCCards;
 
     public TheCardsofChess(string name){
-        base.Consumables(name);
+        base.Consumables(name,4);
+        setSellVal();
         AllCoCCards.Add(this);
     }
 
@@ -30,19 +40,30 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void effect(Pieces p){
-        if (name.equals("Sacrifice!")){
+    public void CoCeffect(Pieces p){
+        if (getName().equals("Sacrifice!")){
             p.setHeads(Heads.getAllHeads().get(0));
-        } else if name.equals("Talent"){
+        } else if getName().equals("Talent"){
             p.setHeads(Heads.getAllHeads().get(1));
-        } else if name.equals("Deja Vu"){
+        } else if getName().equals("Deja Vu"){
             p.setHeads(Heads.getAllHeads().get(2));
-        } else if name.equals("Gold"){
+        } else if getName().equals("Gold"){
             p.setHeads(Heads.getAllHeads().get(3));
-        } else if name.equals("Apcoalypse"){
+        } else if getName().equals("Apcoalypse"){
             Pieces p1 = copypiece(p);
-            Pieces.
             Pieces p2 = copypiece(p);
+            Pieces.addYourPiece(p1);
+            Pieces.addYourPiece(p2);
+        } else if getName().equals("Royalty"){//Destroy a random non-King piece and add one of each: a randomly modified queen and rook to the board
+            p.setHeads(Heads.getAllHeads().get(4));
+        } else if getName().equals("Greed"){//Greed: Destroy 3 random non-King pieces and gain $25
+            p.setHeads(Heads.getAllHeads().get(5));
+        } else if getName().equals("Double Trouble"){//Duplicate one random master card and destroy the others
+            p.setHeads(Heads.getAllHeads().get(6));
+        } else if getName().equals("Cassia the God of Chess"){//Increases the level of all checks by 1
+            p.setHeads(Heads.getAllHeads().get(7));
+        } else if getName().equals("Ascension"){
+            p.setHeads(Heads.getAllHeads().get(8));
         }
     }
 
@@ -89,11 +110,10 @@ public class ChessvolutionCards:Consumables{
 public class Tickets{
     
     private static List<Tickets> T1all = new List<Tickets>();
-    private static List<Tickets> T1available = new List<Tickets>();
+    private static List<Tickets> available = new List<Tickets>();
     private static List<Tickets> T1bought = new List<Tickets>();
 
     private static List<Tickets> T2all = new List<Tickets>();
-    private static List<Tickets> T2available = new List<Tickets>();
     private static List<Tickets> T2bought = new List<Tickets>();
     private string name;
     private Tickets upgraded; //for t1 tickets only
@@ -102,7 +122,7 @@ public class Tickets{
         this.name = name;
         this.upgraded = upgraded;
         T1all.Add(this);
-        T1available.Add(this);
+        available.Add(this);
     }
 
     public Tickets(string name){//T2
@@ -151,5 +171,85 @@ public class Tickets{
 
 
 }
+/*public class SkipTag{ FOR THE SAKE OF GETTING THIS GAME DONE, I AM NOT IMPLEMENTING THIS RIGHT NOW
+    string name;
+    public SkipTag(string name){
+        this.name = name;
+    }
+    public string effects(){
 
+    }
+}*/
+public class Pack{ //Booster Packs Yay
+    private string name="";
+    private string item;
+    private int type=0; //0: 1 of 3; 1: 1 of 5; 2: 2 of 5
+    private int size=0; //size of pack
+    private int choose=0; //number of cards chosen
+    private int cost=0;
+    private List<Consumables> inPack = new List<Consumables>(); 
+    public Pack(string item, int type){
+        this.item = item;
+        this.type = type;
+
+        if (type==0){
+            name += "Normal ";
+            cost = 4;
+            size = 3;
+            choose = 1;
+        } else if (type==1){
+            name += "Jumbo ";
+            cost = 6;
+            size = 5;
+            choose = 1;
+        } else if (type==2){
+            name += "Mega ";
+            cost = 8;
+            size = 5
+            choose = 2;
+        }
+
+        if (item.equals("MC")){
+            name += "Master Pack";
+        } else if (item.equals("CC")){
+            name += "The Cards of Chess";
+        } else if (item.equals("Chaturanga")){
+            name += "Chaturanga Pack";
+        } else if (item.equals("Piece")){
+            name += "Piece Pack";
+        } else if (item.equals("CV")){
+            name += "Evolution Pack";
+        }
+        stuffPack();
+    }
+    public void stuffPack(){
+        if (type.equals("MC")){
+            for (int i=0; i<size; i++){
+                inPack.Add(MasterCard.getAllCards().get(roll(MasterCard.getAllCards().Count)));
+            }
+        } else if (type.equals("CC")){
+            for (int i=0; i<size; i++){
+                inPack.Add(TheCardsofChess.getAllCoCCards().get(roll(TheCardsofChess.getAllCoCCards().Count)));
+            }
+        } else if (type.equals("Chaturanga")){
+            for (int i=0; i<size; i++){
+                inPack.Add(ChaturangaCards.getAllChaturangaCards().get(roll(ChaturangaCards.getAllChaturangaCards().Count)));
+            }
+        } else if (type.equals("Piece")){
+            for (int i=0; i<size; i++){
+                inPack.Add(Pieces.getAllPieces().get(roll(Pieces.getAllPieces().Count)));
+            }
+        } else if (type.equals("CV")){
+            for (int i=0; i<size; i++){
+                inPack.Add(ChessvolutionCards.getAllCVCards().get(roll(ChessvolutionCards.getAllCVCards().Count)));
+            }
+        }
+    }
+    public void openPack(){
+
+    }
+    public void useInPack(int i){
+        inPack[i].effects();
+    }
+}
 }

@@ -36,6 +36,17 @@ public class Shop{
             return 3;
         }
     }
+    public static setweight(string type, double weight){
+        if (type.equals("Piece")){
+            PieceWeight = weight;
+        } else if (type.equals("MasterCard")){
+            MasterCardWeight = weight;
+        } else if (type.equals("ChessEV")){
+            ChessEVWeight = weight;
+        } else if (type.equals("ChaturangaCard")){
+            ChatarangaCardWeight = weight;
+        }
+    }
 
 
 }

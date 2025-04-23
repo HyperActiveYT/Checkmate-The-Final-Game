@@ -53,7 +53,7 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 
 }*/
 
-public class Score:Board{
+public class Score{
 
     /*
 Hand Sequence

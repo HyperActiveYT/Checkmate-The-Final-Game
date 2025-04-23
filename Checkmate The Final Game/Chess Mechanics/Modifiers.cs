@@ -52,6 +52,27 @@ public class Aura{
         this.addcost = addcost;
         AllAuras.Add(this);
     }
+
+    public static void createAuras(){
+        Aura Alternate = new Aura("Alternate",3);
+        Aura Natural = new Aura("Natural",3);
+        Aura Rainbow = new Aura("Rainbow",4);
+        Aura Laminated = new Aura("Laminated",4);
+    }
+
+    public static void AuraEffects(string timeframe){
+        if (timeframe.equals("On Check")){
+            if (name.equals("Alternate")){
+                //alternate the color of the piece
+            } else if (name.equals("Natural")){
+                //natural aura
+            } else if (name.equals("Rainbow")){
+                //rainbow aura
+            } else if name.equals("Laminated"){
+
+            }
+        }
+    }
 }
 
 public class Heads{

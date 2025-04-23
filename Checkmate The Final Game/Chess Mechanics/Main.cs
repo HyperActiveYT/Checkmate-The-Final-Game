@@ -1,6 +1,19 @@
-namespace Checkmate_The_Final_Game.Chess_Mechanics{
+using Checkmate_The_Final_Game.Chess_Mechanics;
 public class Main{
     public static void Main(string[] args){
+        createBosses();
+        createCoCCards();
+        createChaturangaCards();
+        createMasterCards();
+        createHeads();
+        createEditions();
+        createAuras();
+        createPieces();
+        createConsumables();
+        
+        
+        
+        
         // Create a new game
         Game game = new Game();
         
