@@ -1,6 +1,6 @@
 namespace Checkmate_The_Final_Game.Chess_Mechanics{
 
-public class Checks:Score{
+/*public class Checks:Score{
     
     private static List<Checks> allChecks = new List<Checks>();
     private static List<Checks> viewableChecks = new List<Checks>();
@@ -51,7 +51,7 @@ public class Checks:Score{
         score[1]+=change*addition[1];
     }
 
-}
+}*/
 
 public class Score:Board{
 

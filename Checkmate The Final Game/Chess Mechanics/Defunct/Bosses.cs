@@ -1,10 +1,10 @@
-namespace Checkmate_The_Final_Game.Chess_Mechanics{
+/*namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 //using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Bosses:Game{
+public class Bosses:Tournament{
 
     private static List<Bosses> RegularBoss = new List<Bosses>();
     private static List<Bosses> FinalBoss = new List<Bosses>();
@@ -110,5 +110,6 @@ public class Bosses:Game{
     }
 
 
+}
 }
 }
