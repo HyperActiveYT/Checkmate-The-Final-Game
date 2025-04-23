@@ -30,7 +30,7 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void effect(PiecesBetza p){
+    public void effect(Pieces p){
         if (name.equals("Sacrifice!")){
             p.setHeads(Heads.getAllHeads().get(0));
         } else if name.equals("Talent"){
@@ -40,9 +40,9 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         } else if name.equals("Gold"){
             p.setHeads(Heads.getAllHeads().get(3));
         } else if name.equals("Apcoalypse"){
-            PiecesBetza p1 = copypiece(p);
-            PiecesBetza.
-            PiecesBetza p2 = copypiece(p);
+            Pieces p1 = copypiece(p);
+            Pieces.
+            Pieces p2 = copypiece(p);
         }
     }
 

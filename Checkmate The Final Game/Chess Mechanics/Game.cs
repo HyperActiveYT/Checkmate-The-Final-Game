@@ -19,8 +19,8 @@ public class Game:Tournament{
 }
 
 public class Board:Game{
-    private static PiecesBetza[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
-    private static PiecesBetza[][] futureboard = new Pieces[8][8];
+    private static Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
+    private static Pieces[][] futureboard = new Pieces[8][8];
     private static int colorturn = 1; //1: white; -1: black
     private static int WCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
     private static int BCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
@@ -30,6 +30,12 @@ public class Board:Game{
     private static string lastMove = "";
     private static final string BaseFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private static string FEN = BaseFEN;
+    //Determining Which Pieces are Giving Checks
+    private static bool willbeCapture = false;
+    private static bool willbeCheck = false;
+    private static Pieces willbeCapturedPiece = null;
+    private static Pieces willbeMovedPiece = null;
+    private static Pieces willbeCheckingPiece = null;
 
     public static void createBoardBase(){
         Rook bR1 = new Rook(-1);
@@ -94,7 +100,7 @@ public class Board:Game{
         }
     }
 
-    public static PiecesBetza[][] getBoard() => board;
+    public static Pieces[][] getBoard() => board;
 
     public static int[] sqrtoAr(string sqr){
         int rank = 8-Int32.Parse(sqr.Substring(1,2));
@@ -109,7 +115,7 @@ public class Board:Game{
         return new int[]{rank,file};
     }
 
-    public static void move(int[] from, int[] to){
+    public static void commitmove(int[] from, int[] to){
         Pieces piece = board[from[0]][from[1]];
         board[from[0]][from[1]] = null;
         board[to[0]][to[1]] = piece;
@@ -118,7 +124,7 @@ public class Board:Game{
         
     }
 
-    public static void addPiece(PiecesBetza p, int[] pos){
+    public static void addPiece(Pieces p, int[] pos){
         if (board[pos[0]][pos[1]] == null){
             board[pos[0]][pos[1]] = p;
         } else {
@@ -127,6 +133,10 @@ public class Board:Game{
     }
 
     public static void displaymove(int[] from, int[] to){
+        if (board[to[0]][to[1]] != null){
+            willbeCapture = true;
+            willbeCapturedPiece = board[to[0]][to[1]];
+        }
         Pieces piece = board[from[0]][from[1]];
         futureboard[from[0]][from[1]] = null;
         futureboard[to[0]][to[1]] = piece;
@@ -135,13 +145,13 @@ public class Board:Game{
 
     public static void undodisplaymove(){
         futureboard = board;
-    }
-
+        willbeCapture = false;
+        willbeCapturedPiece = null;
     public static void detectChecktype(){
         
     }
 
-    public static boolean legal(){
+    public static bool legal(){
         
     }
 

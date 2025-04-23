@@ -62,7 +62,7 @@ public class Bosses:Game{
         Bosses Press = new Bosses("The Press",1);
         Bosses ForceJedi = new Bosses("The Force of the Jedi",1);
         Bosses Invincible = new Bosses("The Invincible",1);
-        Bosses Bossemony = new Bosses("Boss-emony",1);
+        //Bosses Bossemony = new Bosses("Boss-emony",1);
     }
 
     public static void decMovesElapse(){
@@ -95,12 +95,14 @@ public class Bosses:Game{
             } else if (name.Equals("The Creator")){
                 Random rand = new Random();
                 int num = rand.Next(6);
-                PiecesBetza p = PiecesBetza.getAllPieces()[num];
+                Pieces p = Pieces.getAllPieces()[num];
                 for (int i=0; i<8, i++){
                     
                 }
-            } else if (name.Equals("The Volcano")){
-            } else if (name.Equals("The Atomizer")){
+            /*} else if (name.Equals("The Volcano")){*/
+        if (timeframe.equals("On Captured")){}
+            if (name.Equals("The Atomizer")){
+
             } else if (name.Equals("The Crusader")){
             } else if (name.Equals("The Inquisition")){
             }

@@ -23,7 +23,6 @@ public class Editions{
         Editions Magnetic = new Editions("Magnetic",4);
         Editions Glitched = new Editions("Glitched",5);
     }
-
     public string effects(string timeframe){
         if (timeframe.equals("On Check")){
             if (name.equals("Ancient")){
@@ -42,7 +41,7 @@ public class Editions{
 
 }
 
-public class Aura:PiecesBetza{
+public class Aura{
 
     private string name;
 
@@ -53,8 +52,6 @@ public class Aura:PiecesBetza{
         this.addcost = addcost;
         AllAuras.Add(this);
     }
-
-    
 }
 
 public class Heads{

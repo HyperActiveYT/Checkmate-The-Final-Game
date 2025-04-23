@@ -1,135 +1,308 @@
-/*public class Pieces{
-    private int[][] moves;
-    private int[] center;
-    private string name;
-    private string abv;
-    private double[] ptscore; //0: +pts; 1: xpts; 2: +mult; 3: xmult
-    private int color; //1=white, 2=black
+namespace Checkmate_The_Final_Game.Chess_Mechanics{
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
-    private boolean canCastle = false;
+public class Pieces:Board{
+    private string name; public string getName() => name;
+    private string moves; public string getMoves() => moves;
+    private string abv; public string getAbv() => abv;
+    private string color;/*1=white, -1=black*/ public string getColor() => color;
+    private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
+    private string piecetype; public string getPieceType() => piecetype;
+    
+    private int buycost=0; public int getBuyCost() => buycost;
+    private int rebuycost=0; public int getRebuyCost() => rebuycost;
 
-    public Pieces(int[][] moves, string name, int abv, int color, double[] ptscore){
-        if (moves.Length % 2 == 1 && moves[0].Length % 2 == 1){ //oddxodd up to 15x15 to account for all possible moves from anywhere
-            this.moves = moves;//0 = cannot move to/attack, 1 = can both move to/attack, 2 = can attack but not move to, 3 = can move to but not attack
-        } else {
-            WriteLine("You cannot create this piece. Please ensure the piece move dimensions are accurate");
-            break;
-        }
-        center = findCenter();
-        if (moves[center[0]][center[1]] != 0){
-            WriteLine("You cannot create this piece. Please ensure the piece moves are accurate");
-            break;
-        }
+    private Heads head; public string getHead() => head;
+    private Editions edition; public string getEdition() => edition;
+    private Aura aura; public string getAura() => aura;
+
+    //0: +pts; 1: xpts; 2: +mult; 3: xmult
+
+    private static List<Pieces> YourPieces = new List<Pieces>(); public static List<Pieces> getYourPieces() => YourPieces;
+    public static void addYourPiece(Pieces p){
+        YourPieces.Add(p);
+    }
+    public static void removeYourPiece(Pieces p){
+        YourPieces.Remove(p);
+    }
+    private static List<Pieces> YourCapturedPieces = new List<Pieces>(); public static List<Pieces> getYourCapturedPieces() => YourCapturedPieces;
+    public static void addYourCapturedPiece(Pieces p){
+        YourCapturedPieces.Add(p);
+    }
+    public static void removeYourCapturedPiece(Pieces p){
+        YourCapturedPieces.Remove(p);
+    }
+    private static List<Pieces> AllPieces = new List<Pieces(); public static List<Pieces> getAllPieces() => AllPieces;
+
+
+    public Pieces(string name, string moves, string abv, string color, string piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
         this.name = name;
-        this.color = color;
+        this.moves = moves;
         this.abv = abv;
-        if (color==1){
-            abv = abv.toUpper();
-        }
+        this.color = color;
+        this.piecetype = piecetype;
         this.ptscore = ptscore;
+        //Modifiers
+        this.head = head;
+        this.edition = edition;
+        this.aura = aura;
+        buycost = ptscore[0];
+        rebuycost = buycost/2;
     }
 
-    public String ToString() => name;
-
-    public int[] findCenter(){
-        return new int[]{moves.Length/2,moves[0].Length/2};
+    public static Pieces copyPiece(Pieces p){
+        Pieces newpiece = new Pieces(p.getName(), p.getMoves(), p.getAbv(), p.getColor(), p.getPieceType(), p.getPtscore(), p.getHead(), p.getEdition(), p.getAura());
+        return newpiece;
     }
-
-    public int[][] getMoves() => moves;
-
-    public string getname() => name;
-
-    public string getAbv() => abv;
-
-    public int getcolor() => color;
-
-    public static int[][] movecombine(Pieces p1, Pieces p2){
-        movecombine(p1.getMoves(), p2.getMoves());
-    }
-
-    public static int[][] moveresize(int size){
-        if (size%2 != 1 || size<moves.length){
-            return null;
+    //Modifiers
+    public void setHead(Heads head){
+        if (this.head != null){
+            buycost -= this.head.getHeadCost();
         }
-        int[][] resize = new int[size][size];
-        for (int i=0; i<moves.length; i++){
-            for (int j=0; j<moves.length; j++){
-                resize[i+findCenter[0]-moves.length/2][j+findCenter[1]-moves[0].length/2] = moves[i][j];
-            }
+        this.head = head;
+        buycost += head.getHeadCost();
+        changeRebuyCost();
+    }
+    public void setEdition(Editions edition){
+        if (this.edition != null){
+            buycost -= this.edition.getEditiionCost();
         }
-        return resize;
+        this.edition = edition;
+        buycost += edition.getEditiionCost();
+        changeRebuyCost();
     }
-
-    public int[][] movecombine(int[][] p1, int[][] p2){
-        int[][] newmoves = new int[moves.Length][moves[0].Length];
-        if (p1.Length>p2.Length){
-            p2=p2.moveresize(p1.Length);
-        } else if (p2.Length<p1.Length){
-            p1=p1.moveresize(p2.Length);
+    public void setAura(Aura aura){
+        if (this.aura != null){
+            buycost -= this.aura.getAuraCost();
         }
-        for (int i=0; i < moves.Length;i++){
-            for (int j=0; j<moves[0].Length; j++){
-                if (p1[i][j] == 1 || p2[i][j] == 1 || (p1[i][j]+p2[i][j] == 5)){
-                    newmoves[i][j] == 1;
-                } else if (p1[i][j] + p2[i][j] == 2){
-                    newmoves[i][j] = 2;
-                } else if (p1[i][j] + p2[i][j] == 3){
-                    newmoves[i][j] = 3;
-                }
-            }
-        }
-        return newmoves;
+        this.aura = aura;
+        buycost += aura.getAuraCost();
+        changeRebuyCost();
     }
 
-    public static void Main(string args[]){
-        Knight k1 = new Knight(2,null);
-        WriteLine(k1);
+    public void changeRebuyCost(){
+        rebuycost = buycost/2;;
+    }
+
+    //Rebuy Mechanics
+    
+
+    public static void createAllPieces(){
+        Pawn p = new Pawn(1);
+        Knight n = new Knight(1);
+        Bishop b = new Bishop(1);
+        Rook r = new Rook(1);
+        Queen q = new Queen(1);
+        King k = new King(1);
+        /*Crusader c = new Crusader(1);
+        Viking v = new Viking(1);
+        RoyalGuard g = new RoyalGuard(1);
+        Cannon o = new Cannon(1);
+        Musketeer m = new Musketeer(1);
+        Unicorn u = new Unicorn(1);
+        Archbishop a = new Archbishop(1);
+        Cardinal d = new Cardinal(1);
+        MountedKing o = new MountedKing(1);
+        Pegasus s = new Pegasus(1);
+        WarWagon w = new WarWagon(1);
+        Templar t = new Templar(1);
+        Beserker e = new Beserker(1);
+        Dragon f = new Dragon(1);*/
+        AllPieces.Add(p);
+        AllPieces.Add(n);
+        AllPieces.Add(b);
+        AllPieces.Add(r);
+        AllPieces.Add(q);
+        AllPieces.Add(k);
+        /*AllPieces.Add(c);
+        AllPieces.Add(v);
+        AllPieces.Add(g);
+        AllPieces.Add(o);
+        AllPieces.Add(m);
+        AllPieces.Add(u);
+        AllPieces.Add(a);
+        AllPieces.Add(d);
+        AllPieces.Add(o);
+        AllPieces.Add(s);
+        AllPieces.Add(w);
+        AllPieces.Add(t);
+        AllPieces.Add(e);
+        AllPieces.Add(f);*/
     }
 
 }
 
-class Knight : Pieces{
-    public Knight(int color, double ptscore){
-        : base.({{0,1,0,1,0},{1,0,0,0,1},{0,0,0,0,0,},{1,0,0,0,1},{0,1,0,1,0}}, "Knight", "n", color, ptscore);
+public class Pawn:Pieces{
+    public Pawn(string color, double[] ptscore){
+        base.("Pawn","fmWfceFifmnD", "P", color, "pawn", ptscore,null,null,null)
+    }
+    public Pawn(string color){
+        Pawn(color, new double[]{1,0,0,0});
     }
 }
 
-class Bishop : Pieces{
-    public Bishop(int color, double[] ptscore){
-        : base.({{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},{0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},{0,0,1,0,0,0,0,0,0,0,0,0,1,0,0}
-        ,{0,0,0,1,0,0,0,0,0,0,0,1,0,0,0},{0,0,0,0,1,0,0,0,0,0,1,0,0,0,0},{0,0,0,0,0,1,0,0,0,1,0,0,0,0,0}
-        ,{0,0,0,0,0,0,1,0,1,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,1,0,1,0,0,0,0,0,0}
-        ,{0,0,0,0,0,1,0,0,0,1,0,0,0,0,0},{0,0,0,0,1,0,0,0,0,0,1,0,0,0,0},{0,0,0,1,0,0,0,0,0,0,0,1,0,0,0}
-        ,{0,0,1,0,0,0,0,0,0,0,0,0,1,0,0},{0,1,0,0,0,0,0,0,0,0,0,0,0,1,0},{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1}}
-        , "Bishop", "b", color, ptscore)
+public class Knight:Pieces{
+    public Knight(string color, double[] ptscore){
+        base.("Knight","N", "N", color, "knight", ptscore,null,null,null);
+    }
+    public Knight(string color){
+        Knight(color, new double[]{3,0,0,0});
     }
 }
 
-class Pawn : Pieces{
-    public Pawn(int color, double[] ptscore){
-        : base.({{2,3,2},{0,0,0},{0,0,0}}, "Pawn", "p", color, ptscore);
+public class Bishop:Pieces{
+    public Bishop(string color, double[] ptscore){
+        base.("Bishop","B", "B", color, "bishop", ptscore,null,null,null);
+    }
+    public Bishop(string color){
+        Bishop(color, new double[]{3,0,0,0});
     }
 }
 
-class King : Pieces{
-    public King(int color, double[] ptscore){
-        : base.({1,1,1},{1,0,1},{1,1,1}, "King", "k", color, ptscore);
+public class Rook:Pieces{
+    public Rook(string color, double[] ptscore){
+        base.("Rook","R", "R", color, "rook", ptscore,null,null,null);
+    }
+    public Rook(string color){
+        Rook(color, new double[]{5,0,0,0});
     }
 }
 
-class Rook : Pieces{
-    public Rook(int color, double[] ptscore){
-        : base.({{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}
-        ,{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}
-        ,{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{1,1,1,1,1,1,1,0,1,1,1,1,1,1,1},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}
-        ,{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}
-        ,{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,1,0,0,0,0,0,0,0}}
-        , "Rook", "r", color, ptscore)
+public class Queen:Pieces{
+    public Queen(string color, double[] ptscore){
+        base.("Queen","Q", "Q", color, "queen", ptscore,null,null,null);
+    }
+    public Queen(string color){
+        Queen(color, new double[]{9,0,0,0});
     }
 }
 
-class Queen : Pieces{
-    public Queen(int color, double[] ptscore){
-        : base.(movecombine(new Bishop(), new Rook()),"Queen", "q", color, ptscore);
+public class King:Pieces{
+    public King(string color, double[] ptscore){
+        base.("King","K", "K", color, "king", ptscore,null,null,null);
+    }
+    public King(string color){
+        King(color, new double[]{4,0,0,0});
     }
 }
+
+/*public class Crusader:Pieces{
+    public Crusader(string color, double[] ptscore){
+        base.("Crusader","fBbR", "C", color, "bishop", ptscore,null,null,null);
+    }
+    public Crusader(string color){
+        Crusader(color, new double[]{3.5,0,0,0});
+    }
+}
+public class Viking:Pieces{
+    public Viking(string color, double[] ptscore){
+        base.("Viking","R2B1", "V", color, "king", ptscore, null, null, null);
+    }
+    public Viking(string color){
+        Viking(color, new double[]{4.75,0,0,0});
+    }
+}
+public class RoyalGuard:Pieces{
+    public RoyalGuard(string color, double[] ptscore){
+        base.("Royal Guard","cQmK","G",color,"queen",ptscore,null,null,null);
+    }
+    public RoyalGuard(string color){
+        Viking(color, new double[]{8,0,0,0});
+    }
+}
+
+public class Cannon:Pieces{//I believe that this is already included in fairy stockfish
+    public Cannon(string color, double[] ptscore){
+        base.("Cannon","mRcpR","O",color,"rook",ptscore,null,null,null);
+    }
+    public Cannon(string color){
+        Cannon(color, new double[]{5.5,0,0,0});
+    }
+}
+public class Musketeer:Pieces{
+    public Musketeer(string color, double[] ptscore){
+        base.("Musketeer", "sRB1","M",color,"rook",ptscore,null,null,null);
+    }
+    public Musketeer(string color){
+        Musketeer(color, new double[]{4.5,0,0,0});
+    }
+}
+public class Unicorn:Pieces{//I believe that this is already included in fairy stockfish
+    public Unicorn(string color, double[] ptscore){
+        base.("Unicorn", "RN", "U",color,"rook",ptscore,null,null,null);
+    }
+    public Unicorn(string color){
+        Unicorn(color, new double[]{8,0,0,0});
+    }
+}
+public class Archbishop:Pieces{//I believe that this is already included in fairy stockfish
+    public Archbishop(string color, double[] ptscore){
+        base.("Archbishop","BN","A",color,"bishop",ptscore,null,null,null);
+    }
+    public Archbishop(string color){
+        Archbishop(color, new double[]{7.5,0,0,0});
+    }
+}
+public class Cardinal:Pieces{
+    public Cardinal(string color,double[] ptscore){
+        base.("Cardinal","BK","C",color,"bishop",ptscore,null,null,null);
+    }
+    public Cardinal(string color){
+        Cardinal(color,new double[]{3.5,0,0,0});
+    }
+}
+public class MountedKing:Pieces{
+    public MountedKing(string color, double[] ptscore){
+        base.("Mounted King","NK","M",color,"king",ptscore,null,null,null);
+    }
+    public MountedKing(string color){
+        MountedKing(color, new double[]{5,0,0,0})
+    }
+}
+public class Pegasus:Pieces{
+    public Pegasus(string color, double[] ptscore){
+        base.("Pegasus Rider","N2","S",color,"knight",ptscore,null,null,null);
+    }
+    public Pegasus(string color){
+        Pegasus(color,new double[]{5,0,0,0});
+    }
+}
+public class WarWagon:Pieces{
+    public WarWagon(string color, double[] ptscore){
+        base.("War Wagon","RK","W",color,"rook",ptscore,null,null,null);
+    }
+    public WarWagon(string color){
+        WarWagon(color,new double[]{6,0,0,0});
+    }
+}
+public class Templar:Pieces{
+    public Templar(string color, double[] ptscore){
+        base.("Templar","BvR","T",color,"bishop",ptscore,null,null,null);
+    }
+    public Templar(string color){
+        Templar(color,new double[]{6,0,0,0});
+    }
+}
+public class Beserker:Pieces{
+    public Beserker(string color, double[] ptscore){
+        base.("Beserker","R3NK","B",color,"rook",ptscore,null,null,null);
+    }
+    public Beserker(string color){
+        Beserker(color,new double[]{5,0,0,0});
+    }
+}
+public class Dragon:Pieces{
+    public Dragon(string color, double[] ptscore){
+        base.("Dragon","BR3","F",color,"bishop",ptscore,null,null,null);
+    }
+    public Dragon(color){
+        Dragon(color,new double[]{4,0,0,0})
+    }
+}*/
+
+
+
+}
+

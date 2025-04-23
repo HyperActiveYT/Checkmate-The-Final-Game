@@ -2,15 +2,15 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 
 using namespace emscripten;
 
-using namespace Stockfish;
+using namespace Lizard.Logic.Core;
 
 public class ComputerSettings:Game{
 
     int eloRating = 0;
 
-        public static void getELO() => eloRating;
+    public static void getELO() => eloRating;
 
-        public static void setELO(int eloRating){
+    public static void setELO(int eloRating){
         // Set the ELO rating for the engine
         this.eloRating = eloRating; // Example ELO rating
         Stockfish.SetOption("UCI_Elo", eloRating);
