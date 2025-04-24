@@ -100,7 +100,7 @@ public class Bosses:Tournament{
     }
 
     public void Bosseffect(string timeframe){
-        if (timeframe.Equals("Boss Select")){
+        if (timeframe.Equals("On Boss Select")){
             /*if (name.Equals("The Clock")){
                 time = 
             } else */if (name.Equals("The Wise")){
