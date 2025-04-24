@@ -7,7 +7,7 @@ public class Game:Tournament{
 
     private static void initiateGame(Pieces[][] p){
         createBoard(p);
-        Bosses.BossEffect("Boss Select");
+        Bosses.BossEffect("On Boss Select");
         ComputerSettings.initialize_stockfish();
     }
 

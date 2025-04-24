@@ -33,7 +33,7 @@ public class Editions{
                     return "shatter";
                 }
             }
-        }
+        } else if timeframe.equals()
         return "";
 
 
