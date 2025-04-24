@@ -10,7 +10,7 @@ public class Aura:PiecesBetza{
         this.name = name;
         AllAuras.Add(this);
     }
-
+Hello David
     
 }
 }
