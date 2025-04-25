@@ -104,7 +104,7 @@ public class Bosses:Tournament{
             /*if (name.Equals("The Clock")){
                 time = 
             } else */if (name.Equals("The Wise")){
-                ComputerSettings.modifyELO(1.5);
+                ComputerSettings.modifyELO(1.5);//CHANGE WHAT METHOD IS CALLED WHEN LEO IS DONE WITH CHESSDETECTION.CS
             } else if (name.Equals("The Crusader")){
                 
             } else if (name.Equals("The Inquisition")){
@@ -132,7 +132,7 @@ public class Bosses:Tournament{
             /*} else if (name.Equals("The Volcano")){*/
         if (timeframe.equals("On Captured")){}
             if (name.Equals("The Atomizer")){
-
+                
             } else if (name.Equals("The Crusader")){
             } else if (name.Equals("The Inquisition")){
             }
