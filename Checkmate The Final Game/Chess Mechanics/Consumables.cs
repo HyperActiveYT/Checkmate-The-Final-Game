@@ -83,6 +83,15 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
         ChaturangaCards Prod = new ChaturangaCards("The Prodigy");
         ChaturangaCards WaCBp = new ChaturangaCards("The Wheat and Chessboard Problem");
         ChaturangaCards Sissa = new ChaturangaCards("Sissa the Inventor");
+        ChaturangaCards Shirham = new ChaturangaCards("King Shirham");
+        ChaturangaCards Turk = new ChaturangaCards("The Turk");
+        ChaturangaCards Coffers = new ChaturangaCards("Spanish Royal Coffers");
+        ChaturangaCards Swiss = new ChaturangaCards("Swiss Gold Reserves");
+        ChaturangaCards Gambler = new ChaturangaCards("The Gambler");
+        ChaturangaCards Princess = new ChaturangaCards("The Princess");
+        ChaturangaCards Time = new ChaturangaCards("Time");
+        ChaturangaCards Pollution = new ChaturangaCards("Pollution");
+        ChaturangaCards Magnetic = new ChaturangaCards("Magnetic");
     }
 
 
