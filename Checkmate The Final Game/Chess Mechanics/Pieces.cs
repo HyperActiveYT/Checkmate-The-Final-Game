@@ -9,6 +9,8 @@ public class Pieces:Board{
     private string abv; public string getAbv() => abv;
     private string color;/*1=white, -1=black*/ public string getColor() => color;
     private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
+    //0: +pts; 1: xpts; 2: +mult; 3: xmult
+
     private int piecetype; public int getPieceType() => piecetype;
     
     private int buycost=0; public int getBuyCost() => buycost;
@@ -17,9 +19,6 @@ public class Pieces:Board{
     private Heads head; public string getHead() => head;
     private Editions edition; public string getEdition() => edition;
     private Aura aura; public string getAura() => aura;
-
-    //0: +pts; 1: xpts; 2: +mult; 3: xmult
-
     private static List<Pieces> YourPieces = new List<Pieces>(); public static List<Pieces> getYourPieces() => YourPieces;
     public static void addYourPiece(Pieces p){
         YourPieces.Add(p);
