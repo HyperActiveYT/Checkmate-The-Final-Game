@@ -1,4 +1,0 @@
-repository "Checkmate The Final Game/Checkmate The Final Game@2475798936580@cloud"
-  path "/"
-    br "/main"
-    co "/main"
