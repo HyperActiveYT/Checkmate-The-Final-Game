@@ -51,6 +51,11 @@ public class UserStats{
     public static void calcInterest(){
         
     }
+
+    //Checks and Moves stats
+    private static int baseChecks = 4; public static int getBaseChecks() => baseChecks;
+    private static int baseMoves = 100; public static int getBaseMoves() => baseMoves;
+
 }
 public class Checks:UserStats{
     
