@@ -85,8 +85,13 @@ Plasma Deck balance: Lastly, if using the  Plasma Deck, Chips and Mult are balan
     */
 private static int[] score = new int[2];
 private static int finalscore = 0;
+private static List<Pieces> involvedPieces = new List<Pieces>(); public static List<Pieces> getInvolvedPieces() => involvedPieces;
+public static void addInvolvedPiece(Pieces p){
+    involvedPieces.Add(p);
+}
+
 public static void CalculateScore(){
-    
+
 }
 
 public static void modifyScore(int[] modify){

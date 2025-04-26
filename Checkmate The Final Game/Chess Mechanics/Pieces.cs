@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Pieces:Board{
+public class Pieces{
     private string name; public string getName() => name;
     private string moves; public string getMoves() => moves;
     private string abv; public string getAbv() => abv;
