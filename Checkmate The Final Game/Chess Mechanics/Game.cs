@@ -1,6 +1,18 @@
 namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Game:Tournament{
 
+    private static long scorereq = 0;
+    private static long currentscore;
+
+    public static void setscorereq(){
+        scorereq = Tournament.getBasePt();
+        if (Tournament.getGameNum() == 1){
+            scorereq*=1.5;
+        } else if (Tournament.getGameNum() == 2){
+            scorereq*=2;
+        }
+    }
+
     public static void initiateGame(){
         createBoardBase();
     }
@@ -11,8 +23,8 @@ public class Game:Tournament{
         ComputerSettings.initialize_stockfish();
     }
 
-    public void move(){
-        P/invoke StateMachine::ponder();
+    public static void move(){
+        //P/invoke StateMachine::ponder();
     }
 
 
@@ -114,7 +126,13 @@ public class Board:Game{
         }
         return new int[]{rank,file};
     }
-
+    public static void addPiece(Pieces p, int[] pos){
+        if (board[pos[0]][pos[1]] == null){
+            board[pos[0]][pos[1]] = p;
+        } else {
+            throw new Exception("Square already occupied");
+        }
+    }
     public static void commitmove(int[] from, int[] to){
         Pieces piece = board[from[0]][from[1]];
         board[from[0]][from[1]] = null;
@@ -122,14 +140,6 @@ public class Board:Game{
         futureboard = board;
         if (piece.)
         
-    }
-
-    public static void addPiece(Pieces p, int[] pos){
-        if (board[pos[0]][pos[1]] == null){
-            board[pos[0]][pos[1]] = p;
-        } else {
-            throw new Exception("Square already occupied");
-        }
     }
 
     public static void displaymove(int[] from, int[] to){

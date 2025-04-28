@@ -17,7 +17,7 @@ public class Editions{
     public static void createEditions(){
         Editions Ancient = new Editions("Ancient",3);
         Editions Gold = new Editions("Gold",3);
-        Editions Glass = new Editions("Glass",4);
+        Editions Glass = new Editions("Glass",4); // Like in Ouroboros King, if the piece is captured, it may not be ressurected after the game
         Editions Metal = new Editions("Metal",4);
         Editions Plastic = new Editions("Plastic",3);
         Editions Magnetic = new Editions("Magnetic",4);

@@ -3,13 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Pieces:Board{
+public class Pieces{
     private string name; public string getName() => name;
     private string moves; public string getMoves() => moves;
     private string abv; public string getAbv() => abv;
     private string color;/*1=white, -1=black*/ public string getColor() => color;
     private double[] ptscore = new double[4]; public string getPtscore() => ptscore;
-    private string piecetype; public string getPieceType() => piecetype;
+    //0: +pts; 1: xpts; 2: +mult; 3: xmult
+
+    private int piecetype; public int getPieceType() => piecetype;
     
     private int buycost=0; public int getBuyCost() => buycost;
     private int rebuycost=0; public int getRebuyCost() => rebuycost;
@@ -17,9 +19,6 @@ public class Pieces:Board{
     private Heads head; public string getHead() => head;
     private Editions edition; public string getEdition() => edition;
     private Aura aura; public string getAura() => aura;
-
-    //0: +pts; 1: xpts; 2: +mult; 3: xmult
-
     private static List<Pieces> YourPieces = new List<Pieces>(); public static List<Pieces> getYourPieces() => YourPieces;
     public static void addYourPiece(Pieces p){
         YourPieces.Add(p);
@@ -37,7 +36,7 @@ public class Pieces:Board{
     private static List<Pieces> AllPieces = new List<Pieces(); public static List<Pieces> getAllPieces() => AllPieces;
 
 
-    public Pieces(string name, string moves, string abv, string color, string piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
+    public Pieces(string name, string moves, string abv, string color, int piecetype, double[] ptscore, Heads head, Editions edition, Aura aura){
         this.name = name;
         this.moves = moves;
         this.abv = abv;
@@ -136,7 +135,7 @@ public class Pieces:Board{
 
 public class Pawn:Pieces{
     public Pawn(string color, double[] ptscore){
-        base.("Pawn","fmWfceFifmnD", "P", color, "pawn", ptscore,null,null,null)
+        base.("Pawn","fmWfceFifmnD", "P", color, 0, ptscore,null,null,null)
     }
     public Pawn(string color){
         Pawn(color, new double[]{1,0,0,0});
@@ -145,7 +144,7 @@ public class Pawn:Pieces{
 
 public class Knight:Pieces{
     public Knight(string color, double[] ptscore){
-        base.("Knight","N", "N", color, "knight", ptscore,null,null,null);
+        base.("Knight","N", "N", color, 0, ptscore,null,null,null);
     }
     public Knight(string color){
         Knight(color, new double[]{3,0,0,0});
@@ -154,7 +153,7 @@ public class Knight:Pieces{
 
 public class Bishop:Pieces{
     public Bishop(string color, double[] ptscore){
-        base.("Bishop","B", "B", color, "bishop", ptscore,null,null,null);
+        base.("Bishop","B", "B", color, 0, ptscore,null,null,null);
     }
     public Bishop(string color){
         Bishop(color, new double[]{3,0,0,0});
@@ -163,7 +162,7 @@ public class Bishop:Pieces{
 
 public class Rook:Pieces{
     public Rook(string color, double[] ptscore){
-        base.("Rook","R", "R", color, "rook", ptscore,null,null,null);
+        base.("Rook","R", "R", color, 1, ptscore,null,null,null);
     }
     public Rook(string color){
         Rook(color, new double[]{5,0,0,0});
@@ -172,7 +171,7 @@ public class Rook:Pieces{
 
 public class Queen:Pieces{
     public Queen(string color, double[] ptscore){
-        base.("Queen","Q", "Q", color, "queen", ptscore,null,null,null);
+        base.("Queen","Q", "Q", color, 1, ptscore,null,null,null);
     }
     public Queen(string color){
         Queen(color, new double[]{9,0,0,0});
@@ -181,7 +180,7 @@ public class Queen:Pieces{
 
 public class King:Pieces{
     public King(string color, double[] ptscore){
-        base.("King","K", "K", color, "king", ptscore,null,null,null);
+        base.("King","K", "K", color, 1, ptscore,null,null,null);
     }
     public King(string color){
         King(color, new double[]{4,0,0,0});

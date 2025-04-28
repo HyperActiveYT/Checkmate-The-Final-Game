@@ -6,16 +6,16 @@ using System.Collections.Generic;
 public class Tournament{
 
     private static final long[] baseptreq = new long[]{50, 100, 250, 750, 3000, 7500, 15000
-    , 40000, 125000, 375000, 1500000, 150000000, 1000000000};
+    , 40000, 125000, 375000, 1500000, 150000000, 1000000000}; //there can exist a round 0, so first index is for round 0
 
     private static int Tourneynum = 1;
-    private static long basept = baseptreq[Tourneynum];;
+    private static long basept = baseptreq[Tourneynum]; public static long getBasePt() => basept;
 
     public static void setptbase(){
         basept = baseptreq[Tourneynum];
     }
 
-    private static int gamenum = 1;
+    private static int gamenum = 1; public static int getGameNum() => gamenum;
 
     public static void opponentdefeated(){
         gamenum++;
@@ -104,7 +104,7 @@ public class Bosses:Tournament{
             /*if (name.Equals("The Clock")){
                 time = 
             } else */if (name.Equals("The Wise")){
-                ComputerSettings.modifyELO(1.5);
+                ComputerSettings.modifyELO(1.5);//CHANGE WHAT METHOD IS CALLED WHEN LEO IS DONE WITH CHESSDETECTION.CS
             } else if (name.Equals("The Crusader")){
                 
             } else if (name.Equals("The Inquisition")){
@@ -132,7 +132,7 @@ public class Bosses:Tournament{
             /*} else if (name.Equals("The Volcano")){*/
         if (timeframe.equals("On Captured")){}
             if (name.Equals("The Atomizer")){
-
+                
             } else if (name.Equals("The Crusader")){
             } else if (name.Equals("The Inquisition")){
             }
