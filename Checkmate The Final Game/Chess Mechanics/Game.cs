@@ -134,12 +134,17 @@ public class Board:Game{
         }
     }
     public static void commitmove(int[] from, int[] to){
+        if (board[to[0]][to[1]] != null){
+            willbeCapture = true;
+            willbeCapturedPiece = board[to[0]][to[1]];
+        }
         Pieces piece = board[from[0]][from[1]];
         board[from[0]][from[1]] = null;
         board[to[0]][to[1]] = piece;
         futureboard = board;
-        if (piece.)
-        
+        if (willbeCapturedPiece.getColor()==1 && willbeCapturedPiece.getHead().equals("Purple")){
+            
+        }
     }
 
     public static void displaymove(int[] from, int[] to){

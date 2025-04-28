@@ -99,7 +99,7 @@ public class Bosses:Tournament{
         moveselapsed--;
     }
 
-    public void Bosseffect(string timeframe){
+    public void Bosseffect(string timeframe, int square, Pieces piece){
         if (timeframe.Equals("On Boss Select")){
             /*if (name.Equals("The Clock")){
                 time = 

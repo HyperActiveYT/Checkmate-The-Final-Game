@@ -6,6 +6,8 @@ public class Consumables{
     private string name; public string getName() => name;
     private int buycost=3;
     private int sellval=buycost/2;
+
+    //private static int AscensionCounter = 0;
     public Consumables(string name){
         this.name = name;
     }
@@ -54,17 +56,33 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
             Pieces p2 = copypiece(p);
             Pieces.addYourPiece(p1);
             Pieces.addYourPiece(p2);
-        } else if getName().equals("Royalty"){//Destroy a random non-King piece and add one of each: a randomly modified queen and rook to the board
-            p.setHeads(Heads.getAllHeads().get(4));
-        } else if getName().equals("Greed"){//Greed: Destroy 3 random non-King pieces and gain $25
-            p.setHeads(Heads.getAllHeads().get(5));
+        /*} else if getName().equals("Royalty"){//Destroy a random non-King piece and add one of each: a randomly modified queen and rook to the board
+        */} else if getName().equals("Greed"){//Greed: Destroy 3 random non-King pieces and gain $25
+            for (int i=0; i<3; i++){
+                int rand = roll(Pieces.getYourPieces().Count);
+                Pieces p = Pieces.getYourPieces().get(rand);
+                if (p.getName().equals("King")){
+                    i--;
+                    continue;
+                }
+                Pieces.removeYourPiece(p);
+                UserStats.addMoney(25);
+            }
         } else if getName().equals("Double Trouble"){//Duplicate one random master card and destroy the others
-            p.setHeads(Heads.getAllHeads().get(6));
+            int rand = roll(getHeldCards().Count);
+            MasterCard original = getHeldCards().get(rand);
+            MasterCard clone = MasterCard.clone(getHeldCards().get(rand));
+            List<MasterCard> newHand = new List<MasterCard>();
+            MasterCard.Add(original);
+            MasterCard.Add(clone);
+            MasterCard.setHand(newHand);
         } else if getName().equals("Cassia the God of Chess"){//Increases the level of all checks by 1
-            p.setHeads(Heads.getAllHeads().get(7));
-        } else if getName().equals("Ascension"){
-            p.setHeads(Heads.getAllHeads().get(8));
-        }
+            for (int i=0; i<Checks.getAllChecks().Count; i++){
+                Checks.getAllChecks().get(i).levelchange(1);
+            }
+        }/* else if getName().equals("Ascension"){
+
+        }*/
     }
 
 }
@@ -110,7 +128,7 @@ public class ChessvolutionCards:Consumables{
     public Checks getCheck() => check;
 
     public static void consumeCVCard(ChessvolutionCards card){
-        card.check.levelchange(1);
+        card.getCheck().levelchange(1);
         UserStats.setLastUsed(card);
     }
 

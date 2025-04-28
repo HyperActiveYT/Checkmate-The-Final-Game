@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class Pieces{
     private string name; public string getName() => name;
-    private string moves; public string getMoves() => moves;
+    private string moves; public string getMoves() => moves; //Unnecessary for now since we abaondoned fairy-stockfish
     private string abv; public string getAbv() => abv;
     private string color;/*1=white, -1=black*/ public string getColor() => color;
     private double[] ptscore = new double[4]; public string getPtscore() => ptscore;

@@ -126,6 +126,10 @@ public class MasterCard{
         return newcard;
     }
 
+    public static void setHand(List<MasterCard> hand){
+        heldCards = hand;
+    }
+
     public string void MasterCardEffect(string timeframe){
         return "";
     }
