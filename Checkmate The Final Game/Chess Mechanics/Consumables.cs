@@ -160,6 +160,28 @@ public class ChessvolutionCards:Consumables{
 
     public Checks getCheck() => check;
 
+    public static void createCVCards(){
+        ChessvolutionCards Chaturanji = new ChessvolutionCards("Chaturanji", Checks.getAllChecks().get(0));
+        ChessvolutionCards Chaturanga = new ChessvolutionCards("Chaturanga", Checks.getAllChecks().get(1));
+        ChessvolutionCards Courier = new ChessvolutionCards("Courier Chess", Checks.getAllChecks().get(2));
+        ChessvolutionCards GrAce = new ChessvolutionCards("Grant Acedrex", Checks.getAllChecks().get(3));
+        ChessvolutionCards Shatranj = new ChessvolutionCards("Shatranj", Checks.getAllChecks().get(4));
+        ChessvolutionCards ShAss = new ChessvolutionCards("Short Assize", Checks.getAllChecks().get(5));
+        ChessvolutionCards Tmlane = new ChessvolutionCards("Tamerlane", Checks.getAllChecks().get(6));
+        ChessvolutionCards Xiangqi = new ChessvolutionCards("Xiangqi", Checks.getAllChecks().get(7));
+        ChessvolutionCards Shogi = new ChessvolutionCards("Shogi", Checks.getAllChecks().get(8));
+        ChessvolutionCards Makruk = new ChessvolutionCards("Makruk", Checks.getAllChecks().get(9));
+        ChessvolutionCards Sittuyin = new ChessvolutionCards("Sittuyin", Checks.getAllChecks().get(10));
+        visibleCVCards.add(Chaturanji);
+        visibleCVCards.add(Chaturanga);
+        visibleCVCards.add(Courier);
+        visibleCVCards.add(GrAce);
+        visibleCVCards.add(Shatranj);
+        visibleCVCards.add(ShAss);
+        visibleCVCards.add(Tmlane);
+        visibleCVCards.add(Xiangqi);
+    }
+
     public static void consumeCVCard(ChessvolutionCards card){
         card.getCheck().levelchange(1);
         UserStats.setLastUsed(card);

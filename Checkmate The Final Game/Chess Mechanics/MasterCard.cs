@@ -136,9 +136,17 @@ public class MasterCard{
         }
     }
 
-    public string void MasterCardEffect(string timeframe){
+    public string void MasterCardEffect(string timeframe, Pieces p){
         if (timeframe.Equals("On Check")){
-            if ()
+            if (name.equals("The False Knight")){
+                if (p.getPieceType().equals("Knight")){
+                    Score.modifyscore(new int[]{0,1,6,1});
+                }
+            } else if (name.equals("The False Bishop")){
+                if (p.getPieceType().equals("Bishop")){
+                    Score.modifyscore(new int[]{0,1,6,1});
+                }
+            } else if 
         }
         return "";
     }

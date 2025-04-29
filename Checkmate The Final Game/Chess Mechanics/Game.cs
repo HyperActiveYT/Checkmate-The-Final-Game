@@ -65,9 +65,9 @@ public class Board:Game{
     //Determining Which Pieces are Giving Checks
     private static bool willbeCapture = false;
     private static bool willbeCheck = false;
-    private static Pieces willbeCapturedPiece = null;
-    private static Pieces willbeMovedPiece = null;
-    private static Pieces willbeCheckingPiece = null;
+    private static Pieces willbeCapturedPiece = null; public static Pieces getWillBeCapturedPiece() => willbeCapturedPiece;
+    private static Pieces willbeMovedPiece = null; public static Pieces getWillBeMovedPiece() => willbeMovedPiece;
+    private static Pieces willbeCheckingPiece = null; public static Pieces getWillBeCheckingPiece() => willbeCheckingPiece;
 
     public static void createBoardBase(){
         Rook bR1 = new Rook(-1);
