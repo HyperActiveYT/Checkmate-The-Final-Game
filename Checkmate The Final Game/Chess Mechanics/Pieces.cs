@@ -33,6 +33,15 @@ public class Pieces{
     public static void removeYourCapturedPiece(Pieces p){
         YourCapturedPieces.Remove(p);
     }
+
+    public static void Captured(Pieces p){
+        YourCapturedPieces.Add(p);
+        YourPieces.Remove(p);
+    }
+    public static void Rebought(Pieces p){
+        YourPieces.Add(p);
+        YourCapturedPieces.Remove(p);
+    }
     private static List<Pieces> AllPieces = new List<Pieces(); public static List<Pieces> getAllPieces() => AllPieces;
 
 

@@ -93,7 +93,7 @@ public class MasterCard{
     public static void createRare(){
         MasterCard ChessBook = new MasterCard("The Chess Books", 2); //copy ability of MC to its right
         MasterCard ChessTheory = new MasterCard("Chess Theory", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
-        MasterCard Harmon = new MasterCard("Beth Harmon", 2);//
+        MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
         MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
         MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
         MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically
@@ -105,9 +105,9 @@ public class MasterCard{
         MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
         //Magnus: disable effect of every boss blind
         MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
-        //Kasparov: 
+        //Kasparov: Increase xmult by .025 for every "best move" you make
         MasterCard Fischer = new MasterCard("Bobby Fischer", 3);
-        //Fischer: 
+        //Fischer: Increase xmult by .75 for every exchange sacrifice you make
         MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
         MasterCard Karpov = new MasterCard("Anatoly Karpov", 3);
         MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
@@ -128,6 +128,14 @@ public class MasterCard{
 
     public static void setHand(List<MasterCard> hand){
         heldCards = hand;
+    }
+
+    public static void removeCard(MasterCard card){
+        if (heldCards.Contains(card)){
+            heldCards.Remove(card);
+        } else {
+            Console.WriteLine("You do not have that card");
+        }
     }
 
     public string void MasterCardEffect(string timeframe){
