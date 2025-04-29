@@ -115,8 +115,8 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
 
 }
 public class ChessvolutionCards:Consumables{
-    private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>();
-    private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>();
+    private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>(); public static List<ChessvolutionCards> getAllCVCards() => allCVCards;
+    private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>(); public static List<ChessvolutionCards> getVisibleCVCards() => visibleCVCards;
     Checks check;
 
     public ChessvolutionCards(string name, Checks check){
@@ -134,7 +134,7 @@ public class ChessvolutionCards:Consumables{
 
 }
 
-public class Tickets{
+/*public class Tickets{Simply don't have time to implement this in the current time frame
     
     private static List<Tickets> T1all = new List<Tickets>();
     private static List<Tickets> available = new List<Tickets>();
@@ -197,7 +197,7 @@ public class Tickets{
 
 
 
-}
+}*/
 /*public class SkipTag{ FOR THE SAKE OF GETTING THIS GAME DONE, I AM NOT IMPLEMENTING THIS RIGHT NOW
     string name;
     public SkipTag(string name){
@@ -250,33 +250,41 @@ public class Pack{ //Booster Packs Yay
         stuffPack();
     }
     public void stuffPack(){
-        if (type.equals("MC")){
+        if (item.equals("MC")){
             for (int i=0; i<size; i++){
                 inPack.Add(MasterCard.getAllCards().get(roll(MasterCard.getAllCards().Count)));
             }
-        } else if (type.equals("CC")){
+        } else if (item.equals("CC")){
             for (int i=0; i<size; i++){
                 inPack.Add(TheCardsofChess.getAllCoCCards().get(roll(TheCardsofChess.getAllCoCCards().Count)));
             }
-        } else if (type.equals("Chaturanga")){
+        } else if (item.equals("Chaturanga")){
             for (int i=0; i<size; i++){
                 inPack.Add(ChaturangaCards.getAllChaturangaCards().get(roll(ChaturangaCards.getAllChaturangaCards().Count)));
             }
-        } else if (type.equals("Piece")){
+        } else if (item.equals("Piece")){
             for (int i=0; i<size; i++){
                 inPack.Add(Pieces.getAllPieces().get(roll(Pieces.getAllPieces().Count)));
             }
-        } else if (type.equals("CV")){
+        } else if (item.equals("CV")){
             for (int i=0; i<size; i++){
                 inPack.Add(ChessvolutionCards.getAllCVCards().get(roll(ChessvolutionCards.getAllCVCards().Count)));
             }
         }
     }
     public void openPack(){
-
+        //display the consumables in pack
     }
     public void useInPack(int i){
         inPack[i].effects();
+        inPack.RemoveAt(i);
+        choose--;
+        if (choose==0){
+            closePack();
+        }
+    }
+    public void closePack(){
+        //close the menu
     }
 }
 }

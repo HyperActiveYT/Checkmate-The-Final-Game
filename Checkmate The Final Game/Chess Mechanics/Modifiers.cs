@@ -98,22 +98,26 @@ public class Heads{
             if (name.equals("Purple")){
                 if (UserStats.getheldConsumables().Count<UserStats.getConsumableSlots()){
                     Random rand = new Random();
-                    int val = rand.Next(getAllChaturangaCards().Count);
+                    int val = rand.Next(Consumables.getAllChaturangaCards().Count);
                     UserStats.addheldConsumable(getAllChaturangaCards().get(val));
                     return "Consumable Added";
                 }
             }
         } else if (timeframe.equals("On Check")){
             if (name.equals("Red")){
-                //how the hell are we supposed to do retrigger effects...
+                return "retrigger";
             }
         } else if (timeframe.equals("Game End")){
             if (name.equals("Blue")){
-
+                Random rand = new Random();
+                int val = rand.Next(Consumables.getVisibleCVCards().Count);
+                UserStats.addheldConsumable(Consumables.getVisibleCVCards().get(val));
+                return "Consumable Added";
             }
 
         }
         return "";
 
+}
 }
 }
