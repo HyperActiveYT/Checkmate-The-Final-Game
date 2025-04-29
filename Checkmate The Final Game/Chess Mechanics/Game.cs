@@ -58,8 +58,9 @@ public class Board:Game{
     private static int fullmove = 1;
     private static string enpassant = "";
     private static string lastMove = "";
-    private static final string BaseFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    private static final string BaseFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - - 0 1";
     private static string FEN = BaseFEN; public static string getFEN() => FEN;
+    private static string futureFEN; public static string getFutureFEN() => futureFEN;
 
     //Determining Which Pieces are Giving Checks
     private static bool willbeCapture = false;
@@ -119,7 +120,7 @@ public class Board:Game{
         board = p;
         changeFEN();
     }
-        public Pieces[][] flip(){
+    public Pieces[][] flip(){
         Pieces[][] newboard = new Pieces[8][8]
         for (int i=0; i<board.Length; i++){
             for (int j=0; j<board[0].Length; j++){
@@ -158,9 +159,15 @@ public class Board:Game{
         board[from[0]][from[1]] = null;
         board[to[0]][to[1]] = piece;
         futureboard = board;
-        if (willbeCapturedPiece.getColor()==1 && willbeCapturedPiece.getHead().equals("Purple")){
-            
+        if (willbeCapturedPiece.getColor()==1){
+            willbeCapturedPiece.getHead().HeadEffects("On Captured");
         }
+        colorturn*=-1;
+        if (colorturn == 1){
+            fullmove++;
+        }
+        halfclock++;
+        changeFEN();
     }
 
     public static void displaymove(int[] from, int[] to){
@@ -238,8 +245,6 @@ public class Board:Game{
         lastMove = "";
         FEN = BaseFEN;
     }
-
-    
 
 }
 

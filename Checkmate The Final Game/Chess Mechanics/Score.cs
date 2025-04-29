@@ -89,6 +89,9 @@ private static List<Pieces> involvedPieces = new List<Pieces>(); public static L
 public static void addInvolvedPiece(Pieces p){
     involvedPieces.Add(p);
 }
+public static void clearInvolvedPieces(){
+    involvedPieces.Clear();
+}
 
 public static void CalculateScore(){
 

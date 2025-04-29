@@ -15,8 +15,11 @@ public class Consumables{
         this.name = name;
         this.buycost = sellval;
     }
-    public static void setSellVal(){
+    public void setSellVal(){
         sellval = buycost/2;
+    }
+    public void effects(Pieces p){
+        //just a placeholder for subclass methods
     }
 }
 public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
@@ -42,7 +45,7 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void CoCeffect(Pieces p){
+    public void effects(Pieces p){
         if (getName().equals("Sacrifice!")){
             p.setHeads(Heads.getAllHeads().get(0));
         } else if getName().equals("Talent"){
@@ -110,6 +113,36 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
         ChaturangaCards Time = new ChaturangaCards("Time");
         ChaturangaCards Pollution = new ChaturangaCards("Pollution");
         ChaturangaCards Magnetic = new ChaturangaCards("Magnetic");
+    }
+    
+    public void effects(Pieces p){
+        if (getName().equals("The Copier")){
+            
+        } else if getName().equals("The Prodigy"){
+            //gain 1 of each piece
+        } else if getName().equals("The Wheat and Chessboard Problem"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Sissa the Inventor"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("King Shirham"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Turk"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Spanish Royal Coffers"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Swiss Gold Reserves"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Gambler"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Princess"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Time"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Pollution"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Magnetic"){
+            //gain $2^x where x is the number of pieces on the board
+        }
     }
 
 
