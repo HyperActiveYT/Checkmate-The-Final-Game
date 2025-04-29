@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using namespace Lizard.Logic.Core;
+
 public class CheckDetection{
     public class Position
 {

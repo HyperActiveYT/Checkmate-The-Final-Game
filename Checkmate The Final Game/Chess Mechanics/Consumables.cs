@@ -6,6 +6,8 @@ public class Consumables{
     private string name; public string getName() => name;
     private int buycost=3;
     private int sellval=buycost/2;
+
+    //private static int AscensionCounter = 0;
     public Consumables(string name){
         this.name = name;
     }
@@ -13,8 +15,11 @@ public class Consumables{
         this.name = name;
         this.buycost = sellval;
     }
-    public static void setSellVal(){
+    public void setSellVal(){
         sellval = buycost/2;
+    }
+    public void effects(Pieces p){
+        //just a placeholder for subclass methods
     }
 }
 public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
@@ -40,7 +45,7 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void CoCeffect(Pieces p){
+    public void effects(Pieces p){
         if (getName().equals("Sacrifice!")){
             p.setHeads(Heads.getAllHeads().get(0));
         } else if getName().equals("Talent"){
@@ -54,17 +59,33 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
             Pieces p2 = copypiece(p);
             Pieces.addYourPiece(p1);
             Pieces.addYourPiece(p2);
-        } else if getName().equals("Royalty"){//Destroy a random non-King piece and add one of each: a randomly modified queen and rook to the board
-            p.setHeads(Heads.getAllHeads().get(4));
-        } else if getName().equals("Greed"){//Greed: Destroy 3 random non-King pieces and gain $25
-            p.setHeads(Heads.getAllHeads().get(5));
+        /*} else if getName().equals("Royalty"){//Destroy a random non-King piece and add one of each: a randomly modified queen and rook to the board
+        */} else if getName().equals("Greed"){//Greed: Destroy 3 random non-King pieces and gain $25
+            for (int i=0; i<3; i++){
+                int rand = roll(Pieces.getYourPieces().Count);
+                Pieces p = Pieces.getYourPieces().get(rand);
+                if (p.getName().equals("King")){
+                    i--;
+                    continue;
+                }
+                Pieces.removeYourPiece(p);
+                UserStats.addMoney(25);
+            }
         } else if getName().equals("Double Trouble"){//Duplicate one random master card and destroy the others
-            p.setHeads(Heads.getAllHeads().get(6));
+            int rand = roll(getHeldCards().Count);
+            MasterCard original = getHeldCards().get(rand);
+            MasterCard clone = MasterCard.clone(getHeldCards().get(rand));
+            List<MasterCard> newHand = new List<MasterCard>();
+            MasterCard.Add(original);
+            MasterCard.Add(clone);
+            MasterCard.setHand(newHand);
         } else if getName().equals("Cassia the God of Chess"){//Increases the level of all checks by 1
-            p.setHeads(Heads.getAllHeads().get(7));
-        } else if getName().equals("Ascension"){
-            p.setHeads(Heads.getAllHeads().get(8));
-        }
+            for (int i=0; i<Checks.getAllChecks().Count; i++){
+                Checks.getAllChecks().get(i).levelchange(1);
+            }
+        }/* else if getName().equals("Ascension"){
+
+        }*/
     }
 
 }
@@ -93,12 +114,42 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
         ChaturangaCards Pollution = new ChaturangaCards("Pollution");
         ChaturangaCards Magnetic = new ChaturangaCards("Magnetic");
     }
+    
+    public void effects(Pieces p){
+        if (getName().equals("The Copier")){
+            
+        } else if getName().equals("The Prodigy"){
+            //gain 1 of each piece
+        } else if getName().equals("The Wheat and Chessboard Problem"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Sissa the Inventor"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("King Shirham"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Turk"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Spanish Royal Coffers"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Swiss Gold Reserves"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Gambler"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Princess"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Time"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Pollution"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Magnetic"){
+            //gain $2^x where x is the number of pieces on the board
+        }
+    }
 
 
 }
 public class ChessvolutionCards:Consumables{
-    private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>();
-    private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>();
+    private static List<ChessvolutionCards> allCVCards = new List<ChessvolutionCards>(); public static List<ChessvolutionCards> getAllCVCards() => allCVCards;
+    private static List<ChessvolutionCards> visibleCVCards = new List<ChessvolutionCards>(); public static List<ChessvolutionCards> getVisibleCVCards() => visibleCVCards;
     Checks check;
 
     public ChessvolutionCards(string name, Checks check){
@@ -109,14 +160,36 @@ public class ChessvolutionCards:Consumables{
 
     public Checks getCheck() => check;
 
+    public static void createCVCards(){
+        ChessvolutionCards Chaturanji = new ChessvolutionCards("Chaturanji", Checks.getAllChecks().get(0));
+        ChessvolutionCards Chaturanga = new ChessvolutionCards("Chaturanga", Checks.getAllChecks().get(1));
+        ChessvolutionCards Courier = new ChessvolutionCards("Courier Chess", Checks.getAllChecks().get(2));
+        ChessvolutionCards GrAce = new ChessvolutionCards("Grant Acedrex", Checks.getAllChecks().get(3));
+        ChessvolutionCards Shatranj = new ChessvolutionCards("Shatranj", Checks.getAllChecks().get(4));
+        ChessvolutionCards ShAss = new ChessvolutionCards("Short Assize", Checks.getAllChecks().get(5));
+        ChessvolutionCards Tmlane = new ChessvolutionCards("Tamerlane", Checks.getAllChecks().get(6));
+        ChessvolutionCards Xiangqi = new ChessvolutionCards("Xiangqi", Checks.getAllChecks().get(7));
+        ChessvolutionCards Shogi = new ChessvolutionCards("Shogi", Checks.getAllChecks().get(8));
+        ChessvolutionCards Makruk = new ChessvolutionCards("Makruk", Checks.getAllChecks().get(9));
+        ChessvolutionCards Sittuyin = new ChessvolutionCards("Sittuyin", Checks.getAllChecks().get(10));
+        visibleCVCards.add(Chaturanji);
+        visibleCVCards.add(Chaturanga);
+        visibleCVCards.add(Courier);
+        visibleCVCards.add(GrAce);
+        visibleCVCards.add(Shatranj);
+        visibleCVCards.add(ShAss);
+        visibleCVCards.add(Tmlane);
+        visibleCVCards.add(Xiangqi);
+    }
+
     public static void consumeCVCard(ChessvolutionCards card){
-        card.check.levelchange(1);
+        card.getCheck().levelchange(1);
         UserStats.setLastUsed(card);
     }
 
 }
 
-public class Tickets{
+/*public class Tickets{Simply don't have time to implement this in the current time frame
     
     private static List<Tickets> T1all = new List<Tickets>();
     private static List<Tickets> available = new List<Tickets>();
@@ -179,7 +252,7 @@ public class Tickets{
 
 
 
-}
+}*/
 /*public class SkipTag{ FOR THE SAKE OF GETTING THIS GAME DONE, I AM NOT IMPLEMENTING THIS RIGHT NOW
     string name;
     public SkipTag(string name){
@@ -232,33 +305,41 @@ public class Pack{ //Booster Packs Yay
         stuffPack();
     }
     public void stuffPack(){
-        if (type.equals("MC")){
+        if (item.equals("MC")){
             for (int i=0; i<size; i++){
                 inPack.Add(MasterCard.getAllCards().get(roll(MasterCard.getAllCards().Count)));
             }
-        } else if (type.equals("CC")){
+        } else if (item.equals("CC")){
             for (int i=0; i<size; i++){
                 inPack.Add(TheCardsofChess.getAllCoCCards().get(roll(TheCardsofChess.getAllCoCCards().Count)));
             }
-        } else if (type.equals("Chaturanga")){
+        } else if (item.equals("Chaturanga")){
             for (int i=0; i<size; i++){
                 inPack.Add(ChaturangaCards.getAllChaturangaCards().get(roll(ChaturangaCards.getAllChaturangaCards().Count)));
             }
-        } else if (type.equals("Piece")){
+        } else if (item.equals("Piece")){
             for (int i=0; i<size; i++){
                 inPack.Add(Pieces.getAllPieces().get(roll(Pieces.getAllPieces().Count)));
             }
-        } else if (type.equals("CV")){
+        } else if (item.equals("CV")){
             for (int i=0; i<size; i++){
                 inPack.Add(ChessvolutionCards.getAllCVCards().get(roll(ChessvolutionCards.getAllCVCards().Count)));
             }
         }
     }
     public void openPack(){
-
+        //display the consumables in pack
     }
     public void useInPack(int i){
         inPack[i].effects();
+        inPack.RemoveAt(i);
+        choose--;
+        if (choose==0){
+            closePack();
+        }
+    }
+    public void closePack(){
+        //close the menu
     }
 }
 }

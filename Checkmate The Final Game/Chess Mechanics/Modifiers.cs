@@ -17,7 +17,7 @@ public class Editions{
     public static void createEditions(){
         Editions Ancient = new Editions("Ancient",3);
         Editions Gold = new Editions("Gold",3);
-        Editions Glass = new Editions("Glass",4); // Like in Ouroboros King, if the piece is captured, it may not be ressurected after the game
+        Editions Glass = new Editions("Glass",4);
         Editions Metal = new Editions("Metal",4);
         Editions Plastic = new Editions("Plastic",3);
         Editions Magnetic = new Editions("Magnetic",4);
@@ -32,8 +32,37 @@ public class Editions{
                 if (val==0){
                     return "shatter";
                 }
+            } else if (name.equals("Glass")){
+                Score.modifyscore(new int[]{0,1,0,3});
+                Random rand = new Random();
+                int val = rand.Next(5);
+                if (val==0){
+                    return "shatter";
+                }
+            } else if (name.equals("Plastic")){
+                Score.modifyscore(new int[]{15,1,0,1});
+            } else if (name.equals("Magnetic")){
+                Score.modifyscore(new int[]{0,1,3,1});
+            } else if (name.equals("Glitched")){
+                Random rand = new Random();
+                int val = rand.Next(25);
+                if (val==0){
+                    UserStats.addMoney(15);
+                }
+                val = rand.Next(25)
+                if (val==0){
+                    Score.modifyscore(new int[]{0,1,30,1});
+                }
             }
-        } else if timeframe.equals()
+        } else if (timeframe.equals("On Check: In Hand")){
+            if (name.equals("Metal")){
+                Score.modifyScore(new int[]{0,1,0,2});
+            }
+        } else if (timeframe.equals("Game End")){
+            if (name.equals("Gold")){
+                Score.addMoney(3);
+            }
+        }
         return "";
 
 
@@ -98,22 +127,26 @@ public class Heads{
             if (name.equals("Purple")){
                 if (UserStats.getheldConsumables().Count<UserStats.getConsumableSlots()){
                     Random rand = new Random();
-                    int val = rand.Next(getAllChaturangaCards().Count);
+                    int val = rand.Next(Consumables.getAllChaturangaCards().Count);
                     UserStats.addheldConsumable(getAllChaturangaCards().get(val));
                     return "Consumable Added";
                 }
             }
         } else if (timeframe.equals("On Check")){
             if (name.equals("Red")){
-                //how the hell are we supposed to do retrigger effects...
+                return "retrigger";
             }
         } else if (timeframe.equals("Game End")){
             if (name.equals("Blue")){
-
+                Random rand = new Random();
+                int val = rand.Next(Consumables.getVisibleCVCards().Count);
+                UserStats.addheldConsumable(Consumables.getVisibleCVCards().get(val));
+                return "Consumable Added";
             }
 
         }
         return "";
 
+}
 }
 }

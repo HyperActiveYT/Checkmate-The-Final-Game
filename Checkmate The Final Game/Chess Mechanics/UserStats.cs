@@ -10,9 +10,9 @@ public class UserStats{
     public static void setLastUsed(Consumables consumable) => lastUsed = consumable;
 
     public static void incConsSlot() => consumableslots++;
-        public static void useConsumable(Consumable consumable){
+        public static void useConsumable(Consumable consumable, Pieces p){
         if (heldConsumables.Contains(consumable)){
-            consumable.effect();/*MAKE SURE THE METHOD IS THE CORRECT ONE*/
+            consumable.effect(p);
             heldConsumables.Remove(consumable);
         } else {
             Console.WriteLine("You do not have that consumable");

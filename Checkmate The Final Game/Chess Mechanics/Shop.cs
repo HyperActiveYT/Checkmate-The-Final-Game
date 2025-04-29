@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class Shop{
     
-    private static double PieceWeight=0; //0
+    private static double PieceWeight=4; //0
     private static double MasterCardWeight = 20; //1
     private static double ChessEVWeight = 4; //2
     private static double ChatarangaCardWeight = 4; //3
