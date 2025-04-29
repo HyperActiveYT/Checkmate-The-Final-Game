@@ -120,7 +120,7 @@ public class Board:Game{
         board = p;
         changeFEN();
     }
-    public Pieces[][] flip(){
+        public Pieces[][] flip(){
         Pieces[][] newboard = new Pieces[8][8]
         for (int i=0; i<board.Length; i++){
             for (int j=0; j<board[0].Length; j++){
@@ -150,25 +150,28 @@ public class Board:Game{
             throw new Exception("Square already occupied");
         }
     }
-    public static void commitmove(int[] from, int[] to){
-        if (board[to[0]][to[1]] != null){
-            willbeCapture = true;
-            willbeCapturedPiece = board[to[0]][to[1]];
-        }
-        Pieces piece = board[from[0]][from[1]];
-        board[from[0]][from[1]] = null;
-        board[to[0]][to[1]] = piece;
-        futureboard = board;
-        if (willbeCapturedPiece.getColor()==1){
-            willbeCapturedPiece.getHead().HeadEffects("On Captured");
-        }
-        colorturn*=-1;
-        if (colorturn == 1){
-            fullmove++;
-        }
-        halfclock++;
-        changeFEN();
+    public static void commitmove(int[] from, int[] to)
+{
+    Pieces movingPiece = board[from[0]][from[1]];
+    Pieces targetPiece = board[to[0]][to[1]];
+
+    if (targetPiece != null)
+    {
+        willbeCapture = true;
+        willbeCapturedPiece = targetPiece;
+        currency += getPieceValue(willbeCapturedPiece);
     }
+    else
+    {
+        willbeCapture = false;
+        willbeCapturedPiece = null;
+    }
+
+    board[to[0]][to[1]] = movingPiece;
+    board[from[0]][from[1]] = null;
+    futureboard = board;
+    changeFEN();
+}
 
     public static void displaymove(int[] from, int[] to){
         if (board[to[0]][to[1]] != null){
@@ -245,6 +248,8 @@ public class Board:Game{
         lastMove = "";
         FEN = BaseFEN;
     }
+
+    
 
 }
 
