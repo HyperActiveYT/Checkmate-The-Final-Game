@@ -9,6 +9,7 @@ public class Shop{
     private static double ChessEVWeight = 4; //2
     private static double ChatarangaCardWeight = 4; //3
     private static List<> InShop = new List<>();
+    private static List<Pack> BoosterPacks = new List<Pack>();
 
 
     private static int basererollcost=5;
@@ -16,13 +17,52 @@ public class Shop{
     private static int rerollcost=basererollcost;
 
     public static void createShop(){
+        Random rand = new Random();
         double TotWeight = PieceWeight+MasterCardWeight+ChessEVWeight+ChatarangaCardWeight;
         for (int i=0; i<slot;i++){
-            if (roll(TotWeight)==0){
-                
+            int item = roll(TotWeight);
+            if (item==0){
+                int val = rand.Next(Pieces.getAllPieces().Count);
+                InShop.Add(Pieces.getAllPieces()[val]);
+            } else if (item==1){
+                int val = rand.Next(MasterCard.getAllCards().Count);
+                InShop.Add(MasterCard.getAllCards()[val]);
+            } else if (item==2){
+                int val = rand.Next(ChessEV.getAllCards().Count);
+                InShop.Add(ChessEV.getAllCards()[val]);
+            } else if (item==3){
+                int val = rand.Next(ChaturangaCard.getAllCards().Count);
+                InShop.Add(ChaturangaCard.getAllCards()[val]);
+            }
+        }
+        BoosterPacks.Add(Pack.createRandomPack());
+        BoosterPacks.Add(Pack.createRandomPack());
+    }
+    public static void reroll(){
+        Random rand = new Random();
+        double TotWeight = PieceWeight+MasterCardWeight+ChessEVWeight+ChatarangaCardWeight;
+        for (int i=0; i<slot;i++){
+            int item = roll(TotWeight);
+            if (item==0){
+                int val = rand.Next(Pieces.getAllPieces().Count);
+                InShop.Add(Pieces.getAllPieces()[val]);
+            } else if (item==1){
+                int val = rand.Next(MasterCard.getAllCards().Count);
+                InShop.Add(MasterCard.getAllCards()[val]);
+            } else if (item==2){
+                int val = rand.Next(ChessEV.getAllCards().Count);
+                InShop.Add(ChessEV.getAllCards()[val]);
+            } else if (item==3){
+                int val = rand.Next(ChaturangaCard.getAllCards().Count);
+                InShop.Add(ChaturangaCard.getAllCards()[val]);
             }
         }
     }
+    public static void closeShop(){
+        InShop.Clear();
+        BoosterPacks.Clear();
+    }
+
     public static int roll(double TotWeight){
         Random rand = new Random();
         int val = rand.Next(TotWeight);
@@ -36,7 +76,8 @@ public class Shop{
             return 3;
         }
     }
-    public static setweight(string type, double weight){
+
+    public static void setweight(string type, double weight){
         if (type.equals("Piece")){
             PieceWeight = weight;
         } else if (type.equals("MasterCard")){

@@ -62,7 +62,9 @@ public class Bosses:Tournament{
     private static int moveselapsed;
     private static int bosseffectActive = false;
     private static int wasELO;
-    private static int defeatPrize; //amount of money given when defeated; 25 for final boss
+    private int defeatPrize; //amount of money given when defeated; 25 for final boss
+
+    private static Bosses currentBoss; public static Bosses getCurrentBoss() => currentBoss;
 
     public Bosses(string name, int type){
         this.name = name;
@@ -181,6 +183,5 @@ public class Bosses:Tournament{
         }
     }
 
-}
 }
 }
