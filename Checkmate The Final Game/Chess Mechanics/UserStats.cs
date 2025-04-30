@@ -78,8 +78,8 @@ public class Checks:UserStats{
 
     public static void createChecks(){
         Checks Direct = new Checks("Direct Check", new int[]{5,1}, new int[]{10,1});
-        Checks Skewer = new Checks("Skewer Check", new int[]{10,2}, new int[]{15,1});
-        Checks Fork = new Checks("Fork Check", new int[]{20,2}, new int[]{20,1});
+        //Checks Skewer = new Checks("Skewer Check", new int[]{10,2}, new int[]{15,1});
+        //Checks Fork = new Checks("Fork Check", new int[]{20,2}, new int[]{20,1});
         Checks Double = new Checks("Double Check", new int[]{30,3}, new int[]{20,2});
         Checks Discover = new Checks("Discovered Check", new int[]{30,4}, new int[]{30,3});
         Checks Promotion = new Checks("Promotion Check", new int[]{35,4}, new int[]{15,2});

@@ -8,9 +8,9 @@ public class ComputerSettings:Game{
 
     int eloRating = 0;
 
-    public static void getELO() => eloRating;
+        public static void getELO() => eloRating;
 
-    public static void setELO(int eloRating){
+        public static void setELO(int eloRating){
         // Set the ELO rating for the engine
         this.eloRating = eloRating; // Example ELO rating
         Stockfish.SetOption("UCI_Elo", eloRating);
@@ -24,7 +24,7 @@ public class ComputerSettings:Game{
         // Set the engine to limit its strength to the specified ELO rating
         Stockfish.SetOption("UCI_LimitStrength", true);
     }
-
+    
     public string GetBestMove(string forsythEdwardsNotationString){//found on github
         var p = new System.Diagnostics.Process();
         p.StartInfo.FileName = "stockfishExecutable";
@@ -49,6 +49,14 @@ public class ComputerSettings:Game{
 
     return bestMoveInAlgebraicNotation;
 }
+
+var position = new Position
+{
+    Board = CreateBoardFromFEN(fen),
+    WhiteToMove = DetermineSideToMoveFromFEN(fen)
+};
+
+bool inCheck = position.IsInCheck();
 
 }
 }

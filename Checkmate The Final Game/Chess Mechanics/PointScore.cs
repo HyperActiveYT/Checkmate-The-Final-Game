@@ -25,7 +25,7 @@ public class PointScore
         PromotionCheck,
         UnderpromotionCheck,
         EnPassantDiscoveredCheck,
-        UnpinRevealedCheck,
+        UnpinRevealedCheck,/*Same as Cross Check*/
         DoublyDisambiguatedBishopCaptureMate
     }
 
