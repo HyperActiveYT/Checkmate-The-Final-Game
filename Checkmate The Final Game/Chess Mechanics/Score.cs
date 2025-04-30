@@ -94,7 +94,23 @@ public static void clearInvolvedPieces(){
 }
 
 public static void CalculateScore(){
-
+    //Played Check
+    Bosses.getCurrentBoss().Bosseffect("On Check");
+    for (int i=0; i<getInvolvedPieces().Count; i++){
+        mofidyScore(getInvolvedPieces()[i].getPtscore());
+        getInvolvedPieces()[i].EditionEffects("On Check");
+        getInvolvedPieces()[i].AuraEffects("On Check");
+        for (int j=0; j<MasterCard.getHeldCards().Count; j++){
+            MasterCard.getHeldCards()[j].MasterCardEffect("On Check", getInvolvedPieces()[i]);
+        }
+        getInvolvedPieces()[i].PieceEffect("On Check");
+    }
+    for (int i=0; i<Pieces.getYourPieces().Count; i++){
+        Pieces.getYourPieces()[i].PieceEffect("On Check: In Hand");
+        getInvolvedPieces()[i].PieceEffect("On Check");
+    }
+    finalscore += score;
+    score = 0;
 }
 
 public static void modifyScore(int[] modify){

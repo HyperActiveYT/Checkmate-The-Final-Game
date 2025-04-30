@@ -23,7 +23,7 @@ public class Editions{
         Editions Magnetic = new Editions("Magnetic",4);
         Editions Glitched = new Editions("Glitched",5);
     }
-    public string effects(string timeframe){
+    public string EditionEffects(string timeframe){
         if (timeframe.equals("On Check")){
             if (name.equals("Ancient")){
                 Score.modifyScore(new int[]{0,2,0,1});

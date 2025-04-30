@@ -341,5 +341,24 @@ public class Pack{ //Booster Packs Yay
     public void closePack(){
         //close the menu
     }
+
+    public static Pack createRandomPack(){
+        Random rand = new Random();
+        int packitem = rand.Next(5);
+        int packsize = rand.Next(3);
+        Pack p;
+        if (packitem==0){
+            p = new Pack("MC",packsize);
+        } else if (packitem==1){
+            p = new Pack("CC",packsize);
+        } else if (packitem==2){
+            p = new Pack("Piece",packsize);
+        } else if (packitem==3){
+            p = new Pack("CV",packsize);
+        } else if (packitem==4){
+            p = new Pack("Chaturanga",packsize);
+        }
+        return p;
+    }
 }
 }
