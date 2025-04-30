@@ -24,27 +24,6 @@ public class ComputerSettings:Game{
         // Set the engine to limit its strength to the specified ELO rating
         Stockfish.SetOption("UCI_LimitStrength", true);
     }
-    
-    public static void initialize_stockfish{
-        Stockfish.InitializeStockfish();
-
-        // SetOptions from benchmark.cpp ????????
-        Stockfish.SetOption("UCI_ChessVariant", "CTFG");
-        Stockfish.SetOption()
-        Stockfish.SetOption("Threads", 1);
-        Stockfish.SetOption("Hash", 128);
-        Stockfish.SetOption("Ponder", true);
-        Stockfish.SetOption("UCI_LimitStrength", true);
-        Stockfish.SetOption("UCI_Elo", 1200);
-        Stockfish.SetOption("UCI_Chess960", true);
-        Stockfish.SetOption("UCI_ShowRefutations", false);
-        Stockfish.SetOption("UCI_AnalyseMode", false);
-        Stockfish.
-        
-        {
-            
-        }
-    }
 
     public string GetBestMove(string forsythEdwardsNotationString){//found on github
         var p = new System.Diagnostics.Process();

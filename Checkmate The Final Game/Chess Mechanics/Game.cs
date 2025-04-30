@@ -1,8 +1,17 @@
 namespace Checkmate_The_Final_Game.Chess_Mechanics{
 public class Game:Tournament{
 
-    private static long scorereq = 0;
-    private static long currentscore;
+    private static long scorereq = 0; public static long getScoreReq() => scorereq;
+    private static long currentscore=0; public static long getCurrentScore() => currentscore;
+
+    private static int numchecks; public static int getNumChecks() => numchecks;
+    public static int setnumchecks(){
+        numchecks = UserStats.getBaseChecks();
+    }
+    private static int nummoves; public static int getNumMoves() => nummoves;
+    public static int setnummoves(){
+        nummoves = UserStats.getBaseMoves();
+    }
 
     public static void setscorereq(){
         scorereq = Tournament.getBasePt();
@@ -13,6 +22,10 @@ public class Game:Tournament{
         }
     }
 
+    public static void modifyscorereq(int mult){
+        scorereq*=mult;
+    }
+
     public static void initiateGame(){
         createBoardBase();
     }
@@ -21,6 +34,10 @@ public class Game:Tournament{
         createBoard(p);
         Bosses.BossEffect("On Boss Select");
         ComputerSettings.initialize_stockfish();
+        setscorereq();
+        setnumchecks();
+        setnummoves();
+        
     }
 
     public static void move(){
@@ -31,7 +48,8 @@ public class Game:Tournament{
 }
 
 public class Board:Game{
-    private static Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
+    private static Pieces[][] board = new Pieces[8][8]; public static void getBoard() => board; 
+    //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
     private static Pieces[][] futureboard = new Pieces[8][8];
     private static int colorturn = 1; //1: white; -1: black
     private static int WCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
@@ -40,14 +58,16 @@ public class Board:Game{
     private static int fullmove = 1;
     private static string enpassant = "";
     private static string lastMove = "";
-    private static final string BaseFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    private static string FEN = BaseFEN;
+    private static final string BaseFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - - - 0 1";
+    private static string FEN = BaseFEN; public static string getFEN() => FEN;
+    private static string futureFEN; public static string getFutureFEN() => futureFEN;
+
     //Determining Which Pieces are Giving Checks
     private static bool willbeCapture = false;
     private static bool willbeCheck = false;
-    private static Pieces willbeCapturedPiece = null;
-    private static Pieces willbeMovedPiece = null;
-    private static Pieces willbeCheckingPiece = null;
+    private static Pieces willbeCapturedPiece = null; public static Pieces getWillBeCapturedPiece() => willbeCapturedPiece;
+    private static Pieces willbeMovedPiece = null; public static Pieces getWillBeMovedPiece() => willbeMovedPiece;
+    private static Pieces willbeCheckingPiece = null; public static Pieces getWillBeCheckingPiece() => willbeCheckingPiece;
 
     public static void createBoardBase(){
         Rook bR1 = new Rook(-1);
@@ -100,9 +120,6 @@ public class Board:Game{
         board = p;
         changeFEN();
     }
-
-    public static string getFEN() => FEN;
-
         public Pieces[][] flip(){
         Pieces[][] newboard = new Pieces[8][8]
         for (int i=0; i<board.Length; i++){
@@ -133,19 +150,28 @@ public class Board:Game{
             throw new Exception("Square already occupied");
         }
     }
-    public static void commitmove(int[] from, int[] to){
-        if (board[to[0]][to[1]] != null){
-            willbeCapture = true;
-            willbeCapturedPiece = board[to[0]][to[1]];
-        }
-        Pieces piece = board[from[0]][from[1]];
-        board[from[0]][from[1]] = null;
-        board[to[0]][to[1]] = piece;
-        futureboard = board;
-        if (willbeCapturedPiece.getColor()==1 && willbeCapturedPiece.getHead().equals("Purple")){
-            
-        }
+    public static void commitmove(int[] from, int[] to)
+{
+    Pieces movingPiece = board[from[0]][from[1]];
+    Pieces targetPiece = board[to[0]][to[1]];
+
+    if (targetPiece != null)
+    {
+        willbeCapture = true;
+        willbeCapturedPiece = targetPiece;
+        currency += getPieceValue(willbeCapturedPiece);
     }
+    else
+    {
+        willbeCapture = false;
+        willbeCapturedPiece = null;
+    }
+
+    board[to[0]][to[1]] = movingPiece;
+    board[from[0]][from[1]] = null;
+    futureboard = board;
+    changeFEN();
+}
 
     public static void displaymove(int[] from, int[] to){
         if (board[to[0]][to[1]] != null){

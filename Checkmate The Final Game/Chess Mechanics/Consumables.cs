@@ -15,8 +15,11 @@ public class Consumables{
         this.name = name;
         this.buycost = sellval;
     }
-    public static void setSellVal(){
+    public void setSellVal(){
         sellval = buycost/2;
+    }
+    public void effects(Pieces p){
+        //just a placeholder for subclass methods
     }
 }
 public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
@@ -42,7 +45,7 @@ public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
         TheCardsofChess Ascen = new TheCardsofChess("Ascension");
     ]
 
-    public void CoCeffect(Pieces p){
+    public void effects(Pieces p){
         if (getName().equals("Sacrifice!")){
             p.setHeads(Heads.getAllHeads().get(0));
         } else if getName().equals("Talent"){
@@ -111,6 +114,36 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
         ChaturangaCards Pollution = new ChaturangaCards("Pollution");
         ChaturangaCards Magnetic = new ChaturangaCards("Magnetic");
     }
+    
+    public void effects(Pieces p){
+        if (getName().equals("The Copier")){
+            
+        } else if getName().equals("The Prodigy"){
+            //gain 1 of each piece
+        } else if getName().equals("The Wheat and Chessboard Problem"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Sissa the Inventor"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("King Shirham"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Turk"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Spanish Royal Coffers"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Swiss Gold Reserves"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Gambler"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("The Princess"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Time"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Pollution"){
+            //gain $2^x where x is the number of pieces on the board
+        } else if getName().equals("Magnetic"){
+            //gain $2^x where x is the number of pieces on the board
+        }
+    }
 
 
 }
@@ -126,6 +159,28 @@ public class ChessvolutionCards:Consumables{
     }
 
     public Checks getCheck() => check;
+
+    public static void createCVCards(){
+        ChessvolutionCards Chaturanji = new ChessvolutionCards("Chaturanji", Checks.getAllChecks().get(0));
+        ChessvolutionCards Chaturanga = new ChessvolutionCards("Chaturanga", Checks.getAllChecks().get(1));
+        ChessvolutionCards Courier = new ChessvolutionCards("Courier Chess", Checks.getAllChecks().get(2));
+        ChessvolutionCards GrAce = new ChessvolutionCards("Grant Acedrex", Checks.getAllChecks().get(3));
+        ChessvolutionCards Shatranj = new ChessvolutionCards("Shatranj", Checks.getAllChecks().get(4));
+        ChessvolutionCards ShAss = new ChessvolutionCards("Short Assize", Checks.getAllChecks().get(5));
+        ChessvolutionCards Tmlane = new ChessvolutionCards("Tamerlane", Checks.getAllChecks().get(6));
+        ChessvolutionCards Xiangqi = new ChessvolutionCards("Xiangqi", Checks.getAllChecks().get(7));
+        ChessvolutionCards Shogi = new ChessvolutionCards("Shogi", Checks.getAllChecks().get(8));
+        ChessvolutionCards Makruk = new ChessvolutionCards("Makruk", Checks.getAllChecks().get(9));
+        ChessvolutionCards Sittuyin = new ChessvolutionCards("Sittuyin", Checks.getAllChecks().get(10));
+        visibleCVCards.add(Chaturanji);
+        visibleCVCards.add(Chaturanga);
+        visibleCVCards.add(Courier);
+        visibleCVCards.add(GrAce);
+        visibleCVCards.add(Shatranj);
+        visibleCVCards.add(ShAss);
+        visibleCVCards.add(Tmlane);
+        visibleCVCards.add(Xiangqi);
+    }
 
     public static void consumeCVCard(ChessvolutionCards card){
         card.getCheck().levelchange(1);

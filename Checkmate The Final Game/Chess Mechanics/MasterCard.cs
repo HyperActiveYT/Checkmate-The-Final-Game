@@ -93,27 +93,25 @@ public class MasterCard{
     public static void createRare(){
         MasterCard ChessBook = new MasterCard("The Chess Books", 2); //copy ability of MC to its right
         MasterCard ChessTheory = new MasterCard("Chess Theory", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
-        MasterCard Harmon = new MasterCard("Beth Harmon", 2);//
-        MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
-        MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
+        MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
+       // MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
+       // MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
         MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically
-
-
     }
 
     public static void createLegendary(){
         MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
         //Magnus: disable effect of every boss blind
         MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
-        //Kasparov: 
+        //Kasparov: Increase xmult by .025 for every "best move" you make
         MasterCard Fischer = new MasterCard("Bobby Fischer", 3);
-        //Fischer: 
-        MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
-        MasterCard Karpov = new MasterCard("Anatoly Karpov", 3);
-        MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
+        //Fischer: Increase xmult by .75 for every exchange sacrifice you make
+       // MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
+       // MasterCard Karpov = new MasterCard("Anatoly Karpov", 3);
+       // MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
         MasterCard Alekhine = new MasterCard("Alexander Alekhine", 3, 1);//xmult
         //Alekhine: Increase xmult by .5 every time you give a check while down in evaluation
-        MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
+       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
 
     }
     public static MasterCard clone(MasterCard m){
@@ -130,7 +128,26 @@ public class MasterCard{
         heldCards = hand;
     }
 
-    public string void MasterCardEffect(string timeframe){
+    public static void removeCard(MasterCard card){
+        if (heldCards.Contains(card)){
+            heldCards.Remove(card);
+        } else {
+            Console.WriteLine("You do not have that card");
+        }
+    }
+
+    public string void MasterCardEffect(string timeframe, Pieces p){
+        if (timeframe.Equals("On Check")){
+            if (name.equals("The False Knight")){
+                if (p.getPieceType().equals("Knight")){
+                    Score.modifyscore(new int[]{0,1,6,1});
+                }
+            } else if (name.equals("The False Bishop")){
+                if (p.getPieceType().equals("Bishop")){
+                    Score.modifyscore(new int[]{0,1,6,1});
+                }
+            } else if 
+        }
         return "";
     }
 
