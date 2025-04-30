@@ -249,6 +249,23 @@ public class Board:Game{
         FEN = BaseFEN;
     }
 
+private static int getPieceValue(Pieces piece)
+{
+    if (piece == null)
+        return 0;
+
+    string abv = piece.getAbv().ToLower();
+
+    switch (abv)
+    {
+        case "p": return 1;
+        case "n": return 3;
+        case "b": return 3;
+        case "r": return 5;
+        case "q": return 9;
+        default: return 0;
+    }
+}
     
 
 }

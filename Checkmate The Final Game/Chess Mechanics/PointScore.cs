@@ -145,13 +145,104 @@ public class CheckTypeEvaluator
     {
         return checkScores.TryGetValue(checkType, out int score) ? score : 0;
     }
+    public static string DetectCheckType(int[] from, int[] to, Pieces movedPiece, Pieces[][] boardBeforeMove)
+{
+    bool causesCheck = false;
+    bool isDiscovered = false;
+    bool isDouble = false;
+    bool isPromotion = false;
+    bool isEnPassantDiscovered = false;
 
-    // analyze the position and return a CheckType
-    public CheckType IdentifyCheckType(Position position, Move move)
+    // Simulate move
+    Pieces[][] simulatedBoard = CloneBoard(boardBeforeMove);
+    simulatedBoard[to[0]][to[1]] = movedPiece;
+    simulatedBoard[from[0]][from[1]] = null;
+
+    // 1. Find the enemy king
+    int[] enemyKingPos = FindKingPosition(-movedPiece.getColor(), simulatedBoard);
+
+    // 2. Check all allied pieces for check (including moved one)
+    List<Pieces> attackers = FindAttackers(simulatedBoard, enemyKingPos, movedPiece.getColor());
+
+    causesCheck = attackers.Count > 0;
+
+    if (!causesCheck) return "none";
+
+    if (attackers.Count > 1) isDouble = true;
+
+    // Check if *this* piece is causing the check
+    bool movedPieceIsChecking = IsAttacking(movedPiece, to, enemyKingPos, simulatedBoard);
+
+    if (!movedPieceIsChecking && attackers.Count >= 1)
+        isDiscovered = true;
+
+    // Promotion check (only if piece is a promoted pawn and gave check)
+    if (movedPiece is Queen && (from[0] == 1 || from[0] == 6) && Math.Abs(to[0] - from[0]) == 1)
+        isPromotion = true;
+
+    // En passant discovered check (optional: refine based on your move logic)
+    if (movedPiece is Pawn && Math.Abs(from[1] - to[1]) == 1 && boardBeforeMove[to[0]][to[1]] == null)
+        isEnPassantDiscovered = true;
+
+    // Now, choose result based on priority
+    if (isEnPassantDiscovered) return "en_passant_discovered";
+    if (isDouble) return "double";
+    if (isPromotion) return "promotion";
+    if (isDiscovered) return "discovered";
+    return "simple";
+}
+
+private static Pieces[][] CloneBoard(Pieces[][] board)
+{
+    Pieces[][] clone = new Pieces[8][];
+    for (int i = 0; i < 8; i++)
     {
-        // implement specific detection here
-        return CheckType.None;
+        clone[i] = new Pieces[8];
+        for (int j = 0; j < 8; j++)
+        {
+            clone[i][j] = board[i][j]; // Shallow copy — fine if Pieces are immutable
+        }
     }
+    return clone;
+}
+
+private static int[] FindKingPosition(int color, Pieces[][] board)
+{
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (board[i][j] != null && board[i][j] is King && board[i][j].getColor() == color)
+                return new int[] { i, j };
+        }
+    }
+    return null;
+}
+
+private static List<Pieces> FindAttackers(Pieces[][] board, int[] kingPos, int attackingColor)
+{
+    var attackers = new List<Pieces>();
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            Pieces p = board[i][j];
+            if (p != null && p.getColor() == attackingColor && IsAttacking(p, new int[] { i, j }, kingPos, board))
+                attackers.Add(p);
+        }
+    }
+    return attackers;
+}
+
+private static bool IsAttacking(Pieces piece, int[] from, int[] target, Pieces[][] board)
+{
+    // You must implement piece-specific movement logic here.
+    // This is just a placeholder.
+    return piece.canMove(from, target, board); // If your Pieces have a canMove method
+}
+
+string checkType = DetectCheckType(from, to, movingPiece, CloneBoard(board));
+
 }
 
 public static void Main()
