@@ -7,7 +7,7 @@ public class Editions{
     private string name;
     private int addcost; public int getEditiionCost() => addcost;
 
-    private static List<Editions> AllEditions = new List<Editions>();
+    private static List<Editions> AllEditions = new List<Editions>(); public static List<Editions> getAllEditions() => AllEditions;
     public Editions(string name, int addcost){
         this.name = name;
         AllEditions.Add(this);

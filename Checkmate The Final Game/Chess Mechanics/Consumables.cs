@@ -121,29 +121,39 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
             break;
         } else if getName().equals("The Prodigy"){//Create a random master card
             MasterCard card = MasterCard.getAllCards().get(roll(MasterCard.getAllCards().Count));
-            .addCard(card);
+            MasterCard.addCard(card);
         } else if getName().equals("The Wheat and Chessboard Problem"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("Sissa the Inventor"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("King Shirham"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("The Turk"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("Spanish Royal Coffers"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("Swiss Gold Reserves"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("The Gambler"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("The Princess"){
-            //gain $2^x where x is the number of pieces on the board
-        } else if getName().equals("Time"){
-            //gain $2^x where x is the number of pieces on the board
+            p.setEdition(Editions.getAllEditions().get(0));
+        } else if getName().equals("Sissa the Inventor"){//randomly add two Chaturanga cards to your hand
+            for (int i=0; i<2; i++){
+                int rand = roll(ChaturangaCards.getAllChaturangaCards.Count);
+                ChaturangaCards cons = ChaturangaCards.AllChaturangaCards.get(rand);
+                UserStats.addConsumable(cons);
+            }
+        } else if getName().equals("King Shirham"){//Make the piece gold
+            p.setEdition(Editions.getAllEditions().get(1));
+        } else if getName().equals("The Turk"){//Make the piece metal
+            p.setEdition(Editions.getAllEditions().get(3));
+        } else if getName().equals("Spanish Royal Coffers"){//gain the sell value of all held MasterCards
+            for (int i=0; i<MasterCard.getHeldCards().Count; i++){
+                UserStats.addMoney(MasterCard.getHeldCards().get(i).getSellVal());
+            }
+        } else if getName().equals("Swiss Gold Reserves"){//Doubles your money up to $15
+            UserStats.addMoney(Math.Min(15,UserStats.getInHandMoney()));
+        } else if getName().equals("The Gambler"){//Make the piece glitched
+            p.setEdition(Editions.getAllEditions().get(5));
+        } else if getName().equals("The Princess"){//Make the piece glass
+            p.setEdition(Editions.getAllEditions().get(2));
+        } else if getName().equals("Time"){//Create two random Chess-volution cards and add to held Consumables
+            for (int i=0; i<2; i++){
+                int rand = roll(ChessvolutionCards.getAllCVCards().Count);
+                ChessvolutionCards cons = ChessvolutionCards.getAllCVCards().get(rand);
+                UserStats.addConsumable(cons);
+            }
         } else if getName().equals("Pollution"){
-            //gain $2^x where x is the number of pieces on the board
+            p.setEdition(Editions.getAllEditions().get(4));
         } else if getName().equals("Magnetic"){
-            //gain $2^x where x is the number of pieces on the board
+            p.setEdition(Editions.getAllEditions().get(6));
         }
         UserStats.setLastUsed(this);
     }
