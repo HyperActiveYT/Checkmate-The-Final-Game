@@ -117,9 +117,11 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
     
     public void effects(Pieces p){
         if (getName().equals("The Copier")){
-            
-        } else if getName().equals("The Prodigy"){
-            //gain 1 of each piece
+            addConsumable(UserStats.getLastUsed());
+            break;
+        } else if getName().equals("The Prodigy"){//Create a random master card
+            MasterCard card = MasterCard.getAllCards().get(roll(MasterCard.getAllCards().Count));
+            .addCard(card);
         } else if getName().equals("The Wheat and Chessboard Problem"){
             //gain $2^x where x is the number of pieces on the board
         } else if getName().equals("Sissa the Inventor"){
@@ -143,6 +145,7 @@ public class ChaturangaCards:Consumables{ //Equivalent of Tarot Cards
         } else if getName().equals("Magnetic"){
             //gain $2^x where x is the number of pieces on the board
         }
+        UserStats.setLastUsed(this);
     }
 
 

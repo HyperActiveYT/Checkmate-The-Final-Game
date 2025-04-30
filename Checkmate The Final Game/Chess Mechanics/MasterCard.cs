@@ -136,6 +136,14 @@ public class MasterCard{
         }
     }
 
+    public static void addCard(MasterCard card){
+        if (heldCards.Count<UserStats.getMaxMasterCardSlots()){
+            heldCards.Add(card);
+        } else {
+            Console.WriteLine("You do not have enough slots for that card");
+        }
+    }
+
     public string void MasterCardEffect(string timeframe, Pieces p){
         if (timeframe.Equals("On Check")){
             if (name.equals("The False Knight")){

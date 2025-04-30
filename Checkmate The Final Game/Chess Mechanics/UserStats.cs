@@ -40,8 +40,8 @@ public class UserStats{
     public static void setMoney(int money){
         inHandMoney = money;
     }
-    private static int interest = 1; /*+1 in interest every 5 dollars*/ public static int getInterest() => interest;
-    private static int maxinterest = 5; public static int getMaxInterest() => maxinterest;
+    private static int interest = 1; /*+1 in interest every 10 dollars*/ public static int getInterest() => interest;
+    private static int maxinterest = 10; public static int getMaxInterest() => maxinterest;
     public static void setinterest(int interest){
         this.interest = interest;
     }
@@ -49,12 +49,13 @@ public class UserStats{
         this.maxinterest = maxinterest;
     }
     public static void calcInterest(){
-        
+        money += interest*(int)(0.1*Math.min(money,maxinterest*10));
     }
 
     //Checks and Moves stats
     private static int baseChecks = 4; public static int getBaseChecks() => baseChecks;
     private static int baseMoves = 100; public static int getBaseMoves() => baseMoves;
+    private static int maxMasterCardslots = 5; public static int getMaxMasterCardSlots() => maxMasterCardslots;
 
 }
 public class Checks:UserStats{

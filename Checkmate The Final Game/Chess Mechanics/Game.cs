@@ -237,8 +237,8 @@ public class Board:Game{
     }
 
     public static void resetGame(){
-        Pieces[][] board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
-        Pieces[][] futureboard = new Pieces[8][8];
+        board = new Pieces[8][8]; //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
+        futureboard = new Pieces[8][8];
         colorturn = 1; //1: white; -1: black
         WCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
         BCastle; //0: neither; 1: kingside only; 2: queenside only; 3: both
