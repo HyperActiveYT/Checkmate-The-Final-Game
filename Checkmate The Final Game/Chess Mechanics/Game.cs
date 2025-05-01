@@ -193,6 +193,10 @@ public class Board:Game{
     if (willbeCheck){
         CalculateScore(willbeCheckType);
     }
+    willbeChecktype = -1;
+    willbeCapturedPiece = null;
+    willbeMovedPiece = null;
+    willbeCheckingPiece = null;
     ComputerSettings.getEngineMove();
     EngineMove(ComputerSettings.getEngineMove());
 }
@@ -308,6 +312,10 @@ public class Board:Game{
         enpassant = "";
         lastMove = "";
         FEN = BaseFEN;
+        willbeCapture = false;
+        willbeCheck = false;
+        willbeCheckType = -1;
+
     }
 
 private static int getPieceValue(Pieces piece)

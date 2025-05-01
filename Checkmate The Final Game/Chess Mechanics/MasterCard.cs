@@ -53,7 +53,7 @@ public class MasterCard{
         this.scaling = scaling;
     }
 
-    public static void createmasterCards(){
+    public static void createMasterCards(){
         createCommon();
         createUncommon();
         createRare();
@@ -78,16 +78,19 @@ public class MasterCard{
         MasterCard MinRule = new MasterCard("Minority Rule", 0, new double[]{0,1,0,1});
         MasterCard Choc = new MasterCard("Chocolate", 0, new double[]{100,1,0,1});//+points
         MasterCard TDL = new MasterCard("To Do List", 0);
+    }
+
+    public static void createUncommon(){
+        MasterCard TDofGG = new MasterCard("The Dagger of the Greater Good", 1);
         MasterCard MV75 = new MasterCard("75-Move Rule", 0);
         MasterCard Rep4 = new MasterCard("4-Move Repetition", 0);
         MasterCard Trophy = new MasterCard("The Trophy", 0);
         MasterCard CasDef = new MasterCard("Castle Defense", 0);
         MasterCard CasFort = new MasterCard("Castle Fortress", 0);
-        MasterCard OneTwo = new MasterCard("One-Two", 0);
     }
-
-    public static void createUncommon(){
-        MasterCard TDofGG = new MasterCard("The Dagger of the Greater Good", 1);
+    
+    public static void createRare(){
+        //MasterCard OneTwo = new MasterCard("One-Two", 0);
         //MasterCard Student = new MasterCard("The Student", 1);
         MasterCard MonCom = new MasterCard("Monarcho-Communism", 1); 
         MasterCard JeanGate = new MasterCard("JeansGate", 1);
@@ -95,30 +98,27 @@ public class MasterCard{
         //MasterCard EC = new MasterCard("Extra Check", 1);
         MasterCard Midas = new MasterCard("Midas", 1);
         //MasterCard Horde = new MasterCard("Horde", 1);
-    }
-    
-    public static void createRare(){
         MasterCard ChessBook = new MasterCard("The Chess Books", 2); //copy ability of MC to its right
         MasterCard ChessTheory = new MasterCard("Chess Theory", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
-        /*MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
+        //MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
        // MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
        // MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
-        MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically*/
+       // MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically
     }
 
     public static void createLegendary(){
-        /*MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
+        //MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
         //Magnus: disable effect of every boss blind
-        MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
+        //MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
         //Kasparov: Increase xmult by .025 for every "best move" you make
-        MasterCard Fischer = new MasterCard("Bobby Fischer", 3);
+        //MasterCard Fischer = new MasterCard("Bobby Fischer", 3);
         //Fischer: Increase xmult by .75 for every exchange sacrifice you make
        // MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
        // MasterCard Karpov = new MasterCard("Anatoly Karpov", 3);
        // MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
-        MasterCard Alekhine = new MasterCard("Alexander Alekhine", 3, 1);//xmult
+        //MasterCard Alekhine = new MasterCard("Alexander Alekhine", 3, 1);//xmult
         //Alekhine: Increase xmult by .5 every time you give a check while down in evaluation
-       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);*/
+       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
     }
     public static MasterCard clone(MasterCard m){
         MasterCard newcard = new MasterCard(m.getName(), m.getRarity(), m.getAura());

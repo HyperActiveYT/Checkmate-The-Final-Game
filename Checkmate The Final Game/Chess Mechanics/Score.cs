@@ -98,7 +98,9 @@ public static void setInvolvedPieces(List<Pieces> p){
 }
 
 public static void CalculateScore(int checktype){
-
+    if (!getInvolvedPieces().Contains(Game.getWillBeMovedPiece)){
+        addInvolvedPiece(Game.getWillBeMovedPiece());
+    }
     Bosses.getCurrentBoss().Bosseffect("On Check");
     for (int i=0; i<getInvolvedPieces().Count; i++){
         modifyScore(getInvolvedPieces()[i].getPtscore());
