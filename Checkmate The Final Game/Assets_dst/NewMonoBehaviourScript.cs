@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Checkmate_The_Final_Game.Chess_Mechanics;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
