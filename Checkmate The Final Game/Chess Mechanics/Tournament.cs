@@ -86,7 +86,7 @@ public class Bosses:Tournament{
     }
     public static void createRegBosses(){
         //Bosses Clock = new Bosses("The Clock",0);
-        Bosses Wise = new Bosses("The Wise",0);
+        //Bosses Wise = new Bosses("The Wise",0);
         Bosses Punisher = new Bosses("The Punisher",0);
         Bosses Creator = new Bosses("The Creator",0);
         Bosses Volcano = new Bosses("The Volcano",0);
@@ -100,18 +100,18 @@ public class Bosses:Tournament{
         Bosses Revolution = new Bosses("Viva la Revolution",0);
        // Bosses RoyalCoup = new Bosses("Royal Coup",0);
        // Bosses Botez = new Bosses("Botez",0);
-        Bosses Stubborn = new Bosses("The Stubborn",0);
-        Bosses Various = new Bosses("The Various",0);
-        Bosses Taunter = new Bosses("The Taunter",0);
+       // Bosses Stubborn = new Bosses("The Stubborn",0);
+       // Bosses Various = new Bosses("The Various",0);
+       // Bosses Taunter = new Bosses("The Taunter",0);
        // Bosses Medusa = new Bosses("Medusa",0);
        // Bosses DoubleAgent = new Bosses("Double Agent",0);
     }
 
     public static void createFinBosses(){
-        Bosses AI = new Bosses("AI",1);
+       // Bosses AI = new Bosses("AI",1);
        // Bosses Cheater = new Bosses("The Cheater",1);
-        Bosses Press = new Bosses("The Press",1);
-        Bosses ForceJedi = new Bosses("The Force of the Jedi",1);
+       // Bosses Press = new Bosses("The Press",1);
+       // Bosses ForceJedi = new Bosses("The Force of the Jedi",1);
        // Bosses Invincible = new Bosses("The Invincible",1);
         //Bosses Bossemony = new Bosses("Boss-emony",1);
     }
@@ -121,11 +121,13 @@ public class Bosses:Tournament{
     }
 
     public void Bosseffect(string timeframe, int[] square, Pieces piece, int move){
+        if (MasterCard.CardLocationstr("Magnus Carlsen")!=-1){
+            break;
+        }
         if (timeframe.Equals("On Boss Select")){
             /*if (name.Equals("The Clock")){
                 time = 
             } else */if (name.Equals("The Wise")){
-                ComputerSettings.modifyELO(1.5);//CHANGE WHAT METHOD IS CALLED WHEN LEO IS DONE WITH CHESSDETECTION.CS
             } else if (name.Equals("The Crusader")){
                 Game.addPiece(new Knight(-1),new int[]{2,0});
                 Game.addPiece(new Knight(-1),new int[]{2,1});
@@ -179,9 +181,11 @@ public class Bosses:Tournament{
                         }
                     }
                 }
+            } else if (name.Equals("The Press")){
+                //welp
             }
         } else if (timeframe.equals("On Check")){
-
+            //welp didn't get to this in time. It's fine...
         }
     }
 

@@ -10,7 +10,7 @@ public class MasterCard{
     private static List<MasterCard> Common = new List<MasterCard>(); public static List<MasterCard> getCommon() => Common;
     private static List<MasterCard> Uncommon = new List<MasterCard>(); public static List<MasterCard> getUncommon() => Uncommon;
     private static List<MasterCard> Rare = new List<MasterCard>(); public static List<MasterCard> getRare() => Rare;
-    private static List<MasterCard> Epic = new List<MasterCard>(); public static List<MasterCard> getEpic() => Epic;
+    //private static List<MasterCard> Epic = new List<MasterCard>(); public static List<MasterCard> getEpic() => Epic;
     private static List<MasterCard> Legendary = new List<MasterCard>(); public static List<MasterCard> getLegendary() => Legendary;
     private string name; public string getName() => name;
     private bool disabled = false; public bool isDisabled() => disabled;
@@ -72,34 +72,34 @@ public class MasterCard{
         MasterCard TrueR = new MasterCard("The True Rook", 0);
         MasterCard TrueQ = new MasterCard("The True Queen", 0);
         //MasterCard NewHei = new MasterCard("New Heights", 0);
-        MasterCard Ripped = new MasterCard("Ripper Card", 0);
+        MasterCard Ripped = new MasterCard("Emanuel Lasker", 0);
         MasterCard OverT = new MasterCard("Overtime", 0);
         //MasterCard SacPie = new MasterCard("Sacrificial Piece", 0);
-        MasterCard MinRule = new MasterCard("Minority Rule", 0, new double[]{0,1,0,1});
-        MasterCard Choc = new MasterCard("Chocolate", 0, new double[]{100,1,0,1});//+points
-        MasterCard TDL = new MasterCard("To Do List", 0);
+        MasterCard MinRule = new MasterCard("Ian Nepomniatchi", 0, new double[]{0,1,0,1});
+        MasterCard Choc = new MasterCard("Wesley So", 0, new double[]{100,1,0,1});//+points
+        MasterCard TDL = new MasterCard("Alireza Firuzja", 0);
     }
 
     public static void createUncommon(){
         MasterCard TDofGG = new MasterCard("The Dagger of the Greater Good", 1);
-        MasterCard MV75 = new MasterCard("75-Move Rule", 0);
-        MasterCard Rep4 = new MasterCard("4-Move Repetition", 0);
-        MasterCard Trophy = new MasterCard("The Trophy", 0);
-        MasterCard CasDef = new MasterCard("Castle Defense", 0);
-        MasterCard CasFort = new MasterCard("Castle Fortress", 0);
+        MasterCard MV75 = new MasterCard("Anish Giri", 0);
+        MasterCard Rep4 = new MasterCard("Vladimir Kramnik", 0);
+        MasterCard Trophy = new MasterCard("Mikhail Botvinik", 0);
+        MasterCard CasDef = new MasterCard("Tigran Petrosian", 0);
+        MasterCard CasFort = new MasterCard("Boris Spassky", 0);
     }
     
     public static void createRare(){
         //MasterCard OneTwo = new MasterCard("One-Two", 0);
         //MasterCard Student = new MasterCard("The Student", 1);
-        MasterCard MonCom = new MasterCard("Monarcho-Communism", 1); 
+        MasterCard MonCom = new MasterCard("Ding Liren", 1); 
         MasterCard JeanGate = new MasterCard("JeansGate", 1);
-        MasterCard Darwin = new MasterCard("Charles Darwin", 1);
+        MasterCard Darwin = new MasterCard("Mikhail Tal", 1);
         //MasterCard EC = new MasterCard("Extra Check", 1);
-        MasterCard Midas = new MasterCard("Midas", 1);
+        MasterCard Midas = new MasterCard("Gukesh Dommaraju", 1);
         //MasterCard Horde = new MasterCard("Horde", 1);
-        MasterCard ChessBook = new MasterCard("The Chess Books", 2); //copy ability of MC to its right
-        MasterCard ChessTheory = new MasterCard("Chess Theory", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
+        MasterCard ChessBook = new MasterCard("Praggnanandhaa R", 2); //copy ability of MC to its right
+        MasterCard ChessTheory = new MasterCard("Judit Polgar", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
         //MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
        // MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
        // MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
@@ -107,18 +107,19 @@ public class MasterCard{
     }
 
     public static void createLegendary(){
-        //MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
+        MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
         //Magnus: disable effect of every boss blind
-        //MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
-        //Kasparov: Increase xmult by .025 for every "best move" you make
+        MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
+        //Kasparov: Increase xmult by .5 for every check you make
         //MasterCard Fischer = new MasterCard("Bobby Fischer", 3);
-        //Fischer: Increase xmult by .75 for every exchange sacrifice you make
-       // MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
+        MasterCard Nakamura = new MasterCard("Hikaru Nakamura", 3);
+        //Fischer: Increase xpoints by .5 for every check you give
        // MasterCard Karpov = new MasterCard("Anatoly Karpov", 3);
-       // MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
+        MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
+        //Capablanca: Increase +points by 50 for every check you give
         //MasterCard Alekhine = new MasterCard("Alexander Alekhine", 3, 1);//xmult
-        //Alekhine: Increase xmult by .5 every time you give a check while down in evaluation
-       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
+        MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
+        //Anand: Increase +mult by 10 every time you give a check
     }
     public static MasterCard clone(MasterCard m){
         MasterCard newcard = new MasterCard(m.getName(), m.getRarity(), m.getAura());
@@ -159,11 +160,20 @@ public class MasterCard{
         return -1;
     }
 
+    public static int CardLocationstr(string card){
+        for (int i=0; i<heldCards.Count; i++){
+            if (heldCards[i].getName().equals(card)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public string void MasterCardEffect(string timeframe, Pieces p){
         if (timeframe.equals("On Boss Select")){
-            if (name.equals("75-Move Rule")){
+            if (name.equals("Anish Giri")){
                 modifynumMoves(75);
-            } else if (name.equals("4-Move Repetition")){
+            } else if (name.equals("Vladimir Kramnik")){
                 modifynumMoves(4);
             } else if (name.equals("The Dagger of the Greater Good")){
                 if (CardLocation(this)+1==heldCards.Count){
@@ -215,55 +225,67 @@ public class MasterCard{
                     Score.modifyscore(new int[]{15,1,0,1});
                 }
             } else if (name.equals("New Heights")){
-            } else if (name.equals("Ripped Card")){
+            } else if (name.equals("Emanuel Lasker")){
                 Random random = new Random();
                 int val = random.Next(25);
                 Score.modifyscore(new int[]{0,1,val,1});
             } else if (name.equals("Overtime")){
             } else if (name.equals("Sacrificial Piece")){
-            } else if (name.equals("Minority Rule")){
+            } else if (name.equals("Ian Nepomniatchi")){
                 if (p.getPieceType()==1 || hasMonarchoCommunism()){
                     scaling = new double[]{0,1,0,1};
                 } else if (p.getPieceType()==0){
                     scaling[2] ++;
                 }       
                 modifyscore(scaling)      
-            } else if (name.equals("Chocolate")){
+            } else if (name.equals("Wesley So")){
                 modifyscore(scaling)
-            } else if (name.equals("To Do List")){
-            } else if (name.equals("The Trophy")){
-            } else if (name.equals("Castle Defense")){
+            } else if (name.equals("Alireza Firuzja")){
+            } else if (name.equals("Mikhail Botvinik")){
+            } else if (name.equals("Tigran Petrosian")){
                 if (p.getPieceType()==1 || hasMonarchoCommunism()){
                     modifyScore(new int[]{0,1,5,1});
                 }
-            } else if (name.equals("Castle Fortress")){
+            } else if (name.equals("Boris Spassky")){
                 if (p.getPieceType()==1 || hasMonarchoCommunism()){
                     modifyScore(new int[]{25,1,0,1});
                 }
             } else if (name.equals("One-Two")){
-            } else if (name.equals("Charles Darwin")){
+            } else if (name.equals("Mikhail Tal")){
                 Random random = new Random();
                 int val = random.Next(4);
                 if (val==0){}
                     Checks.allChecks.get(willbeCheckType()).levelchange(1);
                 }
-            } else if (name.equals("Midas")){
+            } else if (name.equals("Gukesh Dommaraju")){
                 if (p.getPieceType()==1 || hasMonarchoCommunism()){
                     p.setEdition(Modifiers.AllEditions.get(1));
                 }
             } else if (name.equals("The Dagger of the Greater Good")){
                 modifyScore(scaling);
-            } else if (name.equals("The Chess Books")){
+            } else if (name.equals("Praggnanandhaa R")){
                 heldCards.get(CardLocation(this)+1).MasterCardEffect(timeframe,p);
-            } else if (name.equals("Chess Theory")){
+            } else if (name.equals("Judit Polgar")){
                 heldCards.get(0).MasterCardEffect(timeframe,p);
-            }
+            } else if (name.equals("Garry Kasparov")){
+                scaling[3] += .5;
+                modifyscore(scaling);
+            } else if (name.equals("Hikaru Nakamura")){
+                scaling[1] += .5;
+                modifyscore(scaling);
+            } else if (name.equals("Jose Capablanca")){
+                scaling[0] += 50;
+                modifyscore(scaling);
+            } else if (name.equals("Viswanathan Anand")){
+                scaling[2] += 10;
+                modifyscore(scaling);
+            } 
         return "";
     }
 
     public static void hasMonarchoCommunism(){
         for (int i=0; i<heldCards.Count; i++){
-            if (heldCards[i].getName().equals("Monarcho-Communism")){
+            if (heldCards[i].getName().equals("Ding Liren")){
                 return true;
             }
         }

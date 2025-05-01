@@ -122,7 +122,7 @@ public class Heads{
     }
 
     public string HeadEffects(string timeframe){
-        if (timeframe.equals("On Capture")){
+        if (timeframe.equals("On Captured")){
             if (name.equals("Purple")){
                 if (UserStats.getheldConsumables().Count<UserStats.getConsumableSlots()){
                     Random rand = new Random();
@@ -141,6 +141,8 @@ public class Heads{
                 int val = rand.Next(Consumables.getVisibleCVCards().Count);
                 UserStats.addheldConsumable(Consumables.getVisibleCVCards().get(val));
                 return "Consumable Added";
+            } else if (name.equals("Gold")){
+                UserStats.addMoney(3);
             }
 
         }

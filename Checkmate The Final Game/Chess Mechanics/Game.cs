@@ -71,6 +71,34 @@ public class Board:Game{
     private static Pieces willbeMovedPiece = null; public static Pieces getWillBeMovedPiece() => willbeMovedPiece;
     private static Pieces willbeCheckingPiece = null; public static Pieces getWillBeCheckingPiece() => willbeCheckingPiece;
 
+    public static void setWhiteSide(){
+        //Because we're lazy, they'll be randomly placed
+        List<Pieces> unplaced = Pieces.getYourPieces();
+        Shuffle(unplaced);
+        int rank = 7; int file = 7;
+        for (int i=0; i<unplaced.Count; i++){
+            board[rank][file] = unplaced.get(i);
+            if (file==0){
+                rank--;
+                file = 7;
+            } else {
+                file--;
+            }
+        }
+    }
+    public static void Shuffle<T>(this IList<T> list)  
+{  
+    Random rng = new Random();
+    int n = list.Count;  
+    while (n > 1) {  
+        n--;  
+        int k = rng.Next(n + 1);  
+        T value = list[k];  
+        list[k] = list[n];  
+        list[n] = value;  
+    }  
+}
+
     public static void createBoardBase(){
         Rook bR1 = new Rook(-1);
         Knight bN1 = new Knight(-1);
@@ -116,13 +144,59 @@ public class Board:Game{
                             ,{wR1,wN1,wB1,wQ,wK,wB2,wN2,wR2}};
         
         changeFEN();
+        Pieces.addYourPiece(wp1);
+        Pieces.addYourPiece(wp2);
+        Pieces.addYourPiece(wp3);
+        Pieces.addYourPiece(wp4);
+        Pieces.addYourPiece(wp5);
+        Pieces.addYourPiece(wp6);
+        Pieces.addYourPiece(wp7);
+        Pieces.addYourPiece(wp8);
+        Pieces.addYourPiece(wR1);
+        Pieces.addYourPiece(wN1);
+        Pieces.addYourPiece(wB1);
+        Pieces.addYourPiece(wQ);
+        Pieces.addYourPiece(wK);
+        Pieces.addYourPiece(wB2);
+        Pieces.addYourPiece(wN2);
+        Pieces.addYourPiece(wR2);
+
     }
 
     public static void createBoard(Pieces[][] p){
         board = p;
         changeFEN();
     }
-        public Pieces[][] flip(){
+    public static void createBoard(){
+        Rook bR1 = new Rook(-1);
+        Knight bN1 = new Knight(-1);
+        Bishop bB1 = new Bishop(-1);
+        Queen bQ = new Queen(-1);
+        King bK = new King(-1);
+        Bishop bB2 = new Bishop(-1);
+        Knight bN2 = new Knight(-1);
+        Rook bR2 = new Rook(-1);
+        Pawn bp1 = new Pawn(-1);
+        Pawn bp2 = new Pawn(-1);
+        Pawn bp3 = new Pawn(-1);
+        Pawn bp4 = new Pawn(-1);
+        Pawn bp5 = new Pawn(-1);
+        Pawn bp6 = new Pawn(-1);
+        Pawn bp7 = new Pawn(-1);
+        Pawn bp8 = new Pawn(-1);
+
+        board = new Pieces[][]{{bR1,bN1,bB1,bQ,bK,bB2,bN2,bR2}
+                            ,{bp1,bp2,bp3,bp4,bp5,bp6,bp7,bp8}
+                            ,{null,null,null,null,null,null,null,null}
+                            ,{null,null,null,null,null,null,null,null}
+                            ,{null,null,null,null,null,null,null,null}
+                            ,{null,null,null,null,null,null,null,null}
+                            ,{null,null,null,null,null,null,null,null}
+                            ,{null,null,null,null,null,null,null,null}};
+        setWhiteSide();
+        futureboard = board;
+    }
+    public Pieces[][] flip(){
         Pieces[][] newboard = new Pieces[8][8]
         for (int i=0; i<board.Length; i++){
             for (int j=0; j<board[0].Length; j++){
@@ -161,16 +235,13 @@ public class Board:Game{
     Pieces movingPiece = board[from[0]][from[1]];
     Pieces targetPiece = board[to[0]][to[1]];
 
-    if (targetPiece != null)
-    {
+    if (targetPiece != null){
         willbeCapture = true;
         willbeCapturedPiece = targetPiece;
-        if (colorturn == 1){}
+        if (colorturn == 1){
             currency += getPieceValue(willbeCapturedPiece);
         }
-    }
-    else
-    {
+    } else {
         willbeCapture = false;
         willbeCapturedPiece = null;
     }
@@ -187,7 +258,11 @@ public class Board:Game{
     if (colorturn == 1){
         fullmove++;
     } else if (colorturn == -1){
-        
+        if (willbeCapturedPiece != null){
+            willbeCapturedPiece.HeadEffects("On Captured");
+            Pieces.removeYourPiece(willbeCapturedPiece);
+            Pieces.addYourCapturedPiece(willbeCapturedPiece);
+        }
     }
     changeFEN();
     if (willbeCheck){
@@ -215,6 +290,7 @@ public class Board:Game{
             if (result.equals("none")){
                 willbeCheck = false;
                 willbeCheckingPiece = null;
+                willbeCheckType == -1;
             } else{
                 willbeCheck = yes;
                 if (result.equals("en_passant_discovered")){
@@ -245,6 +321,7 @@ public class Board:Game{
         willbeCheck = false;
         willbeMovedPiece = null;
         willbeCheckingPiece = null;
+        willbeCheckType = -1;
     }
     public static bool[][] legal(PieceSquare[]){
         List<string>LegalMoves = LegalMoves.GetLegalMoves(changeFEN());
@@ -339,5 +416,4 @@ private static int getPieceValue(Pieces piece)
 
 }
 
-}
 }

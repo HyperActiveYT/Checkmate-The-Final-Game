@@ -101,7 +101,9 @@ public static void CalculateScore(int checktype){
     if (!getInvolvedPieces().Contains(Game.getWillBeMovedPiece)){
         addInvolvedPiece(Game.getWillBeMovedPiece());
     }
-    Bosses.getCurrentBoss().Bosseffect("On Check");
+    if (MasterCard.CardLocationstr("Magnus Carlsen")==-1){
+        Bosses.getCurrentBoss().Bosseffect("On Check");
+    }
     for (int i=0; i<getInvolvedPieces().Count; i++){
         modifyScore(getInvolvedPieces()[i].getPtscore());
         getInvolvedPieces()[i].EditionEffects("On Check");
