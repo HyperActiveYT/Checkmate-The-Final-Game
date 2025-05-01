@@ -3,9 +3,10 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using namespace emscripten;
-
-using namespace Lizard.Logic.Core;
+using emscripten;
+using Lizard;
+using Lizard.Logic;
+using Lizard.Logic.Core;
 
 public class ComputerSettings:Game{
 

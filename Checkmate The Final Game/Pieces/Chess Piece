@@ -1,0 +1,11 @@
+public class ChessPiece
+{
+    public string Name { get; set; }
+    public string BetzaNotation { get; set; }
+
+    public ChessPiece(string name, string betzaNotation)
+    {
+        Name = name;
+        BetzaNotation = betzaNotation;
+    }
+}

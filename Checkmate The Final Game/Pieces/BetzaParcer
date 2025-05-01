@@ -1,0 +1,64 @@
+public class BetzaParser
+{
+    public static List<(int, int)> GetMoves(string betza)
+    {
+        List<(int, int)> moves = new();
+        
+        foreach (char c in betza)
+        {
+            switch (c)
+            {
+                case 'N': // Knight move
+                    moves.Add((2, 1));
+                    moves.Add((2, -1));
+                    moves.Add((-2, 1));
+                    moves.Add((-2, -1));
+                    moves.Add((1, 2));
+                    moves.Add((1, -2));
+                    moves.Add((-1, 2));
+                    moves.Add((-1, -2));
+                    break;
+
+                case 'R': // Rook move (Sliding)
+                    for (int i = 1; i <= 8; i++) 
+                    {
+                        moves.Add((i, 0));
+                        moves.Add((-i, 0));
+                        moves.Add((0, i));
+                        moves.Add((0, -i));
+                    }
+                    break;
+
+                case 'B': // Bishop move (Sliding)
+                    for (int i = 1; i <= 8; i++) 
+                    {
+                        moves.Add((i, i));
+                        moves.Add((-i, -i));
+                        moves.Add((i, -i));
+                        moves.Add((-i, i));
+                    }
+                    break;
+
+                case 'Q': // Queen move (R + B)
+                    for (int i = 1; i <= 8; i++) 
+                    {
+                        moves.Add((i, 0)); moves.Add((-i, 0));
+                        moves.Add((0, i)); moves.Add((0, -i));
+                        moves.Add((i, i)); moves.Add((-i, -i));
+                        moves.Add((i, -i)); moves.Add((-i, i));
+                    }
+                    break;
+
+                case 'K': // King move (Single square in any direction)
+                    moves.Add((1, 0)); moves.Add((-1, 0));
+                    moves.Add((0, 1)); moves.Add((0, -1));
+                    moves.Add((1, 1)); moves.Add((-1, -1));
+                    moves.Add((1, -1)); moves.Add((-1, 1));
+                    break;
+
+            }
+        }
+
+        return moves;
+    }
+}

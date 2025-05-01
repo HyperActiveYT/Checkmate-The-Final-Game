@@ -46,12 +46,6 @@ public class Game:Tournament{
         setnummoves();
         
     }
-
-    public static void move(){
-        //P/invoke StateMachine::ponder();
-    }
-
-
 }
 
 public class Board:Game{
@@ -171,7 +165,9 @@ public class Board:Game{
     {
         willbeCapture = true;
         willbeCapturedPiece = targetPiece;
-        currency += getPieceValue(willbeCapturedPiece);
+        if (colorturn == 1){}
+            currency += getPieceValue(willbeCapturedPiece);
+        }
     }
     else
     {
@@ -246,8 +242,19 @@ public class Board:Game{
         willbeMovedPiece = null;
         willbeCheckingPiece = null;
     }
-    public static bool legal(){
-        
+    public static bool[][] legal(PieceSquare[]){
+        List<string>LegalMoves = LegalMoves.GetLegalMoves(changeFEN());
+        int legally[][] = new int[8][8];
+        for (int i=0; i<LegalMoves.Count; i++){
+            string from = LegalMoves.get(i).Substring(0,2);
+            int[] fromar = sqrtoAr(from);
+            if (fromar[0] == PieceSquare[0] && fromar[1] == PieceSquare[1]){
+                string to = LegalMoves.get(i).Substring(0,2);
+                int[] toar = sqrtoAr(toar);
+                legally[toar[0]toar[1]]=true;
+            }
+        }
+        return legally[][];
     }
 
     public static void changeFEN(){

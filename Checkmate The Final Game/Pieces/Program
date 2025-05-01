@@ -1,0 +1,62 @@
+class Program
+{
+    static void Main()
+    {
+        ChessPiece customPiece = new("Knight", "N");
+        List<(int, int)> possibleMoves = BetzaParser.GetMoves(customPiece.BetzaNotation);
+        
+        Console.WriteLine($"{customPiece.Name} Moves:");
+        foreach (var move in possibleMoves)
+        {
+            Console.WriteLine($"({move.Item1}, {move.Item2})");
+        }
+    }
+
+    static void Main()
+    {
+        ChessPiece customPiece = new("Rook", "R");
+        List<(int, int)> possibleMoves = BetzaParser.GetMoves(customPiece.BetzaNotation);
+        
+        Console.WriteLine($"{customPiece.Name} Moves:");
+        foreach (var move in possibleMoves)
+        {
+            Console.WriteLine($"({move.Item1}, {move.Item2})");
+        }
+    }
+
+    static void Main()
+    {
+        ChessPiece customPiece = new("Bishop", "B");
+        List<(int, int)> possibleMoves = BetzaParser.GetMoves(customPiece.BetzaNotation);
+        
+        Console.WriteLine($"{customPiece.Name} Moves:");
+        foreach (var move in possibleMoves)
+        {
+            Console.WriteLine($"({move.Item1}, {move.Item2})");
+        }
+    }
+
+    static void Main()
+    {
+        ChessPiece customPiece = new("King", "K");
+        List<(int, int)> possibleMoves = BetzaParser.GetMoves(customPiece.BetzaNotation);
+        
+        Console.WriteLine($"{customPiece.Name} Moves:");
+        foreach (var move in possibleMoves)
+        {
+            Console.WriteLine($"({move.Item1}, {move.Item2})");
+        }
+    }
+
+    static void Main()
+    {
+        ChessPiece customPiece = new("Queen", "Q");
+        List<(int, int)> possibleMoves = BetzaParser.GetMoves(customPiece.BetzaNotation);
+        
+        Console.WriteLine($"{customPiece.Name} Moves:");
+        foreach (var move in possibleMoves)
+        {
+            Console.WriteLine($"({move.Item1}, {move.Item2})");
+        }
+    }
+}
