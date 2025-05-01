@@ -7,9 +7,11 @@ public class Tournament{
 
     private static final long[] baseptreq = new long[]{50, 100, 250, 750, 3000, 7500, 15000
     , 40000, 125000, 375000, 1500000, 150000000, 1000000000}; //there can exist a round 0, so first index is for round 0
+    private static final int[] baseELO = new int[]{500, 700, 900, 1100, 1400, 1700, 2100, 2500, 3000}
 
     private static int Tourneynum = 1;
     private static long basept = baseptreq[Tourneynum]; public static long getBasePt() => basept;
+    private static int baseELOnum = baseElonum[Tourneynum]; public static int getBaseELOnum() => baseELOnum;
 
     public static void setptbase(){
         basept = baseptreq[Tourneynum];

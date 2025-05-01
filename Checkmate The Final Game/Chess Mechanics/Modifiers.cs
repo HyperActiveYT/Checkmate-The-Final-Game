@@ -83,7 +83,7 @@ public class Aura{
     }
 
     public static void createAuras(){
-        Aura Alternate = new Aura("Alternate",3);
+        //Aura Alternate = new Aura("Alternate",3);
         Aura Natural = new Aura("Natural",3);
         Aura Rainbow = new Aura("Rainbow",4);
         Aura Laminated = new Aura("Laminated",4);
@@ -92,13 +92,12 @@ public class Aura{
     public static void AuraEffects(string timeframe){
         if (timeframe.equals("On Check")){
             if (name.equals("Alternate")){
-                //alternate the color of the piece
             } else if (name.equals("Natural")){
-                //natural aura
+                Score.modifyScore(new int[]{25,1,0,1});
             } else if (name.equals("Rainbow")){
-                //rainbow aura
+                Score.modifyScore(new double[]{0,1,0,1.5});
             } else if name.equals("Laminated"){
-
+                Score.modifyScore(new double[]{0,1,10,1});
             }
         }
     }

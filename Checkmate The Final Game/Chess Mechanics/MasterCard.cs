@@ -53,6 +53,13 @@ public class MasterCard{
         this.scaling = scaling;
     }
 
+    public static void createmasterCards(){
+        createCommon();
+        createUncommon();
+        createRare();
+        createLegendary();
+    }
+
     public static void createCommon(){
         MasterCard FalN = new MasterCard("The False Knight", 0);
         MasterCard FalB = new MasterCard("The False Bishop", 0);
@@ -64,11 +71,11 @@ public class MasterCard{
         MasterCard TrueP = new MasterCard("The True Pawn", 0);
         MasterCard TrueR = new MasterCard("The True Rook", 0);
         MasterCard TrueQ = new MasterCard("The True Queen", 0);
-        MasterCard NewHei = new MasterCard("New Heights", 0);
+        //MasterCard NewHei = new MasterCard("New Heights", 0);
         MasterCard Ripped = new MasterCard("Ripper Card", 0);
         MasterCard OverT = new MasterCard("Overtime", 0);
-        MasterCard SacPie = new MasterCard("Sacrificial Piece", 0);
-        MasterCard MinRule = new MasterCard("Minority Rule", 0);
+        //MasterCard SacPie = new MasterCard("Sacrificial Piece", 0);
+        MasterCard MinRule = new MasterCard("Minority Rule", 0, new double[]{0,1,0,1});
         MasterCard Choc = new MasterCard("Chocolate", 0, new double[]{100,1,0,1});//+points
         MasterCard TDL = new MasterCard("To Do List", 0);
         MasterCard MV75 = new MasterCard("75-Move Rule", 0);
@@ -81,26 +88,26 @@ public class MasterCard{
 
     public static void createUncommon(){
         MasterCard TDofGG = new MasterCard("The Dagger of the Greater Good", 1);
-        MasterCard Student = new MasterCard("The Student", 1);
+        //MasterCard Student = new MasterCard("The Student", 1);
         MasterCard MonCom = new MasterCard("Monarcho-Communism", 1); 
         MasterCard JeanGate = new MasterCard("JeansGate", 1);
         MasterCard Darwin = new MasterCard("Charles Darwin", 1);
-        MasterCard EC = new MasterCard("Extra Check", 1);
+        //MasterCard EC = new MasterCard("Extra Check", 1);
         MasterCard Midas = new MasterCard("Midas", 1);
-        MasterCard Horde = new MasterCard("Horde", 1);
+        //MasterCard Horde = new MasterCard("Horde", 1);
     }
     
     public static void createRare(){
         MasterCard ChessBook = new MasterCard("The Chess Books", 2); //copy ability of MC to its right
         MasterCard ChessTheory = new MasterCard("Chess Theory", 2); //copy ability of leftmost MC; MAKE SURE IT DOESN'T INFINILOOP
-        MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
+        /*MasterCard Harmon = new MasterCard("Beth Harmon", 2);//Increasee xmult by .5 for every Queen check you give
        // MasterCard Phiona = new MasterCard("Phiona Mutesi", 2);
        // MasterCard Waitzkin = new MasterCard("Josh Waitzkin", 2);
-        MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically
+        MasterCard Petrosian = new MasterCard("Tigran Petrosian", 2);//exchange sac specifically*/
     }
 
     public static void createLegendary(){
-        MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
+        /*MasterCard Magnus = new MasterCard("Magnus Carlsen", 3);
         //Magnus: disable effect of every boss blind
         MasterCard Kasparov = new MasterCard("Garry Kasparov", 3);
         //Kasparov: Increase xmult by .025 for every "best move" you make
@@ -111,8 +118,7 @@ public class MasterCard{
        // MasterCard Capablanca = new MasterCard("Jose Capablanca", 3);
         MasterCard Alekhine = new MasterCard("Alexander Alekhine", 3, 1);//xmult
         //Alekhine: Increase xmult by .5 every time you give a check while down in evaluation
-       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);
-
+       // MasterCard Anand = new MasterCard("Viswanathan Anand", 3);*/
     }
     public static MasterCard clone(MasterCard m){
         MasterCard newcard = new MasterCard(m.getName(), m.getRarity(), m.getAura());
@@ -144,19 +150,123 @@ public class MasterCard{
         }
     }
 
+    public static int CardLocation(MasterCard card){
+        for (int i=0; i<heldCards.Count; i++){
+            if (heldCards[i].getName().equals(card.getName())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public string void MasterCardEffect(string timeframe, Pieces p){
+        if (timeframe.equals("On Boss Select")){
+            if (name.equals("75-Move Rule")){
+                modifynumMoves(75);
+            } else if (name.equals("4-Move Repetition")){
+                modifynumMoves(4);
+            } else if (name.equals("The Dagger of the Greater Good")){
+                if (CardLocation(this)+1==heldCards.Count){
+                } else {
+                    scaling[2] += heldCards.get(CardLocation(this)+1).getSellVal()/2
+                    removeCard(heldCards.get(CardLocation(this)+1));
+                }
+            }
+        }
         if (timeframe.Equals("On Check")){
             if (name.equals("The False Knight")){
-                if (p.getPieceType().equals("Knight")){
+                if (p.getName().equals("Knight")){
                     Score.modifyscore(new int[]{0,1,6,1});
                 }
             } else if (name.equals("The False Bishop")){
-                if (p.getPieceType().equals("Bishop")){
+                if (p.getName().equals("Bishop")){
                     Score.modifyscore(new int[]{0,1,6,1});
                 }
-            } else if 
-        }
+            } else if (name.equals("The False Pawn")){
+                if (p.getName().equals("Pawn")){
+                    Score.modifyscore(new int[]{0,1,10,1});
+                }
+            } else if (name.equals("The False Rook")){
+                if (p.getName().equals("Rook")){
+                    Score.modifyscore(new int[]{0,1,4,1});
+                }
+            } else if (name.equals("The False Queen")){
+                if (p.getName().equals("Queen")){
+                    Score.modifyscore(new int[]{0,1,3,1});
+                }
+            } else if (name.equals("The True Knight")){
+                if (p.getName().equals("Knight")){
+                    Score.modifyscore(new int[]{30,1,0,1});
+                }
+            } else if (name.equals("The True Bishop")){
+                if (p.getName().equals("Bishop")){
+                    Score.modifyscore(new int[]{30,1,0,1});
+                }
+            } else if (name.equals("The True Pawn")){
+                if (p.getName().equals("Pawn")){
+                    Score.modifyscore(new int[]{50,1,0,1});
+                }
+            } else if (name.equals("The True Rook")){
+                if (p.getPieceName().equals("Rook")){
+                    Score.modifyscore(new int[]{20,1,0,1});
+                }
+            } else if (name.equals("The True Queen")){
+                if (p.getName().equals("Queen")){
+                    Score.modifyscore(new int[]{15,1,0,1});
+                }
+            } else if (name.equals("New Heights")){
+            } else if (name.equals("Ripped Card")){
+                Random random = new Random();
+                int val = random.Next(25);
+                Score.modifyscore(new int[]{0,1,val,1});
+            } else if (name.equals("Overtime")){
+            } else if (name.equals("Sacrificial Piece")){
+            } else if (name.equals("Minority Rule")){
+                if (p.getPieceType()==1 || hasMonarchoCommunism()){
+                    scaling = new double[]{0,1,0,1};
+                } else if (p.getPieceType()==0){
+                    scaling[2] ++;
+                }       
+                modifyscore(scaling)      
+            } else if (name.equals("Chocolate")){
+                modifyscore(scaling)
+            } else if (name.equals("To Do List")){
+            } else if (name.equals("The Trophy")){
+            } else if (name.equals("Castle Defense")){
+                if (p.getPieceType()==1 || hasMonarchoCommunism()){
+                    modifyScore(new int[]{0,1,5,1});
+                }
+            } else if (name.equals("Castle Fortress")){
+                if (p.getPieceType()==1 || hasMonarchoCommunism()){
+                    modifyScore(new int[]{25,1,0,1});
+                }
+            } else if (name.equals("One-Two")){
+            } else if (name.equals("Charles Darwin")){
+                Random random = new Random();
+                int val = random.Next(4);
+                if (val==0){}
+                    Checks.allChecks.get(willbeCheckType()).levelchange(1);
+                }
+            } else if (name.equals("Midas")){
+                if (p.getPieceType()==1 || hasMonarchoCommunism()){
+                    p.setEdition(Modifiers.AllEditions.get(1));
+                }
+            } else if (name.equals("The Dagger of the Greater Good")){
+                modifyScore(scaling);
+            } else if (name.equals("The Chess Books")){
+                heldCards.get(CardLocation(this)+1).MasterCardEffect(timeframe,p);
+            } else if (name.equals("Chess Theory")){
+                heldCards.get(0).MasterCardEffect(timeframe,p);
+            }
         return "";
+    }
+
+    public static void hasMonarchoCommunism(){
+        for (int i=0; i<heldCards.Count; i++){
+            if (heldCards[i].getName().equals("Monarcho-Communism")){
+                return true;
+            }
+        }
     }
 
     

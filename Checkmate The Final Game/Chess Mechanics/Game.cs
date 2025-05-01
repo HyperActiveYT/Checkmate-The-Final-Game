@@ -5,12 +5,19 @@ public class Game:Tournament{
     private static long currentscore=0; public static long getCurrentScore() => currentscore;
 
     private static int numchecks; public static int getNumChecks() => numchecks;
-    public static int setnumchecks(){
+    public static void setnumchecks(){
         numchecks = UserStats.getBaseChecks();
     }
+    public static void modifynumchecks(int val){
+        numchecks += val;
+    }
     private static int nummoves; public static int getNumMoves() => nummoves;
-    public static int setnummoves(){
+    public static void setnummoves(){
         nummoves = UserStats.getBaseMoves();
+    }
+
+    public static void modifynummoves(int val){
+        nummoves += val;
     }
 
     public static void setscorereq(){
@@ -65,6 +72,7 @@ public class Board:Game{
     //Determining Which Pieces are Giving Checks
     private static bool willbeCapture = false;
     private static bool willbeCheck = false;
+    private static int willbeCheckType = -1; public static int getWillbeCheckType() => willbeCheckType;
     private static Pieces willbeCapturedPiece = null; public static Pieces getWillBeCapturedPiece() => willbeCapturedPiece;
     private static Pieces willbeMovedPiece = null; public static Pieces getWillBeMovedPiece() => willbeMovedPiece;
     private static Pieces willbeCheckingPiece = null; public static Pieces getWillBeCheckingPiece() => willbeCheckingPiece;
@@ -130,7 +138,11 @@ public class Board:Game{
     }
 
     public static Pieces[][] getBoard() => board;
-
+    public static void EngineMove(string bmove){
+        int[] from = sqrtoAr(bmove.Substring(0,2));
+        int[] to = sqrtoAr(bmove.Substring(2,4));
+        commitmove(from,to);
+    }
     public static int[] sqrtoAr(string sqr){
         int rank = 8-Int32.Parse(sqr.Substring(1,2));
         string[] files = new string[]{"a","b","c","d","e","f","g","h"};
@@ -170,7 +182,23 @@ public class Board:Game{
     board[to[0]][to[1]] = movingPiece;
     board[from[0]][from[1]] = null;
     futureboard = board;
+    colorturn *= -1;
+    if (movingPiece.getName().equals("Pawn")){
+        halfclock = 0;
+    } else {
+        halfclock ++;
+    }
+    if (colorturn == 1){
+        fullmove++;
+    } else if (colorturn == -1){
+        
+    }
     changeFEN();
+    if (willbeCheck){
+        CalculateScore(willbeCheckType);
+    }
+    ComputerSettings.getEngineMove();
+    EngineMove(ComputerSettings.getEngineMove());
 }
 
     public static void displaymove(int[] from, int[] to){
@@ -179,19 +207,45 @@ public class Board:Game{
             willbeCapturedPiece = board[to[0]][to[1]];
         }
         Pieces piece = board[from[0]][from[1]];
+        willbeMovedPiece = piece;
         futureboard[from[0]][from[1]] = null;
         futureboard[to[0]][to[1]] = piece;
-        detectChecktype();
+        if (colorturn==1){
+            string result = PointScore.DetectChecktype(from, to, piece, board);
+            if (result.equals("none")){
+                willbeCheck = false;
+                willbeCheckingPiece = null;
+            } else{
+                willbeCheck = yes;
+                if (result.equals("en_passant_discovered")){
+                    willbeCheckType = 7;
+                } else if (result.equals("cross_check")){
+                    willbeCheckType = 6;
+                } else if (result.equals("simple" && Math.abs(from[1]-to[1])>1 && willbeMovedPiece.getPieceType().equals("King"))){
+                    willbeCheckType = 5;
+                } else if (result.equals("promotion")){
+                    willbeCheckType = 4;
+                } else if (result.equals("discovered")){
+                    willbeCheckType = 3;
+                } else if (result.equals("double")){
+                    willbeCheckType = 2;
+                } else if (result.equals("simple" && willbeCapturedPiece != null)){
+                    willbeCheckType = 1;
+                } else if (result.equals("simple")){
+                    willbeCheckType = 0;
+                }
+            }
+        }
     }
 
     public static void undodisplaymove(){
         futureboard = board;
         willbeCapture = false;
         willbeCapturedPiece = null;
-    public static void detectChecktype(){
-        
+        willbeCheck = false;
+        willbeMovedPiece = null;
+        willbeCheckingPiece = null;
     }
-
     public static bool legal(){
         
     }

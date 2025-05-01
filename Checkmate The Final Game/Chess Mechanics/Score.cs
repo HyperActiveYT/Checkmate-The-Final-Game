@@ -93,27 +93,43 @@ public static void clearInvolvedPieces(){
     involvedPieces.Clear();
 }
 
-public static void CalculateScore(){
-    //Played Check
+public static void setInvolvedPieces(List<Pieces> p){
+    involvedPieces = p;
+}
+
+public static void CalculateScore(int checktype){
+
     Bosses.getCurrentBoss().Bosseffect("On Check");
     for (int i=0; i<getInvolvedPieces().Count; i++){
-        mofidyScore(getInvolvedPieces()[i].getPtscore());
+        modifyScore(getInvolvedPieces()[i].getPtscore());
         getInvolvedPieces()[i].EditionEffects("On Check");
         getInvolvedPieces()[i].AuraEffects("On Check");
         for (int j=0; j<MasterCard.getHeldCards().Count; j++){
             MasterCard.getHeldCards()[j].MasterCardEffect("On Check", getInvolvedPieces()[i]);
         }
-        getInvolvedPieces()[i].PieceEffect("On Check");
+        if (getInvolvedPieces()[i].HeadEffect("On Check").equals("retrigger")){
+            modifyScore(getInvolvedPieces()[i].getPtscore());
+            getInvolvedPieces()[i].EditionEffects("On Check");
+            getInvolvedPieces()[i].AuraEffects("On Check");
+            for (int j=0; j<MasterCard.getHeldCards().Count; j++){
+                MasterCard.getHeldCards()[j].MasterCardEffect("On Check", getInvolvedPieces()[i]);
+            }
+        }
     }
     for (int i=0; i<Pieces.getYourPieces().Count; i++){
         Pieces.getYourPieces()[i].PieceEffect("On Check: In Hand");
-        getInvolvedPieces()[i].PieceEffect("On Check");
+        if (getInvolvedPieces()[i].HeadEffect("On Check").equals("retrigger")){
+            Pieces.getYourPieces()[i].PieceEffect("On Check: In Hand");
+        }
     }
-    finalscore += score;
-    score = 0;
+    finalscore = score[0]*score[1]
 }
 
-public static void modifyScore(int[] modify){
+public static bool hasWonYet(){
+    if (finalscore>= getScoreReq())
+}
+
+public static void modifyScore(double[] modify){
     score[0] += modify[0];
     score[0] *= modify[1];
     score[1] += modify[2];

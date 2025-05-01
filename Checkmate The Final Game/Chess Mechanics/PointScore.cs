@@ -116,6 +116,8 @@ public static List<CheckType> Analyze(Position position, Move lastMove)
 
     return points;
 }
+
+
 }
 
 public class CheckTypeEvaluator
@@ -167,6 +169,10 @@ public class CheckTypeEvaluator
     causesCheck = attackers.Count > 0;
 
     if (!causesCheck) return "none";
+
+    if (causesCheck){
+        Score.setInvolvedPieces(attackers);
+    }
 
     if (attackers.Count > 1) isDouble = true;
 
