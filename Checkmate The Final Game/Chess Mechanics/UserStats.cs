@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 public class UserStats{
+    private static bool hasFAILED = false; public static void changeHASFAILED() => hasFAILED = !hasFAILED;
     //Consumables
     private static int consumableslots = 2; public static int getConsumableSlots() => consumableslots;
     private static List<> heldConsumables = new List<>(); public static List<> getHeldConsumables() => heldConsumables;

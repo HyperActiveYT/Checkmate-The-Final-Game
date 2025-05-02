@@ -45,6 +45,7 @@ public class Tournament{
         return true;
     }
     public static void HasFailed(){
+        UserStats.changeHASFAILED();
         //create the menu that pops up saying game over basically
     }
 
