@@ -1,4 +1,9 @@
 namespace Checkmate_The_Final_Game.Chess_Mechanics{
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 public class Game:Tournament{
 
     private static long scorereq = 0; public static long getScoreReq() => scorereq;
