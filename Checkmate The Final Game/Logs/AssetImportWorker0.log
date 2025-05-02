@@ -200,3 +200,19 @@ Received Import Request.
 Start importing Assets/Capsule.png using Guid(726c79daf875a4e8dac377155ffd4ecc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b4695875ef152102a407663d91a0e78') in 0.204343967 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
 
+========================================================================
+Received Import Request.
+  Time since last request: 1253.190372 seconds.
+  path: Assets/ChessBoard.html
+  artifactKey: Guid(522da595b84b0496dbc994d8706f9974) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ChessBoard.html using Guid(522da595b84b0496dbc994d8706f9974) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8c055308969b5ba0cc95b3f66b20eb28') in 0.022498153 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
+
+========================================================================
+Received Import Request.
+  Time since last request: 442.008889 seconds.
+  path: Assets/ChessBoard.jpeg
+  artifactKey: Guid(816437494cfa64b61b45fd7d3204f6ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ChessBoard.jpeg using Guid(816437494cfa64b61b45fd7d3204f6ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '048b39f9dc4f9c189b4409cc5da1f8b3') in 0.040666633 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
