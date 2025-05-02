@@ -2,6 +2,88 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UserStatsVisualizer : MonoBehaviour
+{
+    public Text moneyText; // UI Text for displaying money
+    public Text consumableSlotsText; // UI Text for displaying consumable slots
+    public Text interestText; // UI Text for displaying interest
+    public Text maxInterestText; // UI Text for displaying max interest
+
+    public void UpdateStatsDisplay()
+    {
+        moneyText.text = "Money: " + UserStats.getInHandMoney();
+        consumableSlotsText.text = "Consumable Slots: " + UserStats.getConsumableSlots();
+        interestText.text = "Interest: " + UserStats.getInterest();
+        maxInterestText.text = "Max Interest: " + UserStats.getMaxInterest();
+    }
+}
+public class ConsumablesManager : MonoBehaviour
+{
+    public GameObject consumablePrefab; // Prefab for consumable items (UI or 3D model)
+    public Transform consumablesParent; // Parent transform for consumables UI objects
+
+    public void AddConsumable(Consumable consumable)
+    {
+        // Add the consumable to the list and instantiate it in the UI
+        if (UserStats.getHeldConsumables().Count < UserStats.getConsumableSlots())
+        {
+            UserStats.addConsumable(consumable);
+            UpdateConsumableUI(consumable);
+        }
+        else
+        {
+            Debug.LogWarning("No available slot for the consumable.");
+        }
+    }
+
+    public void UseConsumable(Consumable consumable, Pieces piece)
+    {
+        UserStats.useConsumable(consumable, piece);
+        UpdateConsumableUI(consumable); // Update UI after using
+    }
+
+    private void UpdateConsumableUI(Consumable consumable)
+    {
+        // Instantiate or update the UI element for the consumable
+        GameObject newConsumableUI = Instantiate(consumablePrefab, consumablesParent);
+        // Set the name or icon for the consumable in the UI
+        newConsumableUI.GetComponentInChildren<Text>().text = consumable.Name;
+    }
+}
+public class ChecksVisualizer : MonoBehaviour
+{
+    public GameObject checkItemPrefab; // Prefab for displaying check information
+    public Transform checksParent; // Parent transform for check UI elements
+
+    public void UpdateCheckList(List<Checks> checksList)
+    {
+        // Clear existing check UI elements
+        foreach (Transform child in checksParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Create UI elements for each check
+        foreach (var check in checksList)
+        {
+            GameObject checkItemUI = Instantiate(checkItemPrefab, checksParent);
+            checkItemUI.GetComponentInChildren<Text>().text = check.name + ": Score = " + check.score[0];
+        }
+    }
+}
+public class ChecksManager : MonoBehaviour
+{
+    public ChecksVisualizer checksVisualizer; // Reference to the ChecksVisualizer
+
+    public void LevelUpCheck(Checks check, int levelIncrease)
+    {
+        check.levelchange(levelIncrease); // Update check level
+        checksVisualizer.UpdateCheckList(UserStats.viewableChecks); // Update UI
+    }
+}
 public class UserStats{
     private static bool hasFAILED = false; public static void changeHASFAILED() => hasFAILED = !hasFAILED;
     //Consumables

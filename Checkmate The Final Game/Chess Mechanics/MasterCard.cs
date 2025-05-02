@@ -3,7 +3,13 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
 public class MasterCard{
+
+    private GameObject cardGameObject;
+    public GameObject GetCardGameObject() => cardGameObject;
+    public void SetCardGameObject(GameObject go) => cardGameObject = go;
 
     private static List<MasterCard> allCards = new List<MasterCard>(); public static List<MasterCard> getAllCards() => allCards;
     private static List<MasterCard> heldCards = new List<MasterCard>(); public static List<MasterCard> getHeldCards() => heldCards;

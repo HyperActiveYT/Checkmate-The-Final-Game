@@ -2,6 +2,122 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
+public class PieceVisualizer : MonoBehaviour
+{
+    public Pieces piece; // Reference to the corresponding Piece object
+    public GameObject pieceModel; // The 3D model or sprite for visualization
+
+    // Initialize with a piece
+    public void Initialize(Pieces piece)
+    {
+        this.piece = piece;
+        SetPieceModel();
+    }
+
+    // Set the corresponding piece model
+    private void SetPieceModel()
+    {
+        // Load the model or sprite for the piece
+        string pieceAbbreviation = piece.getAbv(); // Assuming you have models or sprites named after the abbreviation (e.g., "P" for Pawn)
+        pieceModel = Resources.Load<GameObject>("Pieces/" + pieceAbbreviation); // Assuming models are stored under Resources/Pieces/
+
+        if (pieceModel != null)
+        {
+            Instantiate(pieceModel, transform.position, Quaternion.identity, transform);
+        }
+        else
+        {
+            Debug.LogError("Piece model not found for: " + pieceAbbreviation);
+        }
+    }
+
+    // Update position (for movement)
+    public void UpdatePosition(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+    }
+}
+
+public class ChessManager : MonoBehaviour
+{
+    private Dictionary<string, GameObject> pieceObjects = new Dictionary<string, GameObject>();
+    public GameObject piecePrefab; // Base prefab for pieces (an empty GameObject or model to instantiate)
+
+    // Start is used to create the initial pieces (e.g., at game start)
+    void Start()
+    {
+        CreateAllPieces(); // Call your existing function to create pieces in the game logic
+    }
+
+    // Create a piece and visualize it using GameObject
+    public void CreatePiece(Pieces piece, Vector3 position)
+    {
+        // Create a new GameObject for the piece (this will hold the visual representation)
+        GameObject pieceObj = Instantiate(piecePrefab, position, Quaternion.identity);
+        pieceObjects.Add(piece.getName(), pieceObj);
+
+        // Add the PieceVisualizer component to the GameObject
+        PieceVisualizer visualizer = pieceObj.AddComponent<PieceVisualizer>();
+        visualizer.Initialize(piece); // Link the visualizer to the piece logic
+    }
+
+    // Update piece position on the board
+    public void MovePiece(Pieces piece, Vector3 newPosition)
+    {
+        if (pieceObjects.ContainsKey(piece.getName()))
+        {
+            GameObject pieceObj = pieceObjects[piece.getName()];
+            PieceVisualizer visualizer = pieceObj.GetComponent<PieceVisualizer>();
+            visualizer.UpdatePosition(newPosition); // Update the visual position in Unity
+        }
+    }
+
+    // Example function to create all pieces (called from the Pieces class)
+    private void CreateAllPieces()
+    {
+        // You already have this in your existing code, but we will now call CreatePiece for Unity
+        // Example: Create a white pawn at position (0, 0, 0)
+        foreach (var piece in Pieces.getAllPieces())
+        {
+            Vector3 initialPosition = new Vector3(0, 0, 0); // Position this however you like (e.g., based on chessboard coordinates)
+            CreatePiece(piece, initialPosition);
+        }
+    }
+}
+
+public class PieceMovement : MonoBehaviour
+{
+    private ChessManager chessManager;
+
+    void Start()
+    {
+        chessManager = FindObjectOfType<ChessManager>(); // Find the ChessManager in the scene
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) // Left-click to move pieces
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject clickedObject = hit.collider.gameObject;
+                Vector3 clickedPosition = hit.point;
+
+                // Move the piece if it's selected
+                if (clickedObject.GetComponent<PieceVisualizer>() != null)
+                {
+                    Pieces selectedPiece = clickedObject.GetComponent<PieceVisualizer>().piece;
+                    chessManager.MovePiece(selectedPiece, clickedPosition); // Move piece to new position
+                }
+            }
+        }
+    }
+}
 
 public class Pieces{
     private string name; public string getName() => name;

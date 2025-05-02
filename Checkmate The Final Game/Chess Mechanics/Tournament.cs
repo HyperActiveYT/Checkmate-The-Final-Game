@@ -3,6 +3,138 @@ using System;
 //using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+
+public class BossVisualizer : MonoBehaviour
+{
+    public Bosses boss; // Reference to the Boss object
+    public GameObject bossModel; // The 3D model or sprite for visualization
+
+    // Initialize with a boss
+    public void Initialize(Bosses boss)
+    {
+        this.boss = boss;
+        SetBossModel();
+    }
+
+    // Set the corresponding boss model
+    private void SetBossModel()
+    {
+        string bossName = boss.name; // Assuming you have models or sprites named after the boss (e.g., "The Punisher")
+        bossModel = Resources.Load<GameObject>("Bosses/" + bossName); // Assuming models are stored under Resources/Bosses/
+
+        if (bossModel != null)
+        {
+            Instantiate(bossModel, transform.position, Quaternion.identity, transform);
+        }
+        else
+        {
+            Debug.LogError("Boss model not found for: " + bossName);
+        }
+    }
+
+    // Update position (for movement)
+    public void UpdatePosition(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+    }
+}
+public class PieceVisualizer : MonoBehaviour
+{
+    public Pieces piece; // Reference to the corresponding Piece object
+    public GameObject pieceModel; // The 3D model or sprite for visualization
+
+    public void Initialize(Pieces piece)
+    {
+        this.piece = piece;
+        SetPieceModel();
+    }
+
+    private void SetPieceModel()
+    {
+        string pieceAbbreviation = piece.getAbv(); 
+        pieceModel = Resources.Load<GameObject>("Pieces/" + pieceAbbreviation); 
+
+        if (pieceModel != null)
+        {
+            Instantiate(pieceModel, transform.position, Quaternion.identity, transform);
+        }
+        else
+        {
+            Debug.LogError("Piece model not found for: " + pieceAbbreviation);
+        }
+    }
+
+    public void UpdatePosition(Vector3 newPosition)
+    {
+        transform.position = newPosition;
+    }
+}
+public class TournamentManager : MonoBehaviour
+{
+    private static int tournNumber = 1;
+    private static int gameNumber = 1;
+    public static int getGameNumber() => gameNumber;
+    
+    private void Start()
+    {
+        InitializeTournament();
+    }
+
+    public static void opponentDefeated()
+    {
+        gameNumber++;
+    }
+
+    public static void opponentSkipped()
+    {
+        gameNumber++;
+    }
+
+    public static void bossDefeated()
+    {
+        gameNumber = 1;
+        tournNumber++;
+        UpdateBasePt();
+        Bosses.randomSelectBoss();
+    }
+
+    private static void UpdateBasePt()
+    {
+        // Update the base points based on tournament number
+        long basePt = Tournament.getBasePt();
+        // Further logic to update the base points if necessary
+    }
+
+    private void InitializeTournament()
+    {
+        // Set up tournament and bosses at the start
+        Bosses.createBosses(); // Initialize bosses
+    }
+}
+public class PieceSpawner : MonoBehaviour
+{
+    public GameObject piecePrefab; // Reference to the piece prefab
+
+    // Function to add a new piece to the board
+    public void SpawnPiece(Pieces piece, Vector3 position)
+    {
+        GameObject pieceObject = Instantiate(piecePrefab, position, Quaternion.identity);
+        PieceVisualizer visualizer = pieceObject.AddComponent<PieceVisualizer>();
+        visualizer.Initialize(piece); // Link the visualizer to the piece
+    }
+
+    // Example function to add pieces based on boss effects
+    public void AddPiecesForBossEffect(string bossName, int move, int[] square)
+    {
+        if (bossName == "The Crusader" && move % 10 == 0)
+        {
+            // Add Knights as per the effect
+            Game.addPiece(new Knight(-1), square);
+            Game.addPiece(new Knight(-1), new int[]{2, 1});
+        }
+    }
+}
 public class Tournament{
 
     private static final long[] baseptreq = new long[]{50, 100, 250, 750, 3000, 7500, 15000

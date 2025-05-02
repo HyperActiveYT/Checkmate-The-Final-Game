@@ -2,28 +2,56 @@ namespace Checkmate_The_Final_Game.Chess_Mechanics{
 using System;
 using System.Collections;
 using System.Collections.Generic;
-public class Consumables{
-    private string name; public string getName() => name;
-    private int buycost=3;
-    private int sellval=buycost/2;
+using UnityEngine;
 
-    //private static int AscensionCounter = 0;
-    public Consumables(string name){
-        this.name = name;
-    }
-    public Consumables(string name, int sellval){
+[System.Serializable]
+public class Consumables : MonoBehaviour
+{
+    public string name;
+    public int buycost;
+    public int sellval;
+
+    public virtual void Effects(Pieces p) { }
+
+    public Consumables(string name, int sellval)
+    {
         this.name = name;
         this.buycost = sellval;
-    }
-    public void setSellVal(){
-        sellval = buycost/2;
+        this.sellval = sellval / 2;
     }
     public void effects(Pieces p){
         //just a placeholder for subclass methods
     }
 }
-public class TheCardsofChess:Consumables{//Equivalent of Spectral Cards
 
+public class MasterCard
+{
+    public string name;
+    public int buycost;
+    public int sellval;
+    public static List<MasterCard> allcards = new List<MasterCard>();
+
+    // NEW: Reference to Unity GameObject
+    public GameObject cardObject;
+
+    public MasterCard(string name, int sellval)
+    {
+        this.name = name;
+        this.buycost = sellval;
+        this.sellval = sellval / 2;
+    }
+
+    public void SetGameObject(GameObject obj)
+    {
+        this.cardObject = obj;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return this.cardObject;
+    }
+}
+public class TheCardsofChess:Consumables{ //Equivalent of Spectral Cards
     private static List<TheCardsofChess> AllCoCCards = new List<TheCardsofChess>(); public static List<TheCardsofChess> getAllCoCCards() => AllCoCCards;
 
     public TheCardsofChess(string name){
