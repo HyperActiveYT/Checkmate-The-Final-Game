@@ -21,7 +21,6 @@ public class Tournament{
 
     public static void opponentdefeated(){
         gamenum++;
-
     }
     public static void opponentskipped(){
         gamenum++;
@@ -30,6 +29,7 @@ public class Tournament{
         gamenum=1;
         Tourneynum++;
         setptbase();
+        Bosses.randomselectBoss();
     }
 
     public static boolean ActivateFailState(){
@@ -67,6 +67,18 @@ public class Bosses:Tournament{
     private int defeatPrize; //amount of money given when defeated; 25 for final boss
 
     private static Bosses currentBoss; public static Bosses getCurrentBoss() => currentBoss;
+    public static void randomselectBoss(){
+        Random rand = new Random();
+        int val = rand.Next(unseenRegularBoss.Count);
+        currentBoss=unseenRegularBoss.get(val);
+        makeBossSeen(currentBoss);
+    }
+    public static void makeBossSeen(Bosses boss){
+        if (unseenRegularBoss.Contains(boss)){
+            unseenRegularBoss.Remove(boss);
+        }
+        seenRegularBoss.Add(boss);
+    }
 
     public Bosses(string name, int type){
         this.name = name;
@@ -127,20 +139,20 @@ public class Bosses:Tournament{
         if (timeframe.Equals("On Boss Select")){
             /*if (name.Equals("The Clock")){
                 time = 
-            } else */if (name.Equals("The Wise")){
-            } else if (name.Equals("The Crusader")){
+            } else */if (currentBoss.name.Equals("The Wise")){
+            } else if (currentBoss.name.Equals("The Crusader")){
                 Game.addPiece(new Knight(-1),new int[]{2,0});
                 Game.addPiece(new Knight(-1),new int[]{2,1});
                 Game.addPiece(new Knight(-1),new int[]{2,6});
                 Game.addPiece(new Knight(-1),new int[]{2,7});
-            } else if (name.Equals("The Inquisition")){
+            } else if (currentBoss.name.Equals("The Inquisition")){
                 Game.addPiece(new Bishop(-1),new int[]{2,0});
                 Game.addPiece(new Bishop(-1),new int[]{2,1});
                 Game.addPiece(new Bishop(-1),new int[]{2,6});
                 Game.addPiece(new Bishop(-1),new int[]{2,7});
             }
         } else if (timeframce.equals("On Move")){
-            if (name.Equals("The Punisher")){
+            if (currentBoss.name.Equals("The Punisher")){
                 if (bosseffectActive){
                     if (moveselapsed == 0){
                         ComputerSettings.setELO(wasELO);
@@ -151,7 +163,7 @@ public class Bosses:Tournament{
                     ComputerSettings.setELO(3200);
                     bosseffectActive = true;
                 }
-            } else if (name.Equals("The Creator" && move%10 == 0)){
+            } else if (currentBoss.name.Equals("The Creator" && move%10 == 0)){
                 Random rand = new Random();
                 int num = rand.Next(6);
                 Pieces p = Pieces.getAllPieces()[num];
@@ -162,14 +174,14 @@ public class Bosses:Tournament{
                     Board.AddPiece(p, new int[]{rank,file});
                     break;
                 }
-            } else if (name.equals("Stalingrad") && 15<move && move<=25){
+            } else if (currentBoss.name.equals("Stalingrad") && 15<move && move<=25){
                 if (getBoard()[square[0]][square[1]] == null || getBoard()[square[0]][square[1]].getColor() == -1){
                     ActivateFailState();
                 }
             }
-            /*} else if (name.Equals("The Volcano")){*/
+            /*} else if (currentBoss.name.Equals("The Volcano")){*/
         } else if (timeframe.equals("On Captured")){
-            if (name.Equals("The Atomizer")){
+            if (currentBoss.name.Equals("The Atomizer")){
                 for (int i=Math.min(0,square[0]-1); i<=Math.max(7,square[0]+1); i++){
                     for (int j=Math.min(0,square[1]-1); j<=Math.max(7,square[1]+1); j++){
                         if (i!=square[0] && j!=square[1]){
@@ -181,7 +193,7 @@ public class Bosses:Tournament{
                         }
                     }
                 }
-            } else if (name.Equals("The Press")){
+            } else if (currentBoss.name.Equals("The Press")){
                 //welp
             }
         } else if (timeframe.equals("On Check")){

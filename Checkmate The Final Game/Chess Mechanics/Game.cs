@@ -40,12 +40,15 @@ public class Game:Tournament{
 
     public static void initiateGame(){
         createBoardBase();
+        setscorereq();
+        setnumchecks();
+        setnummoves();
     }
 
     private static void initiateGame(Pieces[][] p){
         createBoard(p);
         Bosses.BossEffect("On Boss Select");
-        ComputerSettings.initialize_stockfish();
+        //ComputerSettings.initialize_stockfish();
         setscorereq();
         setnumchecks();
         setnummoves();
@@ -113,7 +116,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        Board.createBoardBase();  // David could you call your logic layer
+        Main.InitializeGame(); //This should do everything needed to start up checkmate the final game
+       //Board.createBoardBase();  // David could you call your logic layer
         DrawInitialPieces();
     }
 

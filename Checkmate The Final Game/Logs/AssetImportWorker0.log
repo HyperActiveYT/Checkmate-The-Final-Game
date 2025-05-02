@@ -376,3 +376,67 @@ Received Import Request.
 Start importing Assets/TruePawn.jpeg using Guid(3b59de1886f394723be39b5ebb18eac4) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '098f146c650081efb047ab40c8ef7fdd') in 0.01975357 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
 
+========================================================================
+Received Import Request.
+  Time since last request: 1760.417620 seconds.
+  path: Assets/Screenshot 2025-05-01 at 10.05.24 PM.png
+  artifactKey: Guid(7db0b58493abb4fdb9c2001494ae7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Screenshot 2025-05-01 at 10.05.24 PM.png using Guid(7db0b58493abb4fdb9c2001494ae7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0d10aa06b9d4a976a3186a1a9b6676b5') in 0.098104775 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001148 seconds.
+  path: Assets/Screenshot 2025-05-01 at 10.11.52 PM.png
+  artifactKey: Guid(07019c935c2f344e6ba01adb4d978299) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Screenshot 2025-05-01 at 10.11.52 PM.png using Guid(07019c935c2f344e6ba01adb4d978299) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b45447aa671ea933e9905bd911094e1') in 0.033985789 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000121 seconds.
+  path: Assets/Screenshot 2025-05-01 at 10.27.26 PM.png
+  artifactKey: Guid(ec8fde5ffdf24417c900ac9db0de8721) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Screenshot 2025-05-01 at 10.27.26 PM.png using Guid(ec8fde5ffdf24417c900ac9db0de8721) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ab0e7361916b80971265d35d23162fba') in 0.028158518 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.781640 seconds.
+  path: Assets/FalseRook.png
+  artifactKey: Guid(7db0b58493abb4fdb9c2001494ae7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FalseRook.png using Guid(7db0b58493abb4fdb9c2001494ae7be5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7337bba8c86e20b39bb5eae761f04e40') in 0.014356558 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.405042 seconds.
+  path: Assets/FalseBishop.png
+  artifactKey: Guid(c1efd564574d54ab4b06222c6044ce44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FalseBishop.png using Guid(c1efd564574d54ab4b06222c6044ce44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6ec93728d01c81d5d0244a0d732b76a6') in 0.013782728 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.537310 seconds.
+  path: Assets/FalseQueen.png
+  artifactKey: Guid(e365d6b06eb924939a96cf2a5881accc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FalseQueen.png using Guid(e365d6b06eb924939a96cf2a5881accc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '615e259217aa3c50ac3cd6e2e2764cf1') in 0.014948441 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.472270 seconds.
+  path: Assets/FalseKnight.png
+  artifactKey: Guid(ec8fde5ffdf24417c900ac9db0de8721) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FalseKnight.png using Guid(ec8fde5ffdf24417c900ac9db0de8721) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f714a3a7f3800d4e86c93aca927b3e52') in 0.012343734 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.623803 seconds.
+  path: Assets/FalsePawn.jpeg
+  artifactKey: Guid(3fc15061002e7486f8b0fcba1a0b5c2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/FalsePawn.jpeg using Guid(3fc15061002e7486f8b0fcba1a0b5c2d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5d8b9153c790fe05d8e92fef57b54fb6') in 0.04333263 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+

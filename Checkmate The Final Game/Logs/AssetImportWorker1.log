@@ -224,3 +224,19 @@ Received Import Request.
 Start importing Assets/Screenshot 2025-05-01 at 9.54.44 PM.png using Guid(16e3f2bd9989a4d209bec468ae0e978d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1e9b074f5202124d140b112b68ba5305') in 0.019866586 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
 
+========================================================================
+Received Import Request.
+  Time since last request: 1843.287646 seconds.
+  path: Assets/Screenshot 2025-05-01 at 10.07.29 PM.png
+  artifactKey: Guid(c1efd564574d54ab4b06222c6044ce44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Screenshot 2025-05-01 at 10.07.29 PM.png using Guid(c1efd564574d54ab4b06222c6044ce44) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '32bdbe2004791ff0d83167e0e981549f') in 0.094292795 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001157 seconds.
+  path: Assets/Screenshot 2025-05-01 at 10.11.21 PM.png
+  artifactKey: Guid(e365d6b06eb924939a96cf2a5881accc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Screenshot 2025-05-01 at 10.11.21 PM.png using Guid(e365d6b06eb924939a96cf2a5881accc) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5f327bffefe66dfe7e6d29113f2abb36') in 0.036381103 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+

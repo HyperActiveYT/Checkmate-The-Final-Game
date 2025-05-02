@@ -11,7 +11,8 @@ public class Main{
         Modifiers.createEditions();
         Modifiers.createAuras();
         Modifiers.createPieces();
-
+        Bosses.randomselectBoss();
+        Game.initiateGame();
     }
     public static void Main(string[] args){
 
