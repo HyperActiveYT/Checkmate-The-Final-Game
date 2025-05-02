@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bd7762f2ee926446eab0fab4e25ea72c
+guid: ba27f32a4d63046299210ee23c1bd90e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1322735190801868864
-    second: "Screenshot 2025-04-30 at 1.57.37\u202FPM_0"
+      213: -3835568493923766378
+    second: "Screenshot 2025-05-01 at 9.56.32\u202FPM_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Screenshot 2025-04-30 at 1.57.37\u202FPM_0"
+      name: "Screenshot 2025-05-01 at 9.56.32\u202FPM_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 758
-        height: 1012
+        width: 288
+        height: 720
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04867abd5ac4b5210800000000000000
-      internalID: 1322735190801868864
+      spriteID: 69f6ef7c6c255cac0800000000000000
+      internalID: -3835568493923766378
       vertices: []
       indices: 
       edges: []

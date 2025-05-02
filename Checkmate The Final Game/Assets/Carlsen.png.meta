@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 816437494cfa64b61b45fd7d3204f6ef
+guid: 46dd63a892ac0419bafac86839857a58
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1392947133119312337
-    second: ChessBoard_0
+      213: -959466945561370573
+    second: "Screenshot 2025-05-01 at 8.33.42\u202FAM_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ChessBoard_0
+      name: "Screenshot 2025-05-01 at 8.33.42\u202FAM_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 225
-        height: 225
+        width: 808
+        height: 1010
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d1b974990eb45310800000000000000
-      internalID: 1392947133119312337
+      spriteID: 330e51085e94fa2f0800000000000000
+      internalID: -959466945561370573
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ChessBoard_0: 1392947133119312337
+      "Screenshot 2025-05-01 at 8.33.42\u202FAM_0": -959466945561370573
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
