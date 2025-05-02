@@ -48,6 +48,88 @@ public class Game:Tournament{
     }
 }
 
+public class BoardRenderer : MonoBehaviour
+{
+    public GameObject whiteTilePrefab;
+    public GameObject blackTilePrefab;
+    public Transform boardParent;
+
+    void Start()
+    {
+        GenerateBoard();
+    }
+
+    void GenerateBoard()
+    {
+        float tileSize = 1.0f;
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                GameObject prefab = (i + j) % 2 == 0 ? whiteTilePrefab : blackTilePrefab;
+                GameObject tile = Instantiate(prefab, new Vector3(j * tileSize, 0, i * tileSize), Quaternion.identity, boardParent);
+                tile.name = $"Tile_{i}_{j}";
+            }
+        }
+    }
+}
+public class PieceRenderer : MonoBehaviour
+{
+    public Sprite[] pieceSprites; // Ordered: WhitePawn, WhiteRook, ..., BlackKing
+    public GameObject piecePrefab;
+
+    public void SpawnPiece(string type, int color, int row, int col)
+    {
+        GameObject pieceObj = Instantiate(piecePrefab, new Vector3(col, 0.5f, row), Quaternion.identity);
+        SpriteRenderer sr = pieceObj.GetComponent<SpriteRenderer>();
+        sr.sprite = GetSprite(type, color);
+        pieceObj.name = $"{(color == 1 ? "W" : "B")}_{type}_{row}_{col}";
+    }
+
+    private Sprite GetSprite(string type, int color)
+    {
+        int offset = color == -1 ? 6 : 0;
+        switch (type)
+        {
+            case "Pawn": return pieceSprites[0 + offset];
+            case "Rook": return pieceSprites[1 + offset];
+            case "Knight": return pieceSprites[2 + offset];
+            case "Bishop": return pieceSprites[3 + offset];
+            case "Queen": return pieceSprites[4 + offset];
+            case "King": return pieceSprites[5 + offset];
+            default: return null;
+        }
+    }
+}
+public class GameController : MonoBehaviour
+{
+    public BoardRenderer boardRenderer;
+    public PieceRenderer pieceRenderer;
+
+    void Start()
+    {
+        Board.createBoardBase();  // David could you call your logic layer
+        DrawInitialPieces();
+    }
+
+    void DrawInitialPieces()
+    {
+        Pieces[][] logicalBoard = Board.getBoard();
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Pieces p = logicalBoard[i][j];
+                if (p != null)
+                {
+                    string type = p.getType();
+                    int color = p.getColor();
+                    pieceRenderer.SpawnPiece(type, color, i, j);
+                }
+            }
+        }
+    }
+}
 public class Board:Game{
     private static Pieces[][] board = new Pieces[8][8]; public static void getBoard() => board; 
     //rank = 8-i, a=0 b=1 c=2 d=3 e=4 f=5 g=6 h=7
